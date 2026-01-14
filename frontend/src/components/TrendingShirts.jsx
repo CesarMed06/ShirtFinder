@@ -1,23 +1,27 @@
 const SHIRTS = [
     {
-    id: 1,
-    name: "FC Barcelona 1ª Equipación 2025/2026",
-    priceRange: "150–180€",
+        id: 1,
+        name: "FC Barcelona 1ª Equipación 2025/2026",
+        priceRange: "150–180€",
+        image: "https://res.cloudinary.com/dwldyiruu/image/upload/v1768391529/CAMI_BARSA_hqgltq.png"
     },
     {
-    id: 2,
-    name: "PSG 1ª Equipación 2025/2026",
-    priceRange: "95–100€",
+        id: 2,
+        name: "PSG 1ª Equipación 2025/2026",
+        priceRange: "95–100€",
+        image: "https://res.cloudinary.com/dwldyiruu/image/upload/v1768391529/CAMI_PSG_vvsblc.png"
     },
     {
-    id: 3,
-    name: "Venezia FC 1ª Equipación 2023/2024",
-    priceRange: "90–100€",
+        id: 3,
+        name: "Venezia FC 1ª Equipación 2023/2024",
+        priceRange: "90–100€",
+        image: "https://res.cloudinary.com/dwldyiruu/image/upload/v1768391529/CAMI_VENECIA_xpfc7g.png"
     },
     {
-    id: 4,
-    name: "AS Roma 3ª Equipación 2025/2026",
-    priceRange: "90–100€",
+        id: 4,
+        name: "AS Roma 3ª Equipación 2025/2026",
+        priceRange: "90–100€",
+        image: "https://res.cloudinary.com/dwldyiruu/image/upload/v1768391529/CAMI_ROMA_rfhor4.png"
     },
 ];
 
@@ -31,7 +35,11 @@ function TrendingShirts() {
         <article key={shirt.id} className="sf-card">
             {}
             <div className="sf-card__imagen-box">
-                <div className="sf-card__imagen-placeholder" />
+                <img 
+                    src={shirt.image} 
+                    alt={shirt.name} 
+                    className="sf-card__img" 
+                />
             </div>
             
             <h3 className="sf-card__titulo">{shirt.name}</h3>

@@ -13,10 +13,26 @@ function Footer() {
 
         {}
         <div className="sf-footer__icons-container">
-        <div className="sf-social-icon"></div>
-        <div className="sf-social-icon"></div>
-        <div className="sf-social-icon"></div>
-        <div className="sf-social-icon"></div>
+        <img 
+            src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768391527/LOGO_FACEBOOK_c9qszl.png" 
+            alt="Facebook" 
+            className="sf-social-icon" 
+        />
+        <img 
+            src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768391526/LOGO_INSTAGRAM_nw1r0s.png" 
+            alt="Instagram" 
+            className="sf-social-icon" 
+        />
+        <img 
+            src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768391530/LOGO_TWITTER_rulef3.png" 
+            alt="Twitter" 
+            className="sf-social-icon" 
+        />
+        <img 
+            src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768391530/LOGO_TIKTOK_qun7pd.png" 
+            alt="TikTok" 
+            className="sf-social-icon" 
+        />
         </div>
     </footer>
     );

@@ -5,7 +5,11 @@ function Header() {
     <header className="sf-header">
         {}
         <div className="sf-header__logo">
-        <span className="sf-header__logo-icon"></span>
+        <img 
+            src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768391529/LOGO_SHIRTFINDER_ckkr7a.png" 
+            alt="ShirtFinder Logo" 
+            className="sf-header__logo-icon" 
+        />
         </div>
 
         <nav className="sf-header__nav">
@@ -15,8 +19,14 @@ function Header() {
         <a href="#">MI CUENTA</a>
         </nav>
 
+        {}
         <div className="sf-header__search">
-        <input type="text" placeholder="Buscar camisetas" />
+        <input type="text" placeholder="buscar camisetas" />
+        <img 
+            src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768391530/LUPA_mg7p02.png" 
+            alt="Buscar" 
+            className="sf-header__search-icon"
+        />
         </div>
     </header>
     );
