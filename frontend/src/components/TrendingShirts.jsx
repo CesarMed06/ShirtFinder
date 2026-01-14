@@ -29,10 +29,17 @@ function TrendingShirts() {
         <div className="sf-tendencias__grid">
         {SHIRTS.map((shirt) => (
         <article key={shirt.id} className="sf-card">
-            <div className="sf-card__imagen" />
+            {}
+            <div className="sf-card__imagen-box">
+                <div className="sf-card__imagen-placeholder" />
+            </div>
+            
             <h3 className="sf-card__titulo">{shirt.name}</h3>
-            <p className="sf-card__precio-rango">{shirt.priceRange}</p>
-            <button className="sf-card__boton">VER MÁS</button>
+            
+            <div className="sf-card__info-bottom">
+                <p className="sf-card__precio-rango">{shirt.priceRange}</p>
+                <button className="sf-card__boton">VER MÁS</button>
+            </div>
         </article>
         ))}
         </div>

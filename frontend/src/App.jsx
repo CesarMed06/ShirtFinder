@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import TrendingShirts from "./components/TrendingShirts";
+import Footer from "./components/Footer"; 
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
         <TrendingShirts />
       </main>
 
-      {}
+      <Footer /> {}
     </>
   );
 }

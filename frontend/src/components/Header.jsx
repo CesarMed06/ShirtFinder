@@ -3,8 +3,9 @@ import React from 'react';
 function Header() {
     return (
     <header className="sf-header">
+        {}
         <div className="sf-header__logo">
-        <span className="sf-header__logo-icon">SHIRTFINDER</span>
+        <span className="sf-header__logo-icon"></span>
         </div>
 
         <nav className="sf-header__nav">
@@ -15,7 +16,6 @@ function Header() {
         </nav>
 
         <div className="sf-header__search">
-        {}
         <input type="text" placeholder="Buscar camisetas" />
         </div>
     </header>
