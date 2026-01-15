@@ -21,7 +21,7 @@ function Header() {
 
         {}
         <div className="sf-header__search">
-        <input type="text" placeholder="buscar camisetas" />
+        <input type="text" placeholder="Buscar camisetas" />
         <img 
             src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768391530/LUPA_mg7p02.png" 
             alt="Buscar" 

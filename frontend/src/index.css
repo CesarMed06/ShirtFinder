@@ -6,6 +6,17 @@
   padding: 0;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1; 
+  width: 100%; 
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background-color: #F5F5F5;
@@ -28,9 +39,10 @@ body {
 
 .sf-header__logo-icon {
   display: block;
-  width: 51px;   
-  height: 45.07px; 
+  width: 75px;   
+  height: 66px; 
   object-fit: contain;
+  transform: translateY(6px);
 }
 
 .sf-header__nav {
@@ -197,7 +209,7 @@ body {
   font-weight: 800;
   font-size: 14px;
   color: #555555;
-  text-align: left;
+  text-align: center; 
   width: 100%;
   margin-bottom: auto;
 }
@@ -268,8 +280,17 @@ body {
 
 .sf-footer__icons-container {
   display: flex;
-  gap: 15px;
+  gap: 30px; 
   align-items: center;
+}
+
+.sf-social-link {
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.sf-social-link:hover {
+  transform: scale(1.1); 
 }
 
 .sf-social-icon {
@@ -277,4 +298,5 @@ body {
   height: 39px; 
   display: block;
   object-fit: contain;
+  cursor: pointer;
 }
