@@ -1,9 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Header() {
     return (
     <header className="sf-header">
-        {}
         <div className="sf-header__logo">
         <img 
             src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768391529/LOGO_SHIRTFINDER_ckkr7a.png" 
@@ -13,15 +13,15 @@ function Header() {
         </div>
 
         <nav className="sf-header__nav">
-        <a href="#" className="activo">HOME</a>
-        <a href="#">CATÁLOGO</a>
-        <a href="#">FORO</a>
-        <a href="#">MI CUENTA</a>
+        <Link to="/" className="activo">HOME</Link>
+
+        <Link to="#">CATÁLOGO</Link>
+        <Link to="#">FORO</Link>
+        <Link to="#">MI CUENTA</Link>
         </nav>
 
-        {}
         <div className="sf-header__search">
-        <input type="text" placeholder="Buscar camisetas" />
+        <input type="text" placeholder="Buscar camisetas..." />
         <img 
             src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768391530/LUPA_mg7p02.png" 
             alt="Buscar" 
