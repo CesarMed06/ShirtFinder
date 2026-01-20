@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Footer() {
-     return (
+    return (
     <footer className="sf-footer">
         {}
         <div className="sf-footer__box">© 2025 ShirtFinder</div>
