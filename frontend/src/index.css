@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=Kumbh+Sans:wght@700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=Kumbh+Sans:wght@700;800;900&display=swap');
 
 * {
   box-sizing: border-box;
@@ -6,10 +6,11 @@
   padding: 0;
 }
 
-#root {
+#root, .app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%;
 }
 
 main {
@@ -39,7 +40,7 @@ body {
 
 .sf-header__logo-icon {
   display: block;
-  width: 75px;   
+  width: 75px; 
   height: 66px; 
   object-fit: contain;
   transform: translateY(6px);
@@ -199,7 +200,7 @@ body {
 }
 
 .sf-card__img {
-  width: 177px;  
+  width: 177px; 
   height: 142px; 
   object-fit: contain; 
 }
@@ -254,6 +255,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center; 
+  
   gap: 100px;
   
   margin-top: 60px;
@@ -266,11 +268,9 @@ body {
   width: 264px;
   height: 38px;
   background-color: #7E8C8D;
-  
   display: flex;
   align-items: center;
   justify-content: center;
-  
   font-family: 'Kumbh Sans', sans-serif;
   font-weight: 700; 
   font-size: 20px;
@@ -294,9 +294,141 @@ body {
 }
 
 .sf-social-icon {
-  width: 47px;  
+  width: 47px; 
   height: 39px; 
   display: block;
   object-fit: contain;
+  cursor: pointer;
+}
+
+.sf-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  width: 100%;
+}
+
+.sf-login__box {
+  width: 669px;
+  height: 523px;
+  border: 1px solid #B5BCC9;
+  border-radius: 22px;
+  background-color: white;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  padding: 20px 40px 40px 40px;
+}
+
+.sf-login__title {
+  font-family: 'Kumbh Sans', sans-serif;
+  font-weight: 900;
+  font-size: 48px;
+  color: #233A5B;
+  
+  margin-top: 0;
+  
+  margin-bottom: 50px; 
+}
+
+.sf-login__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.sf-login__input {
+  width: 550px;
+  height: 38px;
+  background-color: #F2F2F2;
+  border: 1px solid #B5BCC9;
+  border-radius: 19px;
+  padding: 0 20px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #555555;
+  outline: none;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.sf-login__input::placeholder {
+  color: #555555;
+  opacity: 0.8;
+}
+
+.sf-login__forgot {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  color: #176AC8;
+  text-decoration: none;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: 550px;
+  text-align: center;
+}
+
+.sf-btn-login {
+  width: 170px;
+  height: 40px;
+  background-color: #FF6B35;
+  border-radius: 12px;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sf-btn-google {
+  width: 298px;
+  height: 38px;
+  background-color: #D9D9D9;
+  border-radius: 8px;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  color: #555555;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  margin-top: 15px; 
+}
+
+.sf-login__register-area {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  
+  margin-top: 25px; 
+  margin-bottom: 10px;
+}
+
+.sf-login__no-account {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: #555555;
+}
+
+.sf-login__register-link {
+  font-family: 'Kumbh Sans', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: #0D6EFD;
+  text-decoration: underline;
   cursor: pointer;
 }

@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom'; 
 
 function Header() {
+    const location = useLocation(); 
+
     return (
     <header className="sf-header">
         <div className="sf-header__logo">
@@ -13,11 +15,22 @@ function Header() {
         </div>
 
         <nav className="sf-header__nav">
-        <Link to="/" className="activo">HOME</Link>
+        <Link 
+            to="/" 
+            className={location.pathname === "/" ? "activo" : ""}
+        >
+            HOME
+        </Link>
 
         <Link to="#">CATÁLOGO</Link>
         <Link to="#">FORO</Link>
-        <Link to="#">MI CUENTA</Link>
+
+        <Link 
+            to="/login" 
+            className={location.pathname === "/login" ? "activo" : ""}
+        >
+            MI CUENTA
+        </Link>
         </nav>
 
         <div className="sf-header__search">
