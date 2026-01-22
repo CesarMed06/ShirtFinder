@@ -33,7 +33,6 @@ function TrendingShirts() {
         <div className="sf-tendencias__grid">
         {SHIRTS.map((shirt) => (
         <article key={shirt.id} className="sf-card">
-            {}
             <div className="sf-card__imagen-box">
                 <img 
                     src={shirt.image} 

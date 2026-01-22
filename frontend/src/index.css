@@ -27,11 +27,12 @@ body {
   overflow-x: hidden;
 }
 
+/* ========== HEADER ========== */
 .sf-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
+  padding: 0 60px;
   width: 100%;
   max-width: 1920px;
   height: 80px;
@@ -50,7 +51,10 @@ body {
 
 .sf-header__nav {
   display: flex;
-  gap: 80px;
+  gap: 210px;
+  flex: 1;
+  justify-content: center;
+  padding: 0 40px;
 }
 
 .sf-header__nav a {
@@ -61,6 +65,7 @@ body {
   color: #F5F5F5;
   padding-bottom: 4px;
   border-bottom: 4px solid transparent;
+  white-space: nowrap;
 }
 
 .sf-header__nav a.activo {
@@ -101,6 +106,7 @@ body {
   cursor: pointer;
 }
 
+/* ========== HERO ========== */
 .sf-hero {
   background-color: #181735;
   background-image: url('https://res.cloudinary.com/dwldyiruu/image/upload/v1768391532/FONDO_jve0nw.png');
@@ -154,6 +160,7 @@ body {
   font-size: 38.8px;
 }
 
+/* ========== TENDENCIAS ========== */
 .sf-tendencias {
   padding: 60px 32px 100px 32px;
   max-width: 1400px;
@@ -177,6 +184,7 @@ body {
   flex-wrap: wrap;
 }
 
+/* ========== CARDS ========== */
 .sf-card {
   width: 220px;
   height: 340px;
@@ -248,6 +256,7 @@ body {
   justify-content: center;
 }
 
+/* ========== FOOTER ========== */
 .sf-footer {
   width: 100%;
   max-width: 1920px;
@@ -256,7 +265,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 100px;
+  padding: 0 80px;
+  gap: 60px;
   margin-top: 0;
   margin-left: auto;
   margin-right: auto;
@@ -279,8 +289,9 @@ body {
 
 .sf-footer__icons-container {
   display: flex;
-  gap: 30px;
+  gap: 80px;
   align-items: center;
+  justify-content: center;
 }
 
 .sf-social-link {
@@ -300,6 +311,7 @@ body {
   cursor: pointer;
 }
 
+/* ========== LOGIN ========== */
 .sf-login {
   display: flex;
   justify-content: center;
@@ -332,7 +344,6 @@ body {
   border: 1px solid #B5BCC9;
   border-radius: 22px;
   background-color: white;
-  
   display: flex;
   flex-direction: column;
   align-items: center;
