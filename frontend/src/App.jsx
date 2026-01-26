@@ -4,7 +4,8 @@ import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import TrendingShirts from "./components/TrendingShirts";
 import Login from "./components/Login"; 
-import Register from "./components/Register"; 
+import Register from "./components/Register";
+import Catalog from "./components/Catalog";
 
 function Home() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} /> 
           <Route path="/register" element={<Register />} />
+          <Route path="/catalog" element={<Catalog />} />
         </Routes>
       </main>
 

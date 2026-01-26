@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 function Register() {
     return (
         <section className="sf-login">
-            <Link to="/" className="sf-back-button">
+            <Link to="/login" className="sf-back-button">
                 <img
                     src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768983970/FLECHA_VOLVER_ATRAS_lspqx4.jpg"
                     alt="Volver"
