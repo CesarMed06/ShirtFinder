@@ -362,40 +362,13 @@ body {
   width: 100%;
 }
 
-.sf-input-wrapper {
-  position: relative;
-  width: 550px;
-  height: 38px;
-}
-
-.sf-input-icon {
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  object-fit: contain;
-  pointer-events: none;
-  opacity: 0.7;
-  mix-blend-mode: darken;
-}
-
-.sf-icon-email {
-  width: 38px;
-  height: 38px;
-}
-
-.sf-icon-password {
-  width: 38px;
-  height: 27px;
-}
-
 .sf-login__input {
   width: 100%;
   height: 100%;
   background-color: #F2F2F2;
   border: 1px solid #B5BCC9;
   border-radius: 19px;
-  padding: 0 20px 0 65px;
+  padding: 0 20px 0 50px;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -451,15 +424,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   margin-top: 15px;
 }
 
 .sf-google-icon {
-  width: 27.87px;
-  height: 28.86px;
-  object-fit: contain;
-  mix-blend-mode: darken;
+  width: 20px;
+  height: 20px;
 }
 
 .sf-login__register-area {
@@ -515,13 +486,29 @@ body {
   width: 100%;
 }
 
+.sf-input-container {
+  position: relative;
+  width: 550px;
+  height: 38px;
+}
+
+.sf-input-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+}
+
 .sf-register__input {
   width: 550px;
   height: 38px;
   background-color: #F2F2F2;
   border: 1px solid #BDC3C7;
   border-radius: 19px;
-  padding: 0 20px;
+  padding: 0 20px 0 50px;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 30px;
@@ -565,7 +552,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   margin-top: 5px;
+}
+
+.sf-google-icon {
+  width: 20px;
+  height: 20px;
 }
 
 .sf-register__login-area {
@@ -671,46 +664,53 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+}
+
+.sf-catalog-card__image {
+  width: 142px;
+  height: 177px;
+  object-fit: contain;
 }
 
 .sf-catalog-card__name {
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  font-size: 9px;
+  font-size: 11px;
   color: #555555;
-  text-align: center;
+  text-align: left;
   width: 100%;
   margin-bottom: 8px;
   line-height: 1.4;
   min-height: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 0 5px;
-}
-
-.sf-catalog-card__footer {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  margin-top: auto;
-}
-
-.sf-catalog-card__stars {
-  font-size: 13px;
-  color: #FFD700;
-  letter-spacing: 2px;
-  margin-bottom: 3px;
 }
 
 .sf-catalog-card__price {
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  font-size: 11px;
+  font-size: 13px;
   color: #FF6B35;
   margin: 0 0 8px 0;
+  padding-left: 5px;
+  text-align: left;
+  width: 100%;
+}
+
+.sf-catalog-card__footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  gap: 10px;
+}
+
+.sf-catalog-card__stars {
+  font-size: 16px;
+  color: #FFD700;
+  letter-spacing: 2px;
+  padding-left: 5px;
 }
 
 .sf-catalog-card__button {

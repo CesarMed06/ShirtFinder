@@ -2,39 +2,45 @@ function Catalog() {
     const shirts = [
         {
             id: 1,
-            name: "Manchester United 1ª Equipación 2021/2022",
-            price: "90-110€",
-            rating: 5
+            name: "Ajax 1ª Equipación 2023/2024",
+            price: "80-100€",
+            rating: 5,
+            image: "https://res.cloudinary.com/dwldyiruu/image/upload/v1769505263/AJAX_23-24_fpzbqa.png"
         },
         {
             id: 2,
-            name: "Paris Saint-Germain 1ª Equipación 2021/2022",
-            price: "85-105€",
-            rating: 4
+            name: "Arsenal 1ª Equipación 2024/2025",
+            price: "115-125€",
+            rating: 5,
+            image: "https://res.cloudinary.com/dwldyiruu/image/upload/v1769505260/ARSENAL_24-25_zrtjuj.png"
         },
         {
             id: 3,
-            name: "Bayern München 1ª Equipación 2024/2025",
-            price: "115-125€",
-            rating: 5
+            name: "Bayern de Múnich 1ª Equipación 2024/2025",
+            price: "110-125€",
+            rating: 5,
+            image: "https://res.cloudinary.com/dwldyiruu/image/upload/v1769505260/BAYERN_24-25_w4cyiv.png"
         },
         {
             id: 4,
-            name: "Ajax 1ª Equipación 2023/2024",
-            price: "80-100€",
-            rating: 4
+            name: "Juventus 1ª Equipación 2025/2026",
+            price: "125-135€",
+            rating: 5,
+            image: "https://res.cloudinary.com/dwldyiruu/image/upload/v1769505260/JUVENTUS_25-26_hlukzs.png"
         },
         {
             id: 5,
-            name: "Arsenal 1ª Equipación 2024/2025",
-            price: "115-125€",
-            rating: 5
+            name: "Arsenal 1ª Equipación 2025/2026",
+            price: "150-180€",
+            rating: 5,
+            image: "https://res.cloudinary.com/dwldyiruu/image/upload/v1769505260/ARSENAL_24-25_zrtjuj.png"
         },
         {
             id: 6,
-            name: "Juventus 1ª Equipación 2025/2026",
-            price: "125-135€",
-            rating: 4
+            name: "Manchester United 1ª Equipación 2024/2026",
+            price: "180-180€",
+            rating: 5,
+            image: "https://res.cloudinary.com/dwldyiruu/image/upload/v1769505261/UNITED_25-26_knnnmo.png"
         }
     ];
 
@@ -54,13 +60,16 @@ function Catalog() {
                     <article key={shirt.id} className="sf-catalog-card">
                         <button className="sf-catalog-card__heart">♡</button>
 
-                        <div className="sf-catalog-card__image-box"></div>
+                        <div className="sf-catalog-card__image-box">
+                            <img src={shirt.image} alt={shirt.name} className="sf-catalog-card__image" />
+                        </div>
 
                         <h3 className="sf-catalog-card__name">{shirt.name}</h3>
 
+                        <p className="sf-catalog-card__price">{shirt.price}</p>
+
                         <div className="sf-catalog-card__footer">
                             <span className="sf-catalog-card__stars">{renderStars(shirt.rating)}</span>
-                            <p className="sf-catalog-card__price">{shirt.price}</p>
                             <button className="sf-catalog-card__button">VER MÁS</button>
                         </div>
                     </article>
