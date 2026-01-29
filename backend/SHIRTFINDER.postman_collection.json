@@ -1,0 +1,132 @@
+{
+  "info": {
+    "_postman_id": "8d407c84-b8ec-4b6e-a3bd-34f80d0955dc",
+    "name": "SHIRTFINDER",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "48709233",
+    "_collection_link": "https://go.postman.co/collection/48709233-8d407c84-b8ec-4b6e-a3bd-34f80d0955dc?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "VER TODAS LAS CAMISETAS",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/shirts",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "shirts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "VER UNA CAMISETA",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/shirts/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "shirts",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CREAR CAMISETA",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Real Madrid 1ª Equipación 2025/2026\",\r\n  \"team\": \"Real Madrid\",\r\n  \"league\": \"La Liga\",\r\n  \"season\": \"2025/2026\",\r\n  \"price\": \"130-150€\",\r\n  \"priceMin\": 130,\r\n  \"priceMax\": 150,\r\n  \"rating\": 5,\r\n  \"image\": \"https://example.com/imagen.png\",\r\n  \"description\": \"Camiseta blanca del Real Madrid\",\r\n  \"sizes\": [\"S\", \"M\", \"L\", \"XL\"],\r\n  \"stock\": 50,\r\n  \"brand\": \"Adidas\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/shirts",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "shirts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ACTUALIZAR CAMISETA",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"stock\": 999,\r\n  \"price\": \"70-90€\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/shirts/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "shirts",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ELIMINAR CAMISETA",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/shirts/7",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "shirts",
+            "7"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

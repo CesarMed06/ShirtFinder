@@ -1,0 +1,129 @@
+[
+  {
+    "id": 1,
+    "name": "Ajax 1ª Equipación 2023/2024",
+    "team": "Ajax",
+    "league": "Eredivisie",
+    "season": "2023/2024",
+    "price": "70-90€",
+    "priceMin": 80,
+    "priceMax": 100,
+    "rating": 5,
+    "image": "https://res.cloudinary.com/dwldyiruu/image/upload/v1769505263/AJAX_23-24_fpzbqa.png",
+    "description": "Camiseta oficial del Ajax de Ámsterdam para la temporada 2023/2024. Diseño clásico con franjas rojas y blancas.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "stock": 999,
+    "brand": "Adidas"
+  },
+  {
+    "id": 2,
+    "name": "Arsenal 1ª Equipación 2024/2025",
+    "team": "Arsenal",
+    "league": "Premier League",
+    "season": "2024/2025",
+    "price": "115-125€",
+    "priceMin": 115,
+    "priceMax": 125,
+    "rating": 5,
+    "image": "https://res.cloudinary.com/dwldyiruu/image/upload/v1769505260/ARSENAL_24-25_zrtjuj.png",
+    "description": "Camiseta oficial del Arsenal FC para la temporada 2024/2025. Diseño moderno con el característico rojo del club.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": 18,
+    "brand": "Adidas"
+  },
+  {
+    "id": 3,
+    "name": "Bayern de Múnich 1ª Equipación 2024/2025",
+    "team": "Bayern München",
+    "league": "Bundesliga",
+    "season": "2024/2025",
+    "price": "110-125€",
+    "priceMin": 110,
+    "priceMax": 125,
+    "rating": 5,
+    "image": "https://res.cloudinary.com/dwldyiruu/image/upload/v1769505260/BAYERN_24-25_w4cyiv.png",
+    "description": "Camiseta oficial del Bayern de Múnich para la temporada 2024/2025. Rojo intenso con detalles dorados.",
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "stock": 30,
+    "brand": "Adidas"
+  },
+  {
+    "id": 4,
+    "name": "Juventus 1ª Equipación 2025/2026",
+    "team": "Juventus",
+    "league": "Serie A",
+    "season": "2025/2026",
+    "price": "125-135€",
+    "priceMin": 125,
+    "priceMax": 135,
+    "rating": 5,
+    "image": "https://res.cloudinary.com/dwldyiruu/image/upload/v1769505260/JUVENTUS_25-26_hlukzs.png",
+    "description": "Camiseta oficial de la Juventus para la temporada 2025/2026. Franjas blancas y negras icónicas.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": 15,
+    "brand": "Adidas"
+  },
+  {
+    "id": 5,
+    "name": "Arsenal 1ª Equipación 2025/2026",
+    "team": "Arsenal",
+    "league": "Premier League",
+    "season": "2025/2026",
+    "price": "150-180€",
+    "priceMin": 150,
+    "priceMax": 180,
+    "rating": 5,
+    "image": "https://res.cloudinary.com/dwldyiruu/image/upload/v1769505260/ARSENAL_24-25_zrtjuj.png",
+    "description": "Camiseta oficial del Arsenal FC para la temporada 2025/2026. Última versión con tecnología avanzada.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "stock": 22,
+    "brand": "Adidas"
+  },
+  {
+    "id": 6,
+    "name": "Manchester United 1ª Equipación 2024/2026",
+    "team": "Manchester United",
+    "league": "Premier League",
+    "season": "2024/2026",
+    "price": "180-180€",
+    "priceMin": 180,
+    "priceMax": 180,
+    "rating": 5,
+    "image": "https://res.cloudinary.com/dwldyiruu/image/upload/v1769505261/UNITED_25-26_knnnmo.png",
+    "description": "Camiseta oficial del Manchester United. Rojo característico con el escudo del club.",
+    "sizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": 12,
+    "brand": "Adidas"
+  }
+]
