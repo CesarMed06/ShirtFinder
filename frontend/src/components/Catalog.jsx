@@ -1,56 +1,39 @@
+import { useState, useEffect } from 'react';
+
 function Catalog() {
-    const shirts = [
-        {
-            id: 1,
-            name: "Ajax 1ª Equipación 2023/2024",
-            price: "80-100€",
-            rating: 5,
-            image: "https://res.cloudinary.com/dwldyiruu/image/upload/v1769505263/AJAX_23-24_fpzbqa.png"
-        },
-        {
-            id: 2,
-            name: "Arsenal 1ª Equipación 2024/2025",
-            price: "115-125€",
-            rating: 5,
-            image: "https://res.cloudinary.com/dwldyiruu/image/upload/v1769505260/ARSENAL_24-25_zrtjuj.png"
-        },
-        {
-            id: 3,
-            name: "Bayern de Múnich 1ª Equipación 2024/2025",
-            price: "110-125€",
-            rating: 5,
-            image: "https://res.cloudinary.com/dwldyiruu/image/upload/v1769505260/BAYERN_24-25_w4cyiv.png"
-        },
-        {
-            id: 4,
-            name: "Juventus 1ª Equipación 2025/2026",
-            price: "125-135€",
-            rating: 5,
-            image: "https://res.cloudinary.com/dwldyiruu/image/upload/v1769505260/JUVENTUS_25-26_hlukzs.png"
-        },
-        {
-            id: 5,
-            name: "Arsenal 1ª Equipación 2025/2026",
-            price: "150-180€",
-            rating: 5,
-            image: "https://res.cloudinary.com/dwldyiruu/image/upload/v1769505260/ARSENAL_24-25_zrtjuj.png"
-        },
-        {
-            id: 6,
-            name: "Manchester United 1ª Equipación 2024/2026",
-            price: "180-180€",
-            rating: 5,
-            image: "https://res.cloudinary.com/dwldyiruu/image/upload/v1769505261/UNITED_25-26_knnnmo.png"
-        }
-    ];
+    const [shirts, setShirts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/api/shirts')
+            .then(res => res.json())
+            .then(data => {
+                setShirts(data);
+                setLoading(false);
+            })
+            .catch(err => {
+                setError('Error al cargar las camisetas');
+                setLoading(false);
+            });
+    }, []);
 
     const renderStars = (rating) => {
         return "★".repeat(rating) + "☆".repeat(5 - rating);
     };
 
+    if (loading) {
+        return <div className="sf-catalog"><p>Cargando camisetas...</p></div>;
+    }
+
+    if (error) {
+        return <div className="sf-catalog"><p>{error}</p></div>;
+    }
+
     return (
         <section className="sf-catalog">
             <div className="sf-catalog__header">
+            
                 <h1 className="sf-catalog__title">Resultados de búsqueda</h1>
                 <p className="sf-catalog__count">Mostrando {shirts.length} resultados</p>
             </div>
