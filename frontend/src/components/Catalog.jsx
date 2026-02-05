@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function Catalog() {
     const [shirts, setShirts] = useState([]);
@@ -9,7 +10,7 @@ function Catalog() {
         fetch('http://localhost:5000/api/shirts')
             .then(res => res.json())
             .then(data => {
-                setShirts(data);
+                setShirts(data.data || []);
                 setLoading(false);
             })
             .catch(err => {
@@ -40,20 +41,22 @@ function Catalog() {
 
             <div className="sf-catalog__grid">
                 {shirts.map((shirt) => (
-                    <article key={shirt.id} className="sf-catalog-card">
+                    <article key={shirt.id_shirts} className="sf-catalog-card">
                         <button className="sf-catalog-card__heart">♡</button>
 
                         <div className="sf-catalog-card__image-box">
-                            <img src={shirt.image} alt={shirt.name} className="sf-catalog-card__image" />
+                            <img src={shirt.image_url} alt={shirt.team} className="sf-catalog-card__image" />
                         </div>
 
-                        <h3 className="sf-catalog-card__name">{shirt.name}</h3>
+                        <h3 className="sf-catalog-card__name">{shirt.team} {shirt.season}</h3>
 
-                        <p className="sf-catalog-card__price">{shirt.price}</p>
+                        <p className="sf-catalog-card__price">{shirt.price}€</p>
 
                         <div className="sf-catalog-card__footer">
-                            <span className="sf-catalog-card__stars">{renderStars(shirt.rating)}</span>
-                            <button className="sf-catalog-card__button">VER MÁS</button>
+                            <span className="sf-catalog-card__stars">{renderStars(4)}</span>
+                            <Link to={`/shirt/${shirt.id_shirts}`}>
+                                <button className="sf-catalog-card__button">VER MÁS</button>
+                            </Link>
                         </div>
                     </article>
                 ))}

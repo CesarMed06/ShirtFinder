@@ -1,6 +1,51 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 function Register() {
+    const [formData, setFormData] = useState({
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+    });
+    const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    
+    const { register } = useAuth();
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError('');
+
+        if (formData.password !== formData.confirmPassword) {
+            setError('Las contraseñas no coinciden');
+            return;
+        }
+
+        if (formData.password.length < 6) {
+            setError('La contraseña debe tener al menos 6 caracteres');
+            return;
+        }
+
+        setIsLoading(true);
+
+        const result = await register(formData.username, formData.email, formData.password);
+        
+        if (!result.success) {
+            setError(result.error || 'Error al registrarse');
+        }
+        
+        setIsLoading(false);
+    };
+
     return (
         <section className="sf-login">
             <Link to="/login" className="sf-back-button">
@@ -14,15 +59,21 @@ function Register() {
             <div className="sf-register__box">
                 <h1 className="sf-register__title">Crear cuenta</h1>
 
-                <form className="sf-register__form">
+                <form className="sf-register__form" onSubmit={handleSubmit}>
+                    {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
+                    
                     <div className="sf-input-container">
                         <svg className="sf-input-icon" viewBox="0 0 24 24" fill="none">
                             <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="#555555"/>
                         </svg>
                         <input
                             type="text"
+                            name="username"
                             placeholder="Nombre de usuario"
                             className="sf-register__input"
+                            value={formData.username}
+                            onChange={handleChange}
+                            required
                         />
                     </div>
 
@@ -32,8 +83,12 @@ function Register() {
                         </svg>
                         <input
                             type="email"
+                            name="email"
                             placeholder="Correo electrónico"
                             className="sf-register__input"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
                         />
                     </div>
 
@@ -43,8 +98,12 @@ function Register() {
                         </svg>
                         <input
                             type="password"
+                            name="password"
                             placeholder="Contraseña"
                             className="sf-register__input"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
                         />
                     </div>
 
@@ -54,12 +113,22 @@ function Register() {
                         </svg>
                         <input
                             type="password"
+                            name="confirmPassword"
                             placeholder="Confirmar contraseña"
                             className="sf-register__input"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                            required
                         />
                     </div>
 
-                    <button type="submit" className="sf-btn-register">Registrarse</button>
+                    <button 
+                        type="submit" 
+                        className="sf-btn-register"
+                        disabled={isLoading}
+                    >
+                        {isLoading ? 'Cargando...' : 'Registrarse'}
+                    </button>
 
                     <button type="button" className="sf-btn-google-register">
                         <svg className="sf-google-icon" viewBox="0 0 24 24">

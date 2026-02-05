@@ -1,6 +1,34 @@
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 function Login() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    
+    const { login, user } = useAuth();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user) navigate('/');
+    }, [user, navigate]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError('');
+        setIsLoading(true);
+
+        const result = await login(email, password);
+        
+        if (!result.success) {
+            setError(result.error || 'Error al iniciar sesión');
+        }
+        
+        setIsLoading(false);
+    };
+
     return (
         <section className="sf-login">
             <Link to="/" className="sf-back-button">
@@ -14,7 +42,9 @@ function Login() {
             <div className="sf-login__box">
                 <h1 className="sf-login__title">Iniciar sesión</h1>
 
-                <form className="sf-login__form">
+                <form className="sf-login__form" onSubmit={handleSubmit}>
+                    {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
+                    
                     <div className="sf-input-container">
                         <svg className="sf-input-icon" viewBox="0 0 24 24" fill="none">
                             <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" fill="#555555"/>
@@ -23,6 +53,9 @@ function Login() {
                             type="email"
                             placeholder="Correo electrónico"
                             className="sf-login__input"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
                         />
                     </div>
 
@@ -34,12 +67,21 @@ function Login() {
                             type="password"
                             placeholder="Contraseña"
                             className="sf-login__input"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
                         />
                     </div>
 
                     <a href="#" className="sf-login__forgot">¿Olvidaste tu contraseña?</a>
 
-                    <button className="sf-btn-login">Iniciar sesión</button>
+                    <button 
+                        type="submit" 
+                        className="sf-btn-login"
+                        disabled={isLoading}
+                    >
+                        {isLoading ? 'Cargando...' : 'Iniciar sesión'}
+                    </button>
 
                     <button type="button" className="sf-btn-google">
                         <svg className="sf-google-icon" viewBox="0 0 24 24">

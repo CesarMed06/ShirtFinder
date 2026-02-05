@@ -6,6 +6,7 @@ import TrendingShirts from "./components/TrendingShirts";
 import Login from "./components/Login"; 
 import Register from "./components/Register";
 import Catalog from "./components/Catalog";
+import ShirtDetail from "./pages/ShirtDetail";
 
 function Home() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/login" element={<Login />} /> 
           <Route path="/register" element={<Register />} />
           <Route path="/catalog" element={<Catalog />} />
+          <Route path="/shirt/:id" element={<ShirtDetail />} />
         </Routes>
       </main>
 

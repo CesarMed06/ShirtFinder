@@ -15,7 +15,7 @@ function Header() {
 
             <nav className="sf-header__nav">
                 <Link to="/" className={location.pathname === "/" ? "activo" : ""}>HOME</Link>
-                <Link to="/catalog" className={location.pathname === "/catalog" ? "activo" : ""}>CATÁLOGO</Link>
+                <Link to="/catalog" className={location.pathname === "/catalog" || location.pathname.startsWith("/shirt/") ? "activo" : ""}>CATÁLOGO</Link>
                 <Link to="#">FORO</Link>
                 <Link to="/login" className={location.pathname === "/login" ? "activo" : ""}>MI CUENTA</Link>
             </nav>
