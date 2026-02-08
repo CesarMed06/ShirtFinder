@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { FaStar, FaRegStar, FaStarHalfAlt, FaShoppingCart } from 'react-icons/fa';
+import ShirtImageGallery from '../components/ShirtImageGallery';
 
 function ShirtDetail() {
     const { id } = useParams();
@@ -117,25 +118,7 @@ function ShirtDetail() {
 
             <div className="sf-detail__container">
                 <div className="sf-detail__left">
-                    <div className="sf-detail__main-image">
-                        <img 
-                            src={shirt.image_url} 
-                            alt={shirt.team}
-                            loading="lazy"
-                        />
-                    </div>
-                    
-                    <div className="sf-detail__thumbnails">
-                        {[0, 1, 2, 3, 4].map((idx) => (
-                            <div 
-                                key={idx}
-                                className={`sf-detail__thumbnail ${selectedImage === idx ? 'active' : ''}`}
-                                onClick={() => setSelectedImage(idx)}
-                            >
-                                <img src={shirt.image_url} alt="" />
-                            </div>
-                        ))}
-                    </div>
+                    <ShirtImageGallery shirt={shirt} />
                 </div>
 
                 <div className="sf-detail__center">
@@ -145,9 +128,9 @@ function ShirtDetail() {
 
                     <div className="sf-detail__rating">
                         <div className="sf-detail__stars">
-                            {renderStars(3.5)}
+                            {renderStars(0)}
                         </div>
-                        <span className="sf-detail__reviews">(127 valoraciones)</span>
+                        <span className="sf-detail__reviews">(0 valoraciones)</span>
                     </div>
 
                     <div className="sf-detail__two-columns">
@@ -185,10 +168,10 @@ function ShirtDetail() {
                         <div className="sf-detail__stores">
                             <div className="sf-detail__store">
                                 <FaShoppingCart />
-                                <span>Tienda oficial Betis</span>
-                                <a 
-                                    href={shirt.buy_link || '#'} 
-                                    target="_blank" 
+                                <span>Tienda oficial</span>
+                                <a
+                                    href={shirt.buy_link || '#'}
+                                    target="_blank"
                                     rel="noopener noreferrer"
                                     className="sf-detail__store-btn"
                                 >
@@ -243,61 +226,9 @@ function ShirtDetail() {
                     </div>
 
                     <div className="sf-detail__comments-grid">
-                        <div className="sf-detail__comment">
-                            <div className="sf-detail__comment-avatar"></div>
-                            <div className="sf-detail__comment-rating-wrapper">
-                                <div className="sf-detail__comment-stars">
-                                    {renderStars(4)}
-                                </div>
-                                <div className="sf-detail__comment-content">
-                                    <p className="sf-detail__comment-text">
-                                        El diseño es espectacular y el homenaje a María Jiménez en el cuello es un puntazo. Sin embargo, es más gruesa y da más calor.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="sf-detail__comment">
-                            <div className="sf-detail__comment-avatar"></div>
-                            <div className="sf-detail__comment-rating-wrapper">
-                                <div className="sf-detail__comment-stars">
-                                    {renderStars(5)}
-                                </div>
-                                <div className="sf-detail__comment-content">
-                                    <p className="sf-detail__comment-text">
-                                        Hummel ha superado este año. Aunque el patrocinador principal no me convence, la camiseta histórica.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="sf-detail__comment">
-                            <div className="sf-detail__comment-avatar"></div>
-                            <div className="sf-detail__comment-rating-wrapper">
-                                <div className="sf-detail__comment-stars">
-                                    {renderStars(3)}
-                                </div>
-                                <div className="sf-detail__comment-content">
-                                    <p className="sf-detail__comment-text">
-                                        La tela Becool me pareció de peor calidad, como de plástico y muy fácil, muy sexy pero poco original.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="sf-detail__comment">
-                            <div className="sf-detail__comment-avatar"></div>
-                            <div className="sf-detail__comment-rating-wrapper">
-                                <div className="sf-detail__comment-stars">
-                                    {renderStars(5)}
-                                </div>
-                                <div className="sf-detail__comment-content">
-                                    <p className="sf-detail__comment-text">
-                                        Una de las camisetas más bonitas de los últimos años, muy fresca y cómoda, el detalle del cuello es un toque súper sevillano 10/10
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#777', fontStyle: 'italic', padding: '40px' }}>
+                            Aún no hay comentarios. ¡Sé el primero en comentar!
+                        </p>
                     </div>
                 </div>
             </div>

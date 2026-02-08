@@ -2,8 +2,16 @@ const pool = require('../config/db');
 
 exports.getAllShirts = async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT * FROM shirts ORDER BY date_added DESC');
-    
+    const query = `
+      SELECT
+        id_shirts, season, league, team, brand, price, color,
+        image_url, image_1, image_2, image_3, image_4, image_5,
+        story, key_events, fun_fact
+      FROM shirts
+      ORDER BY date_added DESC
+    `;
+    const [rows] = await pool.query(query);
+
     res.status(200).json({
       success: true,
       count: rows.length,
