@@ -45,7 +45,6 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Validar campos
     if (!email || !password) {
       return res.status(400).json({ 
         success: false, 

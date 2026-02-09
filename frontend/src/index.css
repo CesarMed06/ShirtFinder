@@ -592,7 +592,7 @@ body {
 
 .sf-catalog__content {
   display: flex;
-  gap: 250px;
+  gap: 80px;
   align-items: flex-start;
 }
 
@@ -739,6 +739,7 @@ body {
   grid-template-columns: repeat(3, 220px);
   gap: 45px 55px;
   flex: 1;
+  justify-content: start;
 }
 
 

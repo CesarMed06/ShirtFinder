@@ -8,7 +8,6 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Rutas
 const authRoutes = require('./routes/auth');
 const shirtRoutes = require('./routes/shirts');
 

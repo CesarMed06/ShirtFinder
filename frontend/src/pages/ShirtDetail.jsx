@@ -202,7 +202,7 @@ function ShirtDetail() {
             <div className="sf-detail__history">
                 <h2 className="sf-detail__section-title">Historia y curiosidades</h2>
                 <p className="sf-detail__history-text">
-                    {shirt.story || 'Esta equipación Hummel 2025/26 es un homenaje directo a la cultura de Sevilla. Mantiene las Trece Barras, seña de identidad del club desde 1911, pero esconde una curiosidad única: en el interior del cuello lleva grabada la frase "Verde, verde como el equipo de mi ciudad". Este detalle es un tributo a la icónica canción de la legendaria artista sevillana María Jiménez. Es una camiseta que fusiona la historia del club con el arte de la ciudad, diseñada con la tecnología Becool para estrellas actuales como Isco o Antony.'}
+                    {shirt.description || 'Descripción no disponible'}
                 </p>
             </div>
 

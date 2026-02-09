@@ -18,7 +18,23 @@ function Catalog() {
     });
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/shirts')
+        fetchShirts();
+    }, []);
+
+    const fetchShirts = () => {
+        let url = 'http://localhost:5000/api/shirts?';
+        const params = [];
+
+        if (filters.marca) params.push(`brand=${filters.marca}`);
+        if (filters.tipo) params.push(`tipo=${filters.tipo}`);
+        if (filters.version) params.push(`version=${filters.version}`);
+        if (filters.ordenar === 'precio-menor') params.push('sortBy=price_asc');
+        if (filters.ordenar === 'precio-mayor') params.push('sortBy=price_desc');
+        if (filters.ordenar === 'recientes') params.push('sortBy=recent');
+
+        url += params.join('&');
+
+        fetch(url)
             .then(res => res.json())
             .then(data => {
                 setShirts(data.data || []);
@@ -28,7 +44,7 @@ function Catalog() {
                 setError('Error al cargar las camisetas');
                 setLoading(false);
             });
-    }, []);
+    };
 
     const renderStars = (rating) => {
         return "★".repeat(rating) + "☆".repeat(5 - rating);
@@ -46,6 +62,10 @@ function Catalog() {
             ...prev,
             [filterName]: !prev[filterName]
         }));
+    };
+
+    const applyFilters = () => {
+        fetchShirts();
     };
 
     if (loading) {
@@ -118,10 +138,10 @@ function Catalog() {
                             onChange={(e) => handleFilterChange('marca', e.target.value)}
                         >
                             <option value="">Seleccionar</option>
-                            <option value="adidas">Adidas</option>
-                            <option value="nike">Nike</option>
-                            <option value="puma">Puma</option>
-                            <option value="hummel">Hummel</option>
+                            <option value="Adidas">Adidas</option>
+                            <option value="Nike">Nike</option>
+                            <option value="Puma">Puma</option>
+                            <option value="Hummel">Hummel</option>
                         </select>
                     </div>
 
@@ -141,7 +161,7 @@ function Catalog() {
                     <div className="sf-filter">
                         <label className="sf-filter__label">Valoración</label>
                         <select
-                            className={`sf-filter__select ${filters.valoracion ? 'sf-filter__select--stars' : ''}`}
+                            className="sf-filter__select"
                             value={filters.valoracion}
                             onChange={(e) => handleFilterChange('valoracion', e.target.value)}
                         >
@@ -178,7 +198,7 @@ function Catalog() {
                         </label>
                     </div>
 
-                    <button className="sf-filter__apply-btn">Aplicar cambios</button>
+                    <button className="sf-filter__apply-btn" onClick={applyFilters}>Aplicar cambios</button>
                 </aside>
 
                 <div className="sf-catalog__grid">
@@ -187,10 +207,18 @@ function Catalog() {
                             <button className="sf-catalog-card__heart">♡</button>
 
                             <div className="sf-catalog-card__image-box">
-                                <img src={shirt.image_url} alt={shirt.team} className="sf-catalog-card__image" />
+                                <img
+                                    src={(shirt.image_url || shirt.image_1)?.replace('dwidyinuu', 'dwldyiruu')}
+                                    alt={`${shirt.team} ${shirt.season}`}
+                                    className="sf-catalog-card__image"
+                                    onError={(e) => {
+                                        e.target.onerror = null;
+                                        e.target.style.display = 'none';
+                                    }}
+                                />
                             </div>
 
-                            <h3 className="sf-catalog-card__name">{shirt.team} {shirt.season}</h3>
+                            <h3 className="sf-catalog-card__name">{shirt.team} {shirt.season} - {shirt.tipo}</h3>
 
                             <p className="sf-catalog-card__price">{shirt.price}€</p>
 
