@@ -46,9 +46,9 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).json({ 
-        success: false, 
-        message: 'Email y contraseña son obligatorios' 
+      return res.status(400).json({
+        success: false,
+        message: 'Email y contraseña son obligatorios'
       });
     }
 
@@ -58,9 +58,9 @@ exports.login = async (req, res) => {
     );
 
     if (users.length === 0) {
-      return res.status(401).json({ 
-        success: false, 
-        message: 'Credenciales inválidas' 
+      return res.status(401).json({
+        success: false,
+        message: 'Credenciales inválidas'
       });
     }
 
@@ -69,9 +69,9 @@ exports.login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return res.status(401).json({ 
-        success: false, 
-        message: 'Credenciales inválidas' 
+      return res.status(401).json({
+        success: false,
+        message: 'Credenciales inválidas'
       });
     }
 

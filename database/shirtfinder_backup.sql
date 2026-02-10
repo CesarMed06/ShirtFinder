@@ -39,6 +39,7 @@ CREATE TABLE comments (
   user_id INT,
   shirt_id INT,
   text TEXT,
+  rating DECIMAL(2,1) DEFAULT 0,
   date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id_users) ON DELETE CASCADE,
   FOREIGN KEY (shirt_id) REFERENCES shirts(id_shirts) ON DELETE CASCADE
@@ -84,7 +85,7 @@ INSERT INTO shirts (season, league, team, brand, price, color, tipo, version, ra
 'La temporada 2010/11 representa una de las épocas más doradas del Barcelona. El equipo de Pep Guardiola dominó Europa con un estilo de juego que revolucionó el fútbol moderno, con el tridente formado por Messi, Villa y Pedro siendo prácticamente imparable. Con Xavi e Iniesta dirigiendo la orquesta desde el mediocampo, el Barça conquistó la Champions League en Wembley venciendo 3-1 al Manchester United en una exhibición de tiki-taka que dejó al mundo con la boca abierta. Messi marcó 53 goles en todas las competiciones, consolidándose como el mejor jugador del planeta. Esta camiseta Nike es considerada por muchos coleccionistas como una de las más icónicas de la historia moderna del club.');
 
 INSERT INTO shirts (season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description) VALUES
-('2011/2012', 'La Liga', 'Real Madrid CF', 'Adidas', 90.00, 'Verde / Blanco', 'Local', 'Jugador', 5,
+('2011/2012', 'La Liga', 'Real Madrid CF', 'Adidas', 90.00, 'Blanco / Dorado', 'Local', 'Jugador', 5,
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1770564720/MADRID1_gxgthd.jpg',
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1770564720/MADRID1_gxgthd.jpg',
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1770564720/MADRID2_yxt8nm.jpg',
@@ -93,7 +94,7 @@ INSERT INTO shirts (season, league, team, brand, price, color, tipo, version, ra
 'El Real Madrid de José Mourinho protagonizó una de las temporadas más dominantes en la historia del club durante 2011/12. Cristiano Ronaldo vivió su mejor momento convirtiendo 46 goles en la liga y estableciendo un nuevo récord. El equipo conquistó la Liga española con un récord histórico de 100 puntos y 121 goles marcados en la competición, cifras que aún perduran. La victoria por 1-3 en el Camp Nou quedó grabada en la memoria de todos los madridistas. Esta camiseta Adidas simboliza una era de récords y dominio absoluto en el fútbol español.');
 
 INSERT INTO shirts (season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description) VALUES
-('2007/2008', 'Premier League', 'Manchester United', 'Nike', 85.00, 'Verde / Blanco', 'Local', 'Jugador', 4,
+('2007/2008', 'Premier League', 'Manchester United', 'Nike', 85.00, 'Rojo / Blanco / Negro', 'Local', 'Jugador', 4,
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1770564720/UNITED1_qeugsn.jpg',
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1770564720/UNITED1_qeugsn.jpg',
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1770564719/UNITED2_ucm8ki.jpg',
@@ -102,7 +103,7 @@ INSERT INTO shirts (season, league, team, brand, price, color, tipo, version, ra
 'El Manchester United de Sir Alex Ferguson recuperó su trono europeo tras nueve años de sequía en la temporada 2007/08. Cristiano Ronaldo vivió su mejor año como Red Devil, conquistando el Balón de Oro tras marcar 42 goles en la temporada y convirtiéndose en el jugador más decisivo del planeta. La final de Champions League en Moscú contra el Chelsea fue dramática, decidida en los penaltis bajo la lluvia rusa, con el fatídico resbalón de John Terry que le habría dado la copa al Chelsea. Junto a Rooney, Tévez y Giggs, formaron un ataque temible que conquistó tanto la Premier League como la Champions. Muchos expertos consideran a este United como el mejor equipo inglés de la era moderna.');
 
 INSERT INTO shirts (season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description) VALUES
-('2019/2020', 'Premier League', 'Liverpool FC', 'Nike', 100.00, 'Azul / Negro', 'Local', 'Aficionado', 5,
+('2019/2020', 'Premier League', 'Liverpool FC', 'Nike', 100.00, 'Rojo', 'Local', 'Aficionado', 5,
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1770564742/LIVERPOOL1_ewgxsb.jpg',
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1770564742/LIVERPOOL1_ewgxsb.jpg',
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1770564742/LIVERPOOL2_ot0qa0.jpg',
@@ -120,7 +121,7 @@ INSERT INTO shirts (season, league, team, brand, price, color, tipo, version, ra
 'La equipación Hummel 2025/26 del Real Betis representa un regreso emocional a las raíces del club. Las famosas Trece Barras vertiblancas, símbolo bético desde 1907, vuelven con fuerza en un diseño que fusiona tradición y modernidad de manera magistral. Estas trece barras representan a los trece caballeros que fundaron el club hace más de un siglo. La camiseta incluye detalles ocultos muy especiales: referencias sutiles a la Giralda y al barrio de Heliópolis en el interior del cuello, que solo los béticos más acérrimos reconocen. Hummel se inspiró en los azulejos sevillanos tradicionales para algunos patrones del tejido, creando una pieza que no solo es una camiseta, sino un homenaje a la ciudad de Sevilla. Las ventas batieron récords en las primeras semanas de lanzamiento.');
 
 INSERT INTO shirts (season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description) VALUES
-('2024/2025', 'Premier League', 'Manchester City', 'Puma', 115.00, 'Azul / Negro', 'Local', 'Aficionado', 5,
+('2024/2025', 'Premier League', 'Manchester City', 'Puma', 115.00, 'Azul Claro / Blanco', 'Local', 'Aficionado', 5,
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1770564729/CITY1_ukvxyl.jpg',
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1770564729/CITY1_ukvxyl.jpg',
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1770564728/CITY2_hto2r7.jpg',

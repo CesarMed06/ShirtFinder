@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { FaStar, FaRegStar, FaStarHalfAlt } from 'react-icons/fa';
 
 function Catalog() {
     const [shirts, setShirts] = useState([]);
@@ -28,6 +29,7 @@ function Catalog() {
         if (filters.marca) params.push(`brand=${filters.marca}`);
         if (filters.tipo) params.push(`tipo=${filters.tipo}`);
         if (filters.version) params.push(`version=${filters.version}`);
+        if (filters.valoracion) params.push(`rating=${filters.valoracion}`);
         if (filters.ordenar === 'precio-menor') params.push('sortBy=price_asc');
         if (filters.ordenar === 'precio-mayor') params.push('sortBy=price_desc');
         if (filters.ordenar === 'recientes') params.push('sortBy=recent');
@@ -47,7 +49,20 @@ function Catalog() {
     };
 
     const renderStars = (rating) => {
-        return "★".repeat(rating) + "☆".repeat(5 - rating);
+        const stars = [];
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 >= 0.5;
+
+        for (let i = 0; i < 5; i++) {
+            if (i < fullStars) {
+                stars.push(<FaStar key={i} />);
+            } else if (i === fullStars && hasHalfStar) {
+                stars.push(<FaStarHalfAlt key={i} />);
+            } else {
+                stars.push(<FaRegStar key={i} />);
+            }
+        }
+        return stars;
     };
 
     const handleFilterChange = (filterName, value) => {
@@ -107,10 +122,10 @@ function Catalog() {
                             onChange={(e) => handleFilterChange('tipo', e.target.value)}
                         >
                             <option value="">Seleccionar</option>
-                            <option value="local">Local</option>
-                            <option value="visitante">Visitante</option>
-                            <option value="alternativa">Alternativa</option>
-                            <option value="portero">Portero</option>
+                            <option value="Local">Local</option>
+                            <option value="Visitante">Visitante</option>
+                            <option value="Alternativa">Alternativa</option>
+                            <option value="Portero">Portero</option>
                         </select>
                     </div>
 
@@ -153,8 +168,8 @@ function Catalog() {
                             onChange={(e) => handleFilterChange('version', e.target.value)}
                         >
                             <option value="">Seleccionar</option>
-                            <option value="jugador">Jugador</option>
-                            <option value="aficionado">Aficionado</option>
+                            <option value="Jugador">Jugador</option>
+                            <option value="Aficionado">Aficionado</option>
                         </select>
                     </div>
 
@@ -223,7 +238,7 @@ function Catalog() {
                             <p className="sf-catalog-card__price">{shirt.price}€</p>
 
                             <div className="sf-catalog-card__footer">
-                                <span className="sf-catalog-card__stars">{renderStars(0)}</span>
+                                <span className="sf-catalog-card__stars">{renderStars(shirt.average_rating || 0)}</span>
                                 <Link to={`/shirt/${shirt.id_shirts}`}>
                                     <button className="sf-catalog-card__button">VER MÁS</button>
                                 </Link>

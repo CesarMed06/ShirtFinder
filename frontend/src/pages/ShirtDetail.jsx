@@ -15,6 +15,8 @@ function ShirtDetail() {
     const [selectedImage, setSelectedImage] = useState(0);
     const [userRating, setUserRating] = useState(0);
     const [comment, setComment] = useState('');
+    const [comments, setComments] = useState([]);
+    const token = localStorage.getItem('token');
 
     const handleStarClick = (starIndex, event) => {
         const rect = event.currentTarget.getBoundingClientRect();
@@ -66,7 +68,75 @@ function ShirtDetail() {
                 setError(err.message);
                 setLoading(false);
             });
+
+        loadComments();
     }, [id]);
+
+    const loadComments = async () => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/comments/${id}`);
+            const data = await response.json();
+            if (data.success) {
+                setComments(data.data);
+            }
+        } catch (error) {
+        }
+    };
+
+    const calculateAverageRating = () => {
+        if (comments.length === 0) return 0;
+        const sum = comments.reduce((acc, c) => acc + (c.rating || 0), 0);
+        return sum / comments.length;
+    };
+
+    const handleSubmitComment = async () => {
+        if (!token) {
+            alert('Inicia sesión para comentar');
+            return;
+        }
+
+        if (!comment.trim()) {
+            alert('El comentario no puede estar vacío');
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://localhost:5000/api/comments/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    text: comment,
+                    rating: userRating
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                setComment('');
+                setUserRating(0);
+                loadComments();
+            } else {
+                alert(data.message || 'Error al enviar comentario');
+            }
+        } catch (error) {
+            alert('Error al enviar comentario');
+        }
+    };
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('es-ES', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    };
 
     const renderStars = (rating) => {
         const stars = [];
@@ -128,9 +198,9 @@ function ShirtDetail() {
 
                     <div className="sf-detail__rating">
                         <div className="sf-detail__stars">
-                            {renderStars(0)}
+                            {renderStars(calculateAverageRating())}
                         </div>
-                        <span className="sf-detail__reviews">(0 valoraciones)</span>
+                        <span className="sf-detail__reviews">({comments.length} valoraciones)</span>
                     </div>
 
                     <div className="sf-detail__two-columns">
@@ -156,7 +226,7 @@ function ShirtDetail() {
                                 </div>
                                 <div className="sf-detail__info-row">
                                     <span className="sf-detail__info-label">Colores</span>
-                                    <span className="sf-detail__info-value">Verde / Blanco</span>
+                                    <span className="sf-detail__info-value">{shirt.color}</span>
                                 </div>
                             </div>
                         </div>
@@ -218,17 +288,42 @@ function ShirtDetail() {
                             <textarea
                                 value={comment}
                                 onChange={(e) => setComment(e.target.value)}
-                                placeholder="Escribe tu comentario..."
+                                placeholder={token ? "Escribe tu comentario..." : "Inicia sesión para comentar"}
                                 className="sf-detail__comment-input"
+                                disabled={!token}
                             />
-                            <button className="sf-detail__submit-btn">ENVIAR</button>
+                            <button
+                                className="sf-detail__submit-btn"
+                                onClick={handleSubmitComment}
+                                disabled={!token}
+                            >
+                                ENVIAR
+                            </button>
                         </div>
                     </div>
 
                     <div className="sf-detail__comments-grid">
-                        <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#777', fontStyle: 'italic', padding: '40px' }}>
-                            Aún no hay comentarios. ¡Sé el primero en comentar!
-                        </p>
+                        {comments.length === 0 ? (
+                            <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#777', fontStyle: 'italic', padding: '40px' }}>
+                                Aún no hay comentarios. ¡Sé el primero en comentar!
+                            </p>
+                        ) : (
+                            comments.map(c => (
+                                <div key={c.id_comments} className="sf-detail__comment">
+                                    <div className="sf-detail__comment-avatar"></div>
+                                    <div className="sf-detail__comment-rating-wrapper">
+                                        <div className="sf-detail__comment-stars">
+                                            {renderStars(c.rating || 0)}
+                                        </div>
+                                        <div className="sf-detail__comment-content">
+                                            <div className="sf-detail__comment-text">
+                                                {c.text}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        )}
                     </div>
                 </div>
             </div>

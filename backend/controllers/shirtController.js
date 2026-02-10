@@ -6,9 +6,12 @@ exports.getAllShirts = async (req, res) => {
 
     let query = `
       SELECT
-        id_shirts, season, league, team, brand, price, color, tipo, version, rating,
-        image_url, image_1, image_2, image_3, image_4, description
-      FROM shirts
+        s.id_shirts, s.season, s.league, s.team, s.brand, s.price, s.color, s.tipo, s.version,
+        s.image_url, s.image_1, s.image_2, s.image_3, s.image_4, s.description,
+        COALESCE(AVG(c.rating), 0) as average_rating,
+        COUNT(c.id_comments) as comment_count
+      FROM shirts s
+      LEFT JOIN comments c ON s.id_shirts = c.shirt_id
       WHERE 1=1
     `;
 
@@ -16,67 +19,75 @@ exports.getAllShirts = async (req, res) => {
 
     if (brand) {
       const brands = brand.split(',');
-      query += ` AND brand IN (${brands.map(() => '?').join(',')})`;
+      query += ` AND s.brand IN (${brands.map(() => '?').join(',')})`;
       params.push(...brands);
     }
 
     if (league) {
       const leagues = league.split(',');
-      query += ` AND league IN (${leagues.map(() => '?').join(',')})`;
+      query += ` AND s.league IN (${leagues.map(() => '?').join(',')})`;
       params.push(...leagues);
     }
 
     if (season) {
       const seasons = season.split(',');
-      query += ` AND season IN (${seasons.map(() => '?').join(',')})`;
+      query += ` AND s.season IN (${seasons.map(() => '?').join(',')})`;
       params.push(...seasons);
     }
 
     if (tipo) {
       const tipos = tipo.split(',');
-      query += ` AND tipo IN (${tipos.map(() => '?').join(',')})`;
+      query += ` AND s.tipo IN (${tipos.map(() => '?').join(',')})`;
       params.push(...tipos);
     }
 
     if (version) {
       const versions = version.split(',');
-      query += ` AND version IN (${versions.map(() => '?').join(',')})`;
+      query += ` AND s.version IN (${versions.map(() => '?').join(',')})`;
       params.push(...versions);
     }
 
-    if (rating) {
-      query += ` AND rating = ?`;
-      params.push(parseInt(rating));
-    }
-
     if (minPrice) {
-      query += ` AND price >= ?`;
+      query += ` AND s.price >= ?`;
       params.push(parseFloat(minPrice));
     }
 
     if (maxPrice) {
-      query += ` AND price <= ?`;
+      query += ` AND s.price <= ?`;
       params.push(parseFloat(maxPrice));
     }
 
+    query += ` GROUP BY s.id_shirts`;
+
+    if (rating) {
+      query += ` HAVING average_rating >= ?`;
+      params.push(parseInt(rating));
+    }
+
     if (sortBy === 'price_asc') {
-      query += ` ORDER BY price ASC`;
+      query += ` ORDER BY s.price ASC`;
     } else if (sortBy === 'price_desc') {
-      query += ` ORDER BY price DESC`;
+      query += ` ORDER BY s.price DESC`;
     } else if (sortBy === 'recent') {
-      query += ` ORDER BY date_added DESC`;
+      query += ` ORDER BY s.date_added DESC`;
     } else if (sortBy === 'name_asc') {
-      query += ` ORDER BY team ASC`;
+      query += ` ORDER BY s.team ASC`;
     } else {
-      query += ` ORDER BY date_added DESC`;
+      query += ` ORDER BY s.date_added DESC`;
     }
 
     const [rows] = await pool.query(query, params);
 
+    const shirtsWithRating = rows.map(shirt => ({
+      ...shirt,
+      average_rating: parseFloat(shirt.average_rating) || 0,
+      comment_count: parseInt(shirt.comment_count) || 0
+    }));
+
     res.status(200).json({
       success: true,
-      count: rows.length,
-      data: rows
+      count: shirtsWithRating.length,
+      data: shirtsWithRating
     });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
