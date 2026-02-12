@@ -6,10 +6,10 @@ exports.getCommentsByShirt = async (req, res) => {
 
     const [comments] = await pool.query(
       `SELECT c.id_comments, c.text, c.rating, c.date, u.username
-       FROM comments c
-       JOIN users u ON c.user_id = u.id_users
-       WHERE c.shirt_id = ?
-       ORDER BY c.date DESC`,
+      FROM comments c
+      JOIN users u ON c.user_id = u.id_users
+      WHERE c.shirt_id = ?
+      ORDER BY c.date DESC`,
       [shirtId]
     );
 
@@ -43,9 +43,9 @@ exports.addComment = async (req, res) => {
 
     const [newComment] = await pool.query(
       `SELECT c.id_comments, c.text, c.rating, c.date, u.username
-       FROM comments c
-       JOIN users u ON c.user_id = u.id_users
-       WHERE c.id_comments = ?`,
+      FROM comments c
+      JOIN users u ON c.user_id = u.id_users
+      WHERE c.id_comments = ?`,
       [result.insertId]
     );
 
