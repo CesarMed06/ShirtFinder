@@ -185,3 +185,46 @@ exports.deleteShirt = async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
+exports.searchShirts = async (req, res) => {
+  try {
+    const { q } = req.query;
+
+    if (!q) {
+      return res.status(400).json({
+        success: false,
+        message: 'Parámetro de búsqueda requerido'
+      });
+    }
+
+    const query = `
+      SELECT
+        s.id_shirts, s.season, s.league, s.team, s.brand, s.price, s.color, s.tipo, s.version,
+        s.image_url, s.image_1, s.image_2, s.image_3, s.image_4, s.description,
+        COALESCE(AVG(c.rating), 0) as average_rating,
+        COUNT(c.id_comments) as comment_count
+      FROM shirts s
+      LEFT JOIN comments c ON s.id_shirts = c.shirt_id
+      WHERE s.team LIKE ? OR s.league LIKE ?
+      GROUP BY s.id_shirts
+      ORDER BY s.date_added DESC
+    `;
+
+    const searchTerm = `%${q}%`;
+    const [rows] = await pool.query(query, [searchTerm, searchTerm]);
+
+    const shirtsWithRating = rows.map(shirt => ({
+      ...shirt,
+      average_rating: parseFloat(shirt.average_rating) || 0,
+      comment_count: parseInt(shirt.comment_count) || 0
+    }));
+
+    res.status(200).json({
+      success: true,
+      count: shirtsWithRating.length,
+      data: shirtsWithRating
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};

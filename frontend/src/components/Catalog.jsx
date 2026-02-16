@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { FaStar, FaRegStar, FaStarHalfAlt } from 'react-icons/fa';
 
 function Catalog() {
+    const [searchParams] = useSearchParams();
+    const searchQuery = searchParams.get('search');
+
     const [shirts, setShirts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -20,21 +23,27 @@ function Catalog() {
 
     useEffect(() => {
         fetchShirts();
-    }, []);
+    }, [searchQuery]);
 
     const fetchShirts = () => {
-        let url = 'http://localhost:5000/api/shirts?';
-        const params = [];
+        let url;
 
-        if (filters.marca) params.push(`brand=${filters.marca}`);
-        if (filters.tipo) params.push(`tipo=${filters.tipo}`);
-        if (filters.version) params.push(`version=${filters.version}`);
-        if (filters.valoracion) params.push(`rating=${filters.valoracion}`);
-        if (filters.ordenar === 'precio-menor') params.push('sortBy=price_asc');
-        if (filters.ordenar === 'precio-mayor') params.push('sortBy=price_desc');
-        if (filters.ordenar === 'recientes') params.push('sortBy=recent');
+        if (searchQuery) {
+            url = `http://localhost:5000/api/shirts/search?q=${searchQuery}`;
+        } else {
+            url = 'http://localhost:5000/api/shirts?';
+            const params = [];
 
-        url += params.join('&');
+            if (filters.marca) params.push(`brand=${filters.marca}`);
+            if (filters.tipo) params.push(`tipo=${filters.tipo}`);
+            if (filters.version) params.push(`version=${filters.version}`);
+            if (filters.valoracion) params.push(`rating=${filters.valoracion}`);
+            if (filters.ordenar === 'precio-menor') params.push('sortBy=price_asc');
+            if (filters.ordenar === 'precio-mayor') params.push('sortBy=price_desc');
+            if (filters.ordenar === 'recientes') params.push('sortBy=recent');
+
+            url += params.join('&');
+        }
 
         fetch(url)
             .then(res => res.json())
@@ -94,7 +103,9 @@ function Catalog() {
     return (
         <section className="sf-catalog">
             <div className="sf-catalog__header">
-                <h1 className="sf-catalog__title">Resultados de búsqueda</h1>
+                <h1 className="sf-catalog__title">
+                    {searchQuery ? `Resultados de búsqueda para: "${searchQuery}"` : 'Catálogo de camisetas'}
+                </h1>
                 <p className="sf-catalog__count">Mostrando {shirts.length} resultados</p>
             </div>
 

@@ -1,15 +1,25 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 function Header() {
     const location = useLocation();
+    const navigate = useNavigate();
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (searchTerm.trim()) {
+            navigate(`/catalog?search=${searchTerm}`);
+        }
+    };
 
     return (
         <header className="sf-header">
             <Link to="/">
-                <img 
-                    src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768391529/LOGO_SHIRTFINDER_ckkr7a.png" 
-                    alt="Logo ShirtFinder" 
-                    className="sf-header__logo-icon" 
+                <img
+                    src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768391529/LOGO_SHIRTFINDER_ckkr7a.png"
+                    alt="Logo ShirtFinder"
+                    className="sf-header__logo-icon"
                 />
             </Link>
 
@@ -20,14 +30,21 @@ function Header() {
                 <Link to="/login" className={location.pathname === "/login" ? "activo" : ""}>MI CUENTA</Link>
             </nav>
 
-            <div className="sf-header__search">
-                <input type="text" placeholder="Buscar camisetas..." />
-                <img 
-                    src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768391530/LUPA_mg7p02.png" 
-                    alt="Buscar" 
-                    className="sf-header__search-icon" 
+            <form className="sf-header__search" onSubmit={handleSearch}>
+                <input
+                    type="text"
+                    placeholder="Buscar camisetas..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
                 />
-            </div>
+                <img
+                    src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768391530/LUPA_mg7p02.png"
+                    alt="Buscar"
+                    className="sf-header__search-icon"
+                    onClick={handleSearch}
+                    style={{ cursor: 'pointer' }}
+                />
+            </form>
         </header>
     );
 }

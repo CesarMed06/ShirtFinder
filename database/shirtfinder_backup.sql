@@ -138,6 +138,41 @@ INSERT INTO shirts (season, league, team, brand, price, color, tipo, version, ra
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1770564724/INTER4_s62ldx.jpg',
 'El Inter de Milán vivió una temporada de consolidación tras conquistar el Scudetto el año anterior. El equipo de Simone Inzaghi demostró que no fue campeón por casualidad al conseguir su segundo Scudetto consecutivo, rompiendo años de dominio de la Juventus. La camiseta nerazzurra presenta el diseño del Biscione, la serpiente milenaria que es uno de los símbolos más antiguos de Milán, usado por la poderosa familia Visconti desde el siglo XIV. Nike incorporó este diseño de forma sutil en las franjas, visible solo de cerca, creando una pieza llena de historia. Lautaro Martínez se coronó como Pichichi de la Serie A, formando junto a Thuram una dupla goleadora letal, mientras que Calhanoglu dirigía el mediocampo con maestría. El equipo alcanzó las semifinales de la Champions League. Esta camiseta se agotó en Italia en menos de dos semanas tras salir a la venta, convirtiéndose en una de las más vendidas de la historia reciente del Inter.');
 
+INSERT INTO shirts (season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description) VALUES
+('2025/2026', 'La Liga', 'FC Barcelona', 'Nike', 150.00, 'Azul / Granate', 'Local', 'Jugador', 5,
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237507/BARSA1_vhmexs.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237507/BARSA1_vhmexs.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237507/BARSA2_pzjpz4.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237507/BARSA3_gprj6a.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237507/BARSA4_apidlf.jpg',
+'La temporada 2025/26 marca un nuevo capítulo en la historia del FC Barcelona con una camiseta que rinde homenaje a sus orígenes. El diseño presenta las icónicas franjas azulgrana en un degradado moderno que simboliza la transición entre tradición y futuro. Tras años de incertidumbre financiera, el club ha logrado estabilizarse bajo la dirección de Joan Laporta y su proyecto deportivo empieza a dar frutos. La plantilla rejuvenecida combina canteranos formados en La Masia con fichajes estratégicos que han devuelto al equipo a la élite europea. El escudo bordado y los detalles dorados celebran los 126 años de historia del club. Esta equipación Nike representa la esperanza de una nueva era dorada en el Camp Nou, donde una generación de jóvenes talentos busca emular las gestas de Messi, Xavi e Iniesta.');
+
+INSERT INTO shirts (season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description) VALUES
+('2025/2026', 'Ligue 1', 'Paris Saint-Germain', 'Nike', 95.00, 'Azul Marino / Rojo', 'Local', 'Aficionado', 4,
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237507/PSG1_dvhnmm.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237507/PSG1_dvhnmm.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237507/PSG2_mvbalb.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237547/PSG3_rm2viu.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237532/PSG4_nfubb9.jpg',
+'El PSG entra en una nueva era tras la partida de sus megaestrellas Messi, Neymar y Mbappé. Esta camiseta 2025/26 simboliza un cambio de filosofía: menos galácticos individuales y más trabajo colectivo. El diseño presenta la clásica franja roja vertical sobre fondo azul marino, con detalles inspirados en la Torre Eiffel y los monumentos parisinos. Nike ha incorporado su tecnología más avanzada para un rendimiento óptimo. El club, respaldado por Qatar Sports Investments, ahora apuesta por desarrollar talento joven francés combinado con fichajes estratégicos. Aunque ha dominado la Ligue 1 durante años, el gran objetivo sigue siendo conquistar la escurridiza Champions League. Esta equipación representa la ambición renovada de un gigante europeo que busca demostrar que puede triunfar sin depender de nombres mediáticos.');
+
+INSERT INTO shirts (season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description) VALUES
+('2023/2024', 'Serie A', 'Venezia FC', 'Kappa', 90.00, 'Negro / Verde / Naranja', 'Local', 'Jugador', 5,
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237512/VENEZIA1_zpwfq5.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237512/VENEZIA1_zpwfq5.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237512/VENEZIA2_xjgeh6.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237512/VENEZIA3_rjwefo.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237511/VENEZIA4_srpz6l.jpg',
+'El Venezia FC se ha convertido en el equipo más elegante y fashion del fútbol mundial. Esta camiseta 2023/24 es una auténtica obra de arte que fusiona deporte y moda de alta costura. El diseño en negro con detalles en verde y naranja está inspirado en los canales y góndolas de Venecia, creando un efecto visual único. Kappa ha trabajado junto a diseñadores de moda para crear una pieza que trasciende el fútbol. Aunque el club juega en Serie B tras descender, sus camisetas se han convertido en objetos de culto entre coleccionistas y fashionistas de todo el mundo. Celebrities y influencers las lucen en las calles de Milán, París y Nueva York. Esta equipación demuestra que el fútbol puede ser un lienzo para la expresión artística, convirtiendo al Venezia en un fenómeno cultural más allá de los resultados deportivos.');
+
+INSERT INTO shirts (season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description) VALUES
+('2025/2026', 'Serie A', 'AS Roma', 'Adidas', 90.00, 'Verde Menta / Naranja', 'Alternativa', 'Jugador', 4,
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237508/ROMA1_l6xtid.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237508/ROMA1_l6xtid.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237508/ROMA2_yviufa.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237507/ROMA3_nc3tm1.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237507/ROMA4_nhk5we.jpg',
+'La tercera equipación de la Roma 2025/26 ha generado controversia y admiración a partes iguales. Adidas se atrevió con un diseño radical en verde menta con detalles en naranja, colores completamente ajenos a la tradicional paleta giallorossa. Inspirada en las fuentes y jardines de la Roma antigua, esta camiseta representa la osadía y la innovación. Los aficionados más puristas la criticaron inicialmente, pero rápidamente se convirtió en un éxito de ventas global. El diseño moderno y atrevido atrajo a una nueva generación de fans que buscan piezas únicas y diferentes. La Roma, bajo la ambiciosa propiedad americana de los Friedkin, está construyendo un nuevo estadio y un proyecto deportivo competitivo en Europa. Esta equipación simboliza la valentía de romper con lo establecido y mirar hacia el futuro sin olvidar la gloriosa historia del club.');
+
 INSERT INTO users (username, email, password, user_type) VALUES
 ('cesar_test', 'cesar@test.com', '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
-
