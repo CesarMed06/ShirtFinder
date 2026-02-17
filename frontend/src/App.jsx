@@ -3,7 +3,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import TrendingShirts from "./components/TrendingShirts";
-import Login from "./components/Login"; 
+import Login from "./components/Login";
 import Register from "./components/Register";
 import Catalog from "./components/Catalog";
 import ShirtDetail from "./pages/ShirtDetail";
@@ -17,6 +17,8 @@ function Home() {
   );
 }
 
+import MyAccount from "./pages/MyAccount";
+
 function App() {
   return (
     <div className="app-container">
@@ -25,10 +27,11 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} /> 
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/shirt/:id" element={<ShirtDetail />} />
+          <Route path="/my-account" element={<MyAccount />} />
         </Routes>
       </main>
 

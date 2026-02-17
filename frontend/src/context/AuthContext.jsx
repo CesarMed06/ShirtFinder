@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     const savedToken = localStorage.getItem('token');
-    
+
     if (!savedToken) {
       setLoading(false);
       return;
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem('token');
       setToken(null);
     }
-    
+
     setLoading(false);
   };
 
@@ -77,7 +77,7 @@ export const AuthProvider = ({ children }) => {
         navigate('/');
         return { success: true };
       } else {
-        return { success: false, error: data.message };
+        return { success: false, error: data.message || data.error || 'Credenciales inválidas' };
       }
     } catch (error) {
       return { success: false, error: 'Error al conectar con el servidor' };

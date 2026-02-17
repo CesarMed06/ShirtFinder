@@ -7,9 +7,9 @@ exports.register = async (req, res) => {
     const { username, email, password } = req.body;
 
     if (!username || !email || !password) {
-      return res.status(400).json({ 
-        success: false, 
-        message: 'Todos los campos son obligatorios' 
+      return res.status(400).json({
+        success: false,
+        message: 'Todos los campos son obligatorios'
       });
     }
 
@@ -19,9 +19,9 @@ exports.register = async (req, res) => {
     );
 
     if (existingUser.length > 0) {
-      return res.status(400).json({ 
-        success: false, 
-        message: 'Email ya registrado' 
+      return res.status(400).json({
+        success: false,
+        message: 'Email ya registrado'
       });
     }
 
@@ -32,9 +32,9 @@ exports.register = async (req, res) => {
       [username, email, hashedPassword]
     );
 
-    res.status(201).json({ 
-      success: true, 
-      message: 'Usuario registrado correctamente' 
+    res.status(201).json({
+      success: true,
+      message: 'Usuario registrado correctamente'
     });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
@@ -103,9 +103,9 @@ exports.getMe = async (req, res) => {
     );
 
     if (users.length === 0) {
-      return res.status(404).json({ 
-        success: false, 
-        message: 'Usuario no encontrado' 
+      return res.status(404).json({
+        success: false,
+        message: 'Usuario no encontrado'
       });
     }
 

@@ -1,0 +1,324 @@
+.sf-my-account {
+    width: 100%;
+    margin: 0;
+    padding: 60px 80px;
+    background-color: #fff;
+    color: #2c3e50;
+    min-height: calc(100vh - 80px - 50px);
+    overflow-x: hidden;
+    box-sizing: border-box;
+    /* Asegura que el padding no cause desbordamiento */
+}
+
+.sf-my-account__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.sf-my-account__layout {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 60px;
+}
+
+.sf-my-account__section-title {
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0;
+    color: #2c3e50;
+}
+
+.sf-my-account__underline {
+    width: 148px;
+    height: 3px;
+    background-color: #ff6b35;
+    margin-top: 5px;
+    margin-bottom: 40px;
+}
+
+.sf-my-account__underline--right {
+    width: 173px;
+    margin-left: auto;
+}
+
+/* Info Usuario */
+.sf-profile-main {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+.sf-profile-avatar {
+    width: 197px;
+    height: 256px;
+    object-fit: cover;
+}
+
+.sf-profile-details {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-top: 5px;
+    /* Ajustado para alinear con estadísticas */
+}
+
+.sf-profile-details p {
+    margin: 0;
+    font-size: 16px;
+    color: #555;
+    font-family: 'Inter', sans-serif;
+    line-height: normal;
+    /* Asegura consistencia */
+}
+
+.sf-profile-name {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.sf-profile-email {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.sf-profile-date {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+/* Estadísticas vertical */
+.sf-my-account__stats-panel {
+    text-align: right;
+}
+
+.sf-profile-stats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 5px;
+    /* Ajustado para alinear con el nombre del usuario */
+}
+
+.sf-profile-stats-list p {
+    margin: 0;
+    font-size: 16px;
+    color: #555;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Pestañas */
+.sf-profile-tabs-container {
+    position: relative;
+    width: calc(100% + 160px);
+    /* Extiende la línea por todo el ancho compensando el padding */
+    margin-left: -80px;
+    /* Compensa el padding del contenedor padre */
+    margin-bottom: 40px;
+}
+
+.sf-profile-tabs {
+    display: flex;
+    gap: 80px;
+    /* Reducido un poco para asegurar que quepan todas */
+    padding-left: 80px;
+    /* Alineado con el padding general del contenido */
+    margin-bottom: 0;
+    position: relative;
+    z-index: 2;
+    overflow-x: auto;
+    /* Permite scroll si la pantalla es muy pequeña */
+    scrollbar-width: none;
+    /* Oculta scrollbar en Firefox */
+}
+
+.sf-profile-tabs::-webkit-scrollbar {
+    display: none;
+    /* Oculta scrollbar en Chrome/Safari */
+}
+
+.sf-tab-btn {
+    flex: 0 0 auto;
+    width: 269px;
+    height: 50px;
+    background: #fff;
+    border: 1px solid #bdc3c7;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sf-tab-btn.active {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+.sf-full-width-line {
+    position: absolute;
+    bottom: -15px;
+    /* Ajustado según Figma */
+    left: 0;
+    width: 100%;
+    height: 1px;
+    /* Figma suele usar líneas de 1px */
+    background-color: #000000;
+    /* Color negro solicitado */
+    z-index: 1;
+}
+
+/* Grid de Camisetas */
+.sf-favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.sf-shirt-card-mini {
+    background: #f5f5f5;
+    border-radius: 22px;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.sf-shirt-card-mini__img-container {
+    background: #d9d9d9;
+    height: 160px;
+    margin-bottom: 20px;
+}
+
+.sf-shirt-card-mini__title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 10px;
+    min-height: 48px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.sf-shirt-card-mini__price {
+    color: #ff6b35;
+    font-weight: 700;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.sf-shirt-card-mini__btn {
+    background: rgba(52, 152, 219, 0.82);
+    color: #fff;
+    border: none;
+    width: 100%;
+    padding: 8px;
+    border-radius: 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.sf-heart-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 24px;
+    height: 24px;
+}
+
+.sf-logout-wrapper {
+    margin-top: 20px;
+}
+
+.sf-logout-btn-minimal {
+    background: none;
+    border: none;
+    color: #ff6b35;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+}
+
+.sf-profile-avatar--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border: none;
+    /* ELIMINADO EL BORDE */
+    border-radius: 0;
+}
+
+/* Comentarios Minimalistas */
+.sf-comments-section-minimal {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.sf-comment-card-minimal {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 15px 20px;
+    border-radius: 12px;
+    transition: all 0.2s;
+}
+
+.sf-comment-card-minimal:hover {
+    border-color: #ff6b35;
+    transform: translateX(5px);
+}
+
+.sf-comment-card-minimal p {
+    margin: 0;
+    color: #555;
+    font-size: 15px;
+}
+
+.sf-comment-card-minimal strong {
+    color: #2c3e50;
+    margin-right: 5px;
+}
+
+.sf-comment-date-small {
+    display: block;
+    font-size: 12px;
+    color: #999;
+    margin-top: 5px;
+}
+
+.sf-empty-state-minimal {
+    text-align: center;
+    padding: 60px 20px;
+    color: #95a5a6;
+    background: #fdfdfd;
+    border-radius: 15px;
+    border: 1px dashed #eee;
+}
+
+.sf-empty-state-minimal a {
+    color: #ff6b35;
+    text-decoration: none;
+    font-weight: 700;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.sf-shirt-card-mini__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
