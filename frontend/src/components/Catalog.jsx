@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { FaStar, FaRegStar, FaStarHalfAlt } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 function Catalog() {
     const [searchParams] = useSearchParams();
@@ -54,6 +55,12 @@ function Catalog() {
             .catch(err => {
                 setError('Error al cargar las camisetas');
                 setLoading(false);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'No se pudieron cargar las camisetas. Inténtalo de nuevo más tarde.',
+                    confirmButtonColor: '#ff8a3d'
+                });
             });
     };
 
@@ -74,6 +81,14 @@ function Catalog() {
         return stars;
     };
 
+    const getPriceRange = (price) => {
+        const base = parseFloat(price);
+        if (isNaN(base)) return price;
+        const low = Math.floor(base * 0.9 / 5) * 5;
+        const high = Math.ceil(base * 1.2 / 5) * 5;
+        return `${low}-${high}€`;
+    };
+
     const handleFilterChange = (filterName, value) => {
         setFilters(prev => ({
             ...prev,
@@ -90,6 +105,15 @@ function Catalog() {
 
     const applyFilters = () => {
         fetchShirts();
+        Swal.fire({
+            icon: 'success',
+            title: 'Filtros aplicados',
+            text: 'El catálogo se ha actualizado según tus preferencias.',
+            timer: 3000, // Aumentado de 1500 a 3000
+            showConfirmButton: false,
+            toast: true,
+            position: 'top-end'
+        });
     };
 
     if (loading) {
@@ -246,7 +270,7 @@ function Catalog() {
 
                             <h3 className="sf-catalog-card__name">{shirt.team} {shirt.season} - {shirt.tipo}</h3>
 
-                            <p className="sf-catalog-card__price">{shirt.price}€</p>
+                            <p className="sf-catalog-card__price">{getPriceRange(shirt.price)}</p>
 
                             <div className="sf-catalog-card__footer">
                                 <span className="sf-catalog-card__stars">{renderStars(shirt.average_rating || 0)}</span>
