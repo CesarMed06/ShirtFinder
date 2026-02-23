@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { FaStar, FaRegStar, FaStarHalfAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
-
-const PER_PAGE = 9;
+import FavoriteButton from './FavoriteButton';
 
 function Catalog() {
     const [searchParams] = useSearchParams();
@@ -13,6 +12,8 @@ function Catalog() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [page, setPage] = useState(1);
+    const [total, setTotal] = useState(0);
+    const shirtsPerPage = 8;
 
     const [filters, setFilters] = useState({
         ordenar: '',
@@ -27,8 +28,11 @@ function Catalog() {
 
     useEffect(() => {
         setPage(1);
-        fetchShirts();
     }, [searchQuery]);
+
+    useEffect(() => {
+        fetchShirts();
+    }, [searchQuery, filters, page]);
 
     const fetchShirts = () => {
         let url;
@@ -46,10 +50,13 @@ function Catalog() {
             url += params.join('&');
         }
 
+        setLoading(true);
         fetch(url)
             .then(res => res.json())
             .then(data => {
-                setShirts(data.data || []);
+                const arr = data.data || data || [];
+                setTotal(arr.length);
+                setShirts(arr.slice((page - 1) * shirtsPerPage, page * shirtsPerPage));
                 setLoading(false);
             })
             .catch(() => {
@@ -58,7 +65,7 @@ function Catalog() {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'No se pudieron cargar las camisetas. Inténtalo de nuevo más tarde.',
+                    text: 'No se pudieron cargar las camisetas.',
                     confirmButtonColor: '#ff8a3d'
                 });
             });
@@ -98,22 +105,14 @@ function Catalog() {
         Swal.fire({
             icon: 'success',
             title: 'Filtros aplicados',
-            text: 'El catálogo se ha actualizado según tus preferencias.',
-            timer: 3000,
+            timer: 2000,
             showConfirmButton: false,
             toast: true,
             position: 'top-end'
         });
     };
 
-    const totalPages = Math.ceil(shirts.length / PER_PAGE);
-    const paginated = shirts.slice((page - 1) * PER_PAGE, page * PER_PAGE);
-
-    const getPageNumbers = () => {
-        const start = Math.max(1, Math.min(page - 2, totalPages - 4));
-        const end = Math.min(totalPages, start + 4);
-        return Array.from({ length: end - start + 1 }, (_, i) => start + i);
-    };
+    const totalPages = Math.ceil(total / shirtsPerPage) || 1;
 
     if (loading) return <div className="sf-catalog"><p>Cargando camisetas...</p></div>;
     if (error) return <div className="sf-catalog"><p>{error}</p></div>;
@@ -127,10 +126,9 @@ function Catalog() {
                     </h1>
                 )}
                 <p className="sf-catalog__count">
-
-                    {shirts.length === 0
+                    {total === 0
                         ? '0 resultados'
-                        : `Mostrando ${(page - 1) * PER_PAGE + 1}–${Math.min(page * PER_PAGE, shirts.length)} de ${shirts.length} resultados`
+                        : `Mostrando ${(page - 1) * shirtsPerPage + 1}–${Math.min(page * shirtsPerPage, total)} de ${total} resultados`
                     }
                 </p>
             </div>
@@ -214,9 +212,11 @@ function Catalog() {
 
                 <div className="sf-catalog__right">
                     <div className="sf-catalog__grid">
-                        {paginated.map((shirt) => (
+                        {shirts.map((shirt) => (
                             <article key={shirt.id_shirts} className="sf-catalog-card">
-                                <button className="sf-catalog-card__heart">♡</button>
+                                <div className="sf-catalog-card__heart">
+                                    <FavoriteButton shirtId={shirt.id_shirts} size="small" />
+                                </div>
                                 <div className="sf-catalog-card__image-box">
                                     <img
                                         src={(shirt.image_url || shirt.image_1)?.replace('dwidyinuu', 'dwldyiruu')}
@@ -239,23 +239,18 @@ function Catalog() {
 
                     {totalPages > 1 && (
                         <div className="sf-pagination">
-                            <button
-                                className="sf-pagination__btn"
-                                onClick={() => setPage(p => p - 1)}
-                                disabled={page === 1}
-                            >‹</button>
-                            {getPageNumbers().map(n => (
-                                <button
-                                    key={n}
-                                    className={`sf-pagination__btn${page === n ? ' sf-pagination__btn--active' : ''}`}
-                                    onClick={() => setPage(n)}
-                                >{n}</button>
-                            ))}
-                            <button
-                                className="sf-pagination__btn"
-                                onClick={() => setPage(p => p + 1)}
-                                disabled={page === totalPages}
-                            >›</button>
+                            <button className="sf-pagination__btn" onClick={() => setPage(p => p - 1)} disabled={page === 1}>‹</button>
+                            {Array.from({ length: totalPages }, (_, i) => i + 1)
+                                .filter(n => n === 1 || n === totalPages || Math.abs(n - page) <= 2)
+                                .map(n => (
+                                    <button
+                                        key={n}
+                                        className={`sf-pagination__btn${page === n ? ' sf-pagination__btn--active' : ''}`}
+                                        onClick={() => setPage(n)}
+                                    >{n}</button>
+                                ))
+                            }
+                            <button className="sf-pagination__btn" onClick={() => setPage(p => p + 1)} disabled={page === totalPages}>›</button>
                         </div>
                     )}
                 </div>

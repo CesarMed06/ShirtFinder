@@ -1,19 +1,24 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './MyAccount.css';
-
 import { FaUser } from 'react-icons/fa';
+import FavoriteButton from '../components/FavoriteButton';
+
+const FAV_PER_PAGE = 8;
 
 function MyAccount() {
     const navigate = useNavigate();
     const [profile, setProfile] = useState(null);
     const [comments, setComments] = useState([]);
+    const [favorites, setFavorites] = useState([]);
+    const [loadingFavorites, setLoadingFavorites] = useState(true);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [activeTab, setActiveTab] = useState('favorites');
+    const [favPage, setFavPage] = useState(1);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-
         if (!token) {
             navigate('/login');
             return;
@@ -21,19 +26,15 @@ function MyAccount() {
 
         const fetchData = async () => {
             try {
-                // Fetch Profile
                 const profileRes = await fetch('http://localhost:5000/api/users/profile', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-
                 if (!profileRes.ok) throw new Error('Error al cargar perfil');
                 const profileData = await profileRes.json();
 
-                // Fetch Comments
                 const commentsRes = await fetch('http://localhost:5000/api/users/profile/comments', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-
                 if (!commentsRes.ok) throw new Error('Error al cargar comentarios');
                 const commentsData = await commentsRes.json();
 
@@ -53,12 +54,32 @@ function MyAccount() {
         fetchData();
     }, [navigate]);
 
+    useEffect(() => {
+        const fetchFavorites = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) return setFavorites([]);
+                const res = await fetch('http://localhost:5000/api/favorites', {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                const data = await res.json();
+                setFavorites(Array.isArray(data) ? data : []);
+            } catch (e) {
+                setFavorites([]);
+            } finally {
+                setLoadingFavorites(false);
+            }
+        };
+        fetchFavorites();
+    }, []);
+
     const handleLogout = () => {
         localStorage.removeItem('token');
         navigate('/login');
     };
 
-    const [activeTab, setActiveTab] = useState('favorites');
+    const favTotalPages = Math.ceil(favorites.length / FAV_PER_PAGE) || 1;
+    const paginatedFavs = favorites.slice((favPage - 1) * FAV_PER_PAGE, favPage * FAV_PER_PAGE);
 
     if (loading) return <div className="sf-my-account"><p>Cargando perfil...</p></div>;
     if (error) return <div className="sf-my-account"><p className="error">{error}</p></div>;
@@ -102,28 +123,16 @@ function MyAccount() {
 
             <div className="sf-profile-tabs-container">
                 <div className="sf-profile-tabs">
-                    <button
-                        className={`sf-tab-btn ${activeTab === 'favorites' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('favorites')}
-                    >
+                    <button className={`sf-tab-btn ${activeTab === 'favorites' ? 'active' : ''}`} onClick={() => setActiveTab('favorites')}>
                         MIS FAVORITOS
                     </button>
-                    <button
-                        className={`sf-tab-btn ${activeTab === 'comments' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('comments')}
-                    >
+                    <button className={`sf-tab-btn ${activeTab === 'comments' ? 'active' : ''}`} onClick={() => setActiveTab('comments')}>
                         MIS COMENTARIOS
                     </button>
-                    <button
-                        className={`sf-tab-btn ${activeTab === 'posts' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('posts')}
-                    >
+                    <button className={`sf-tab-btn ${activeTab === 'posts' ? 'active' : ''}`} onClick={() => setActiveTab('posts')}>
                         MIS POSTS
                     </button>
-                    <button
-                        className={`sf-tab-btn ${activeTab === 'settings' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('settings')}
-                    >
+                    <button className={`sf-tab-btn ${activeTab === 'settings' ? 'active' : ''}`} onClick={() => setActiveTab('settings')}>
                         CONFIGURACIÓN
                     </button>
                 </div>
@@ -132,10 +141,65 @@ function MyAccount() {
 
             <div className="sf-tab-content">
                 {activeTab === 'favorites' && (
-                    <div className="sf-empty-state-minimal">
-                        <p>No tienes camisetas favoritas aún.</p>
-                        <Link to="/catalog">Explorar catálogo</Link>
-                    </div>
+                    <section className="sf-favs">
+                        {loadingFavorites ? (
+                            <p className="sf-favs__loading">Cargando favoritos...</p>
+                        ) : favorites.length === 0 ? (
+                            <div className="sf-favs__empty">
+                                <p>Aún no has añadido favoritos</p>
+                                <p>Explora el catálogo y guarda tus camisetas favoritas</p>
+                            </div>
+                        ) : (
+                            <>
+                                <div className="sf-favs__grid">
+                                    {paginatedFavs.map(s => (
+                                        <article key={s.id_shirts} className="sf-fav-card">
+                                            <div className="sf-fav-card__heart">
+                                                <FavoriteButton
+                                                    shirtId={s.id_shirts}
+                                                    size="small"
+                                                    onChange={(val) => {
+                                                        if (!val) {
+                                                            setFavorites(prev => prev.filter(x => x.id_shirts !== s.id_shirts));
+                                                            setFavPage(1);
+                                                        }
+                                                    }}
+                                                />
+                                            </div>
+                                            <div className="sf-fav-card__imageBox" onClick={() => navigate(`/shirt/${s.id_shirts}`)}>
+                                                <img
+                                                    className="sf-fav-card__img"
+                                                    src={(s.image_url || s.image_1)?.replace?.('dwidyinuu', 'dwldyiruu') || (s.image_url || s.image_1)}
+                                                    alt={s.team}
+                                                />
+                                            </div>
+                                            <h3 className="sf-fav-card__title">{s.team} {s.season}</h3>
+                                            <div className="sf-fav-card__bottom">
+                                                <span className="sf-fav-card__price">{s.price}€</span>
+                                                <button className="sf-fav-card__btn" onClick={() => navigate(`/shirt/${s.id_shirts}`)}>
+                                                    VER MÁS
+                                                </button>
+                                            </div>
+                                        </article>
+                                    ))}
+                                </div>
+
+                                {favTotalPages > 1 && (
+                                    <div className="sf-pagination" style={{ marginTop: 30 }}>
+                                        <button className="sf-pagination__btn" onClick={() => setFavPage(p => p - 1)} disabled={favPage === 1}>‹</button>
+                                        {Array.from({ length: favTotalPages }, (_, i) => i + 1).map(n => (
+                                            <button
+                                                key={n}
+                                                className={`sf-pagination__btn${favPage === n ? ' sf-pagination__btn--active' : ''}`}
+                                                onClick={() => setFavPage(n)}
+                                            >{n}</button>
+                                        ))}
+                                        <button className="sf-pagination__btn" onClick={() => setFavPage(p => p + 1)} disabled={favPage === favTotalPages}>›</button>
+                                    </div>
+                                )}
+                            </>
+                        )}
+                    </section>
                 )}
 
                 {activeTab === 'comments' && (
