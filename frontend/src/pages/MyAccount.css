@@ -1,3 +1,93 @@
+.favorites-section {
+    margin-top: 40px;
+    padding: 20px;
+}
+
+.favorites-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.no-favorites {
+    text-align: center;
+    padding: 60px 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.no-favorites p {
+    font-size: 18px;
+    color: #7f8c8d;
+    margin: 10px 0;
+}
+
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.favorite-card {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.favorite-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.favorite-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.favorite-card-info {
+    padding: 15px;
+}
+
+.favorite-card-info h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+.favorite-card-info p {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin: 3px 0;
+}
+
+.favorite-card-info .price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #27ae60;
+    margin-top: 8px;
+}
+
+.favorite-button-absolute {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    padding: 4px;
+}
+
+@media (max-width: 768px) {
+    .favorites-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+    }
+}
+
 .sf-my-account {
     width: 100%;
     margin: 0;
@@ -321,4 +411,139 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+.sf-favs {
+    width: 100%;
+    padding: 0 60px 40px 60px;
+}
+
+.sf-favs__loading {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #555555;
+}
+
+.sf-favs__empty {
+    width: 100%;
+    padding: 40px 0;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #555555;
+}
+
+.sf-favs__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 376px);
+    gap: 90px;
+    align-items: start;
+}
+
+.sf-fav-card {
+    width: 376px;
+    height: 270px;
+    background: #F5F5F5;
+    border-radius: 22px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    padding: 18px 18px 16px 18px;
+    position: relative;
+}
+
+.sf-fav-card__heart {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 20px;
+    height: 18.35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sf-fav-card__imageBox {
+    width: 283.71px;
+    height: 161.21px;
+    background: #D9D9D9;
+    border-radius: 10px;
+    margin: 10px auto 12px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.sf-fav-card__img {
+    width: 177px;
+    height: 147px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+}
+
+.sf-fav-card__title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #555555;
+    margin: 0 0 10px 0;
+    padding: 0 6px;
+}
+
+.sf-fav-card__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+    gap: 12px;
+}
+
+.sf-fav-card__price {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #FF6B35;
+    white-space: nowrap;
+}
+
+.sf-fav-card__btn {
+    width: 188px;
+    height: 28.59px;
+    background: rgba(52, 152, 219, 0.8235);
+    border: none;
+    border-radius: 18px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.sf-fav-card__btn:hover {
+    background: rgba(52, 152, 219, 1);
+}
+
+@media (max-width: 1700px) {
+    .sf-favs__grid {
+        grid-template-columns: repeat(3, 376px);
+    }
+}
+
+@media (max-width: 1300px) {
+    .sf-favs__grid {
+        grid-template-columns: repeat(2, 376px);
+        justify-content: center;
+    }
+}
+
+@media (max-width: 900px) {
+    .sf-favs {
+        padding: 0 20px 30px 20px;
+    }
+
+    .sf-favs__grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
 }

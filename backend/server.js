@@ -13,10 +13,12 @@ const shirtRoutes = require('./routes/shirts');
 const commentRoutes = require('./routes/commentRoutes');
 const userRoutes = require('./routes/userRoutes');
 
+const favoriteRoutes = require('./routes/favoriteRoutes');
 app.use('/api/auth', authRoutes);
 app.use('/api/shirts', shirtRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/favorites', favoriteRoutes);
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
