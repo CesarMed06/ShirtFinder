@@ -13,7 +13,7 @@ const shirtRoutes = require('./routes/shirts');
 const commentRoutes = require('./routes/commentRoutes');
 const userRoutes = require('./routes/userRoutes');
 
-const favoriteRoutes = require('./routes/favoriteRoutes');
+const favoriteRoutes = require('./routes/frvoriteRoutes');
 app.use('/api/auth', authRoutes);
 app.use('/api/shirts', shirtRoutes);
 app.use('/api/comments', commentRoutes);

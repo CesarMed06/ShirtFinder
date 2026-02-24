@@ -7,6 +7,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Catalog from "./components/Catalog";
 import ShirtDetail from "./pages/ShirtDetail";
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 function Home() {
   return (
@@ -32,6 +34,8 @@ function App() {
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/shirt/:id" element={<ShirtDetail />} />
           <Route path="/my-account" element={<MyAccount />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
       </main>
 

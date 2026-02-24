@@ -1,6 +1,8 @@
 const pool = require('../config/db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const { sendResetEmail } = require('../utils/mailer');  
 
 exports.register = async (req, res) => {
   try {
@@ -117,3 +119,60 @@ exports.getMe = async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
+exports.forgotPassword = async (req, res) => {
+    console.log('>>> forgotPassword llamado con:', req.body);
+    try {
+        const { email } = req.body;
+
+        if (!email) return res.status(400).json({ success: false, message: 'Email requerido' });
+
+        const [users] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
+
+        if (users.length === 0) {
+            return res.json({ success: true, message: 'Si el correo existe, recibirás un enlace' });
+        }
+
+        const token = crypto.randomBytes(32).toString('hex');
+        const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
+
+        await pool.query('DELETE FROM password_resets WHERE email = ?', [email]);
+        await pool.query(
+            'INSERT INTO password_resets (email, token, expires_at) VALUES (?, ?, ?)',
+            [email, token, expiresAt]
+        );
+
+        await sendResetEmail(email, token);
+
+        res.json({ success: true, message: 'Si el correo existe, recibirás un enlace' });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Error al procesar la solicitud' });
+    }
+};
+
+exports.resetPassword = async (req, res) => {
+    try {
+        const { token, password } = req.body;
+        if (!token || !password) return res.status(400).json({ success: false, message: 'Datos incompletos' });
+
+        const [resets] = await pool.query(
+            'SELECT * FROM password_resets WHERE token = ? AND expires_at > NOW()',
+            [token]
+        );
+
+        if (resets.length === 0) {
+            return res.status(400).json({ success: false, message: 'Token inválido o expirado' });
+        }
+
+        const { email } = resets[0];
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        await pool.query('UPDATE users SET password = ? WHERE email = ?', [hashedPassword, email]);
+        await pool.query('DELETE FROM password_resets WHERE token = ?', [token]);
+
+        res.json({ success: true, message: 'Contraseña actualizada correctamente' });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Error al actualizar contraseña' });
+    }
+};
+

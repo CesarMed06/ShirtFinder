@@ -373,14 +373,31 @@ body {
 }
 
 .sf-login__box {
-  width: 450px;
-  background-color: #FFFFFF;
-  border-radius: 20px;
-  padding: 40px;
+  width: 669px;
+  height: 523px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 50px 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  gap: 0px;
+  box-sizing: border-box;
+}
+
+.sf-register__box {
+    width: 669px;
+    min-height: 523px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 40px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+    box-sizing: border-box;
 }
 
 .sf-login__title {
@@ -396,7 +413,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 22px;
   width: 100%;
 }
 
@@ -406,10 +423,10 @@ body {
   background-color: #F2F2F2;
   border: 1px solid #B5BCC9;
   border-radius: 19px;
-  padding: 0 20px 0 50px;
+  padding: 0 50px 0 52px;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 18px;
   color: #555555;
   outline: none;
   box-shadow: none;
@@ -433,14 +450,14 @@ body {
 }
 
 .sf-btn-login {
-  width: 250px;
-  height: 50px;
+  width: 300px;
+  height: 54px;
   background-color: #FF6B35;
   border-radius: 12px;
   border: none;
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 20px;
   color: #FFFFFF;
   cursor: pointer;
   display: flex;
@@ -467,12 +484,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 }
 
 .sf-password-toggle svg {
-  width: 20px;
-  height: 20px;
-  fill: #555555;
+    width: 22px;
+    height: 22px;
+    fill: #555555;
 }
 
 .sf-login__register-area {
@@ -499,17 +517,6 @@ body {
   cursor: pointer;
 }
 
-.sf-register__box {
-  width: 450px;
-  background-color: #FFFFFF;
-  border-radius: 20px;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-}
-
 .sf-register__title {
   font-family: 'Kumbh Sans', sans-serif;
   font-weight: 900;
@@ -520,17 +527,17 @@ body {
 }
 
 .sf-register__form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    width: 100%;
 }
 
 .sf-input-container {
-  position: relative;
-  width: 350px;
-  height: 44px;
+    position: relative;
+    width: 500px;
+    height: 50px;
 }
 
 .sf-input-icon {
@@ -549,10 +556,10 @@ body {
   background-color: #F2F2F2;
   border: 1px solid #BDC3C7;
   border-radius: 19px;
-  padding: 0 20px 0 50px;
+  padding: 0 50px 0 52px;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 18px;
   color: #555555;
   outline: none;
   box-shadow: none;
@@ -564,23 +571,22 @@ body {
 }
 
 .sf-btn-register {
-  width: 250px;
-  height: 50px;
+  width: 300px;
+  height: 54px;
   background-color: #FF6B35;
   border-radius: 12px;
   border: none;
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 20px;
   color: #FFFFFF;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 6px;
   transition: background-color 0.2s;
 }
-
 
 .sf-register__login-area {
   display: flex;
@@ -1395,7 +1401,7 @@ body {
 
   .sf-detail__main-image,
   .sf-detail__left {
-    margin: 0 auto;
+  margin: 0 auto;
   }
 
   .sf-detail__two-columns {
@@ -1408,40 +1414,40 @@ body {
 }
 
 @media (max-width: 768px) {
-  .sf-detail {
+    .sf-detail {
     padding: 20px 30px;
   }
 
   .sf-detail__history {
-    padding: 20px 30px;
-    margin: 40px -30px;
+  padding: 20px 30px;
+  margin: 40px -30px;
   }
 }
 
 .sf-pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding: 30px 0 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 30px 0 10px 0;
 }
 
 .sf-pagination__btn {
-    min-width: 38px;
-    height: 38px;
-    padding: 0 12px;
-    border: none;
-    border-radius: 8px;
-    background: #dce3ec;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    color: #1a2e45;
-    cursor: pointer;
-    transition: background 0.18s, color 0.18s, transform 0.15s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 8px;
+  background: #dce3ec;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: #1a2e45;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, transform 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sf-pagination__btn:hover:not(:disabled) {
@@ -1451,19 +1457,39 @@ body {
 }
 
 .sf-pagination__btn--active {
-    background: #2c4a6b;
-    color: #fff;
-    box-shadow: 0 3px 8px rgba(44, 74, 107, 0.35);
+  background: #2c4a6b;
+  color: #fff;
+  box-shadow: 0 3px 8px rgba(44, 74, 107, 0.35);
 }
 
 .sf-pagination__btn--active:hover {
-    background: #2c4a6b !important;
-    color: #fff !important;
-    transform: none !important;
+  background: #2c4a6b !important;
+  color: #fff !important;
+  transform: none !important;
 }
 
 .sf-pagination__btn:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-    transform: none;
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
 }
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none !important;
+}
+
+.sf-login__input:-webkit-autofill,
+.sf-login__input:-webkit-autofill:hover,
+.sf-login__input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #F2F2F2 inset;
+    box-shadow: 0 0 0px 1000px #F2F2F2 inset;
+}
+
+.sf-register__input:-webkit-autofill,
+.sf-register__input:-webkit-autofill:hover,
+.sf-register__input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #F2F2F2 inset;
+    box-shadow: 0 0 0px 1000px #F2F2F2 inset;
+}
+
