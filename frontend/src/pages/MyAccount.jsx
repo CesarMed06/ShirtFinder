@@ -3,8 +3,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import './MyAccount.css';
 import { FaUser } from 'react-icons/fa';
 import FavoriteButton from '../components/FavoriteButton';
+import Swal from 'sweetalert2';
 
 const FAV_PER_PAGE = 8;
+const COMMENTS_PER_PAGE = 5;
 
 function MyAccount() {
     const navigate = useNavigate();
@@ -16,6 +18,13 @@ function MyAccount() {
     const [error, setError] = useState(null);
     const [activeTab, setActiveTab] = useState('favorites');
     const [favPage, setFavPage] = useState(1);
+    const [commentPage, setCommentPage] = useState(1);
+    const [deletingId, setDeletingId] = useState(null);
+
+    const commentTotalPages = Math.ceil(comments.length / COMMENTS_PER_PAGE) || 1;
+    const paginatedComments = comments.slice((commentPage - 1) * COMMENTS_PER_PAGE, commentPage * COMMENTS_PER_PAGE);
+    const favTotalPages = Math.ceil(favorites.length / FAV_PER_PAGE) || 1;
+    const paginatedFavs = favorites.slice((favPage - 1) * FAV_PER_PAGE, favPage * FAV_PER_PAGE);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -32,7 +41,7 @@ function MyAccount() {
                 if (!profileRes.ok) throw new Error('Error al cargar perfil');
                 const profileData = await profileRes.json();
 
-                const commentsRes = await fetch('http://localhost:5000/api/users/profile/comments', {
+                const commentsRes = await fetch('http://localhost:5000/api/comments/user/me', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (!commentsRes.ok) throw new Error('Error al cargar comentarios');
@@ -73,13 +82,38 @@ function MyAccount() {
         fetchFavorites();
     }, []);
 
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        navigate('/login');
-    };
+    const handleDeleteComment = async (commentId) => {
+        const result = await Swal.fire({
+            title: '¿Eliminar comentario?',
+            text: 'Esta acción no se puede deshacer',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#E67E22',
+            cancelButtonColor: '#555',
+            confirmButtonText: 'Sí, borrar',
+            cancelButtonText: 'Cancelar'
+        });
 
-    const favTotalPages = Math.ceil(favorites.length / FAV_PER_PAGE) || 1;
-    const paginatedFavs = favorites.slice((favPage - 1) * FAV_PER_PAGE, favPage * FAV_PER_PAGE);
+        if (!result.isConfirmed) return;
+
+        try {
+            setDeletingId(commentId);
+            const token = localStorage.getItem('token');
+            const res = await fetch(`http://localhost:5000/api/comments/${commentId}`, {
+                method: 'DELETE',
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            const data = await res.json();
+            if (data.success) {
+                setComments(prev => prev.filter(c => c.id_comments !== commentId));
+                Swal.fire({ icon: 'success', title: 'Eliminado', timer: 1500, showConfirmButton: false });
+            }
+        } catch (error) {
+            Swal.fire('Error', 'No se pudo eliminar', 'error');
+        } finally {
+            setDeletingId(null);
+        }
+    };
 
     if (loading) return <div className="sf-my-account"><p>Cargando perfil...</p></div>;
     if (error) return <div className="sf-my-account"><p className="error">{error}</p></div>;
@@ -203,24 +237,81 @@ function MyAccount() {
                 )}
 
                 {activeTab === 'comments' && (
-                    <div className="sf-comments-section-minimal">
-                        {comments.length > 0 ? (
-                            comments.map(comment => (
-                                <div key={comment.id_comments} className="sf-comment-card-minimal">
-                                    <p>
-                                        <strong>
-                                            <Link to={`/shirt/${comment.id_shirts}`} style={{ color: 'inherit' }}>
-                                                {comment.team}
-                                            </Link>
-                                        </strong>: {comment.text}
-                                    </p>
-                                    <span className="sf-comment-date-small">
-                                        {new Date(comment.date).toLocaleDateString()}
-                                    </span>
-                                </div>
-                            ))
+                    <div className="sf-comments-tab">
+                        {comments.length === 0 ? (
+                            <p className="sf-comments-empty">Aún no has hecho ningún comentario</p>
                         ) : (
-                            <p style={{ textAlign: 'center', color: '#999', marginTop: '40px' }}>No hay comentarios aún.</p>
+                            <>
+                                {paginatedComments.map(comment => (
+    <div key={comment.id_comments} className="sf-comment-wrapper">
+        <div className="sf-comment-row">
+            <div className="sf-comment-row__left">
+                <div className="sf-comment-row__img-wrap">
+                    <img
+                        className="sf-comment-row__img"
+                        src={(comment.image_url || comment.image_1)?.replace?.('dwidyinuu', 'dwldyiruu') || (comment.image_url || comment.image_1)}
+                        alt={comment.team}
+                    />
+                </div>
+                <div className="sf-comment-row__info">
+                    <p className="sf-comment-row__title">
+                        <Link to={`/shirt/${comment.id_shirts}`} className="sf-comment-row__link">
+                            {comment.team} {comment.season}
+                        </Link>
+                    </p>
+                    <p className="sf-comment-row__text">{comment.text}</p>
+                </div>
+            </div>
+
+            <div className="sf-comment-row__stars">
+                {[1, 2, 3, 4, 5].map(star => {
+                    const llena = star <= Math.floor(comment.rating);
+                    const media = !llena && star === Math.ceil(comment.rating) && comment.rating % 1 !== 0;
+    return (
+        <span
+            key={star}
+            className={`sf-comment-row__star ${llena ? 'sf-comment-row__star--filled' : media ? 'sf-comment-row__star--half' : ''}`}
+        >★</span>
+    );
+})}
+
+            </div>
+
+            <span className="sf-comment-row__date">
+                publicado el {new Date(comment.date).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+            </span>
+        </div>
+
+        <div className="sf-comment-row__actions">
+            <Link to={`/shirt/${comment.id_shirts}`} className="sf-comment-row__btn-ver">
+                VER
+            </Link>
+            <button
+                className="sf-comment-row__btn-borrar"
+                onClick={() => handleDeleteComment(comment.id_comments)}
+                disabled={deletingId === comment.id_comments}
+            >
+                {deletingId === comment.id_comments ? '...' : 'BORRAR'}
+            </button>
+        </div>
+    </div>
+))}
+
+
+                                {commentTotalPages > 1 && (
+                                    <div className="sf-pagination" style={{ marginTop: 30 }}>
+                                        <button className="sf-pagination__btn" onClick={() => setCommentPage(p => p - 1)} disabled={commentPage === 1}>‹</button>
+                                        {Array.from({ length: commentTotalPages }, (_, i) => i + 1).map(n => (
+                                            <button
+                                                key={n}
+                                                className={`sf-pagination__btn${commentPage === n ? ' sf-pagination__btn--active' : ''}`}
+                                                onClick={() => setCommentPage(n)}
+                                            >{n}</button>
+                                        ))}
+                                        <button className="sf-pagination__btn" onClick={() => setCommentPage(p => p + 1)} disabled={commentPage === commentTotalPages}>›</button>
+                                    </div>
+                                )}
+                            </>
                         )}
                     </div>
                 )}

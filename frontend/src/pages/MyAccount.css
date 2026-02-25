@@ -97,7 +97,6 @@
     min-height: calc(100vh - 80px - 50px);
     overflow-x: hidden;
     box-sizing: border-box;
-    /* Asegura que el padding no cause desbordamiento */
 }
 
 .sf-my-account__header {
@@ -134,7 +133,6 @@
     margin-left: auto;
 }
 
-/* Info Usuario */
 .sf-profile-main {
     display: flex;
     gap: 60px;
@@ -152,7 +150,6 @@
     flex-direction: column;
     gap: 40px;
     padding-top: 5px;
-    /* Ajustado para alinear con estadísticas */
 }
 
 .sf-profile-details p {
@@ -161,7 +158,6 @@
     color: #555;
     font-family: 'Inter', sans-serif;
     line-height: normal;
-    /* Asegura consistencia */
 }
 
 .sf-profile-name {
@@ -179,7 +175,6 @@
     font-size: 16px;
 }
 
-/* Estadísticas vertical */
 .sf-my-account__stats-panel {
     text-align: right;
 }
@@ -189,7 +184,6 @@
     flex-direction: column;
     gap: 40px;
     margin-top: 5px;
-    /* Ajustado para alinear con el nombre del usuario */
 }
 
 .sf-profile-stats-list p {
@@ -199,34 +193,26 @@
     font-family: 'Inter', sans-serif;
 }
 
-/* Pestañas */
 .sf-profile-tabs-container {
     position: relative;
     width: calc(100% + 160px);
-    /* Extiende la línea por todo el ancho compensando el padding */
     margin-left: -80px;
-    /* Compensa el padding del contenedor padre */
     margin-bottom: 40px;
 }
 
 .sf-profile-tabs {
     display: flex;
     gap: 80px;
-    /* Reducido un poco para asegurar que quepan todas */
     padding-left: 80px;
-    /* Alineado con el padding general del contenido */
     margin-bottom: 0;
     position: relative;
     z-index: 2;
     overflow-x: auto;
-    /* Permite scroll si la pantalla es muy pequeña */
     scrollbar-width: none;
-    /* Oculta scrollbar en Firefox */
 }
 
 .sf-profile-tabs::-webkit-scrollbar {
     display: none;
-    /* Oculta scrollbar en Chrome/Safari */
 }
 
 .sf-tab-btn {
@@ -255,17 +241,13 @@
 .sf-full-width-line {
     position: absolute;
     bottom: -15px;
-    /* Ajustado según Figma */
     left: 0;
     width: 100%;
     height: 1px;
-    /* Figma suele usar líneas de 1px */
     background-color: #000000;
-    /* Color negro solicitado */
     z-index: 1;
 }
 
-/* Grid de Camisetas */
 .sf-favorites-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -347,64 +329,7 @@
     justify-content: center;
     background-color: #f8f9fa;
     border: none;
-    /* ELIMINADO EL BORDE */
     border-radius: 0;
-}
-
-/* Comentarios Minimalistas */
-.sf-comments-section-minimal {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.sf-comment-card-minimal {
-    background: #fff;
-    border: 1px solid #eee;
-    padding: 15px 20px;
-    border-radius: 12px;
-    transition: all 0.2s;
-}
-
-.sf-comment-card-minimal:hover {
-    border-color: #ff6b35;
-    transform: translateX(5px);
-}
-
-.sf-comment-card-minimal p {
-    margin: 0;
-    color: #555;
-    font-size: 15px;
-}
-
-.sf-comment-card-minimal strong {
-    color: #2c3e50;
-    margin-right: 5px;
-}
-
-.sf-comment-date-small {
-    display: block;
-    font-size: 12px;
-    color: #999;
-    margin-top: 5px;
-}
-
-.sf-empty-state-minimal {
-    text-align: center;
-    padding: 60px 20px;
-    color: #95a5a6;
-    background: #fdfdfd;
-    border-radius: 15px;
-    border: 1px dashed #eee;
-}
-
-.sf-empty-state-minimal a {
-    color: #ff6b35;
-    text-decoration: none;
-    font-weight: 700;
-    margin-top: 10px;
-    display: inline-block;
 }
 
 .sf-shirt-card-mini__img {
@@ -547,3 +472,196 @@
         justify-items: center;
     }
 }
+
+.sf-comments-tab {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    padding: 0 0 40px 0;
+}
+
+.sf-comments-empty {
+    text-align: center;
+    color: #999;
+    margin-top: 40px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
+
+.sf-comment-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 20px;
+    min-height: 74px;
+    background: #F5F5F5;
+    border: none;
+    box-sizing: border-box;
+    flex: 1;
+}
+
+.sf-comment-row__left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+    min-width: 0;
+}
+
+.sf-comment-row__img-wrap {
+    width: 57px;
+    height: 57px;
+    background: #F5F5F5;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.sf-comment-row__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+}
+
+.sf-comment-row__info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.sf-comment-row__title {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #555555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+}
+
+.sf-comment-row__link {
+    color: #555555;
+    text-decoration: none;
+}
+
+.sf-comment-row__link:hover {
+    color: #E67E22;
+}
+
+.sf-comment-row__text {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: #555555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 350px;
+}
+
+.sf-comment-row__stars {
+    display: flex;
+    gap: 3px;
+    flex-shrink: 0;
+}
+
+.sf-comment-row__star {
+    font-size: 26px;
+    color: #ccc;
+    line-height: 1;
+}
+
+.sf-comment-row__star--filled {
+    color: #F39C12;
+}
+
+.sf-comment-row__date {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #9C9C9C;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 190px;
+    text-align: right;
+}
+
+.sf-comment-row__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0;
+    flex-shrink: 0;
+    min-width: 176px;
+}
+
+.sf-comment-row__btn-ver {
+    width: 176px;
+    height: 28px;
+    background: #E67E22;
+    border: 1px solid #000;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #000;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.sf-comment-row__btn-ver:hover {
+    background: #d35400;
+}
+
+.sf-comment-row__btn-borrar {
+    background: none;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #333333;
+    cursor: pointer;
+    padding: 0;
+    white-space: nowrap;
+}
+
+.sf-comment-row__btn-borrar:hover {
+    color: #E67E22;
+}
+
+.sf-comment-row__btn-borrar:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.sf-comment-row__btn-borrar:hover {
+    color: #e74c3c;
+}
+
+.sf-comment-wrapper {
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.sf-comment-row__star--half {
+    background: linear-gradient(to right, #F39C12 50%, #ccc 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+
