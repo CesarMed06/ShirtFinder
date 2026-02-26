@@ -4,6 +4,7 @@ import './MyAccount.css';
 import { FaUser } from 'react-icons/fa';
 import FavoriteButton from '../components/FavoriteButton';
 import Swal from 'sweetalert2';
+import Settings from '../components/Settings';
 
 const FAV_PER_PAGE = 8;
 const COMMENTS_PER_PAGE = 5;
@@ -20,6 +21,7 @@ function MyAccount() {
     const [favPage, setFavPage] = useState(1);
     const [commentPage, setCommentPage] = useState(1);
     const [deletingId, setDeletingId] = useState(null);
+    const [avatarUrl, setAvatarUrl] = useState(null);
 
     const commentTotalPages = Math.ceil(comments.length / COMMENTS_PER_PAGE) || 1;
     const paginatedComments = comments.slice((commentPage - 1) * COMMENTS_PER_PAGE, commentPage * COMMENTS_PER_PAGE);
@@ -136,7 +138,15 @@ function MyAccount() {
                 <div className="sf-my-account__profile-panel">
                     <div className="sf-profile-main">
                         <div className="sf-profile-avatar sf-profile-avatar--placeholder">
-                            <FaUser size={120} color="#bdc3c7" />
+                            {profile.avatar_url ? (
+                                <img
+                                    src={`http://localhost:5000${profile.avatar_url}`}
+                                    alt="avatar"
+                                    style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
+                                />
+                            ) : (
+                                <FaUser size={120} color="#bdc3c7" />
+                            )}
                         </div>
                         <div className="sf-profile-details">
                             <p className="sf-profile-name">{profile.username}</p>
@@ -243,60 +253,58 @@ function MyAccount() {
                         ) : (
                             <>
                                 {paginatedComments.map(comment => (
-    <div key={comment.id_comments} className="sf-comment-wrapper">
-        <div className="sf-comment-row">
-            <div className="sf-comment-row__left">
-                <div className="sf-comment-row__img-wrap">
-                    <img
-                        className="sf-comment-row__img"
-                        src={(comment.image_url || comment.image_1)?.replace?.('dwidyinuu', 'dwldyiruu') || (comment.image_url || comment.image_1)}
-                        alt={comment.team}
-                    />
-                </div>
-                <div className="sf-comment-row__info">
-                    <p className="sf-comment-row__title">
-                        <Link to={`/shirt/${comment.id_shirts}`} className="sf-comment-row__link">
-                            {comment.team} {comment.season}
-                        </Link>
-                    </p>
-                    <p className="sf-comment-row__text">{comment.text}</p>
-                </div>
-            </div>
+                                    <div key={comment.id_comments} className="sf-comment-wrapper">
+                                        <div className="sf-comment-row">
+                                            <div className="sf-comment-row__left">
+                                                <div className="sf-comment-row__img-wrap">
+                                                    <img
+                                                        className="sf-comment-row__img"
+                                                        src={(comment.image_url || comment.image_1)?.replace?.('dwidyinuu', 'dwldyiruu') || (comment.image_url || comment.image_1)}
+                                                        alt={comment.team}
+                                                    />
+                                                </div>
+                                                <div className="sf-comment-row__info">
+                                                    <p className="sf-comment-row__title">
+                                                        <Link to={`/shirt/${comment.id_shirts}`} className="sf-comment-row__link">
+                                                            {comment.team} {comment.season}
+                                                        </Link>
+                                                    </p>
+                                                    <p className="sf-comment-row__text">{comment.text}</p>
+                                                </div>
+                                            </div>
 
-            <div className="sf-comment-row__stars">
-                {[1, 2, 3, 4, 5].map(star => {
-                    const llena = star <= Math.floor(comment.rating);
-                    const media = !llena && star === Math.ceil(comment.rating) && comment.rating % 1 !== 0;
-    return (
-        <span
-            key={star}
-            className={`sf-comment-row__star ${llena ? 'sf-comment-row__star--filled' : media ? 'sf-comment-row__star--half' : ''}`}
-        >★</span>
-    );
-})}
+                                            <div className="sf-comment-row__stars">
+                                                {[1, 2, 3, 4, 5].map(star => {
+                                                    const llena = star <= Math.floor(comment.rating);
+                                                    const media = !llena && star === Math.ceil(comment.rating) && comment.rating % 1 !== 0;
+                                                    return (
+                                                        <span
+                                                            key={star}
+                                                            className={`sf-comment-row__star ${llena ? 'sf-comment-row__star--filled' : media ? 'sf-comment-row__star--half' : ''}`}
+                                                        >★</span>
+                                                    );
+                                                })}
+                                            </div>
 
-            </div>
+                                            <span className="sf-comment-row__date">
+                                                publicado el {new Date(comment.date).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+                                            </span>
+                                        </div>
 
-            <span className="sf-comment-row__date">
-                publicado el {new Date(comment.date).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })}
-            </span>
-        </div>
-
-        <div className="sf-comment-row__actions">
-            <Link to={`/shirt/${comment.id_shirts}`} className="sf-comment-row__btn-ver">
-                VER
-            </Link>
-            <button
-                className="sf-comment-row__btn-borrar"
-                onClick={() => handleDeleteComment(comment.id_comments)}
-                disabled={deletingId === comment.id_comments}
-            >
-                {deletingId === comment.id_comments ? '...' : 'BORRAR'}
-            </button>
-        </div>
-    </div>
-))}
-
+                                        <div className="sf-comment-row__actions">
+                                            <Link to={`/shirt/${comment.id_shirts}`} className="sf-comment-row__btn-ver">
+                                                VER
+                                            </Link>
+                                            <button
+                                                className="sf-comment-row__btn-borrar"
+                                                onClick={() => handleDeleteComment(comment.id_comments)}
+                                                disabled={deletingId === comment.id_comments}
+                                            >
+                                                {deletingId === comment.id_comments ? '...' : 'BORRAR'}
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
 
                                 {commentTotalPages > 1 && (
                                     <div className="sf-pagination" style={{ marginTop: 30 }}>
@@ -316,8 +324,18 @@ function MyAccount() {
                     </div>
                 )}
 
-                {(activeTab === 'posts' || activeTab === 'settings') && (
+                {activeTab === 'posts' && (
                     <p style={{ textAlign: 'center', color: '#999', marginTop: '40px' }}>Por hacer</p>
+                )}
+
+                {activeTab === 'settings' && (
+                    <Settings
+                        profile={profile}
+                        onAvatarUpdate={(url) => {
+                            setAvatarUrl(url);
+                            setProfile(prev => ({ ...prev, avatar_url: url }));
+                        }}
+                    />
                 )}
             </div>
         </div>

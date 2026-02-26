@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "jspdf": "^4.2.0",
+    "multer": "^2.0.2",
+    "react-icons": "^5.5.0"
+  }
+}
