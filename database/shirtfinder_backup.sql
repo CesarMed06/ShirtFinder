@@ -65,6 +65,17 @@ CREATE TABLE forum_posts (
   FOREIGN KEY (user_id) REFERENCES users(id_users) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE posts (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(255) NOT NULL,
+  content TEXT NOT NULL,
+  category VARCHAR(100) DEFAULT 'Off-topic',
+  user_id INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  replies_count INT DEFAULT 0,
+  FOREIGN KEY (user_id) REFERENCES users(id_users) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE notifications (
   id_notifications INT PRIMARY KEY AUTO_INCREMENT,
   user_id INT,

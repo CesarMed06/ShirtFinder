@@ -9,6 +9,9 @@ import Catalog from "./components/Catalog";
 import ShirtDetail from "./pages/ShirtDetail";
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import Forum from './pages/Forum';
+import CreatePost from './pages/CreatePost';
+import PostDetail from './pages/PostDetail';
 
 function Home() {
   return (
@@ -36,6 +39,9 @@ function App() {
           <Route path="/my-account" element={<MyAccount />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/foro" element={<Forum />} />
+          <Route path="/foro/crear" element={<CreatePost />} />
+          <Route path="/foro/:postId" element={<PostDetail />} />
         </Routes>
       </main>
 

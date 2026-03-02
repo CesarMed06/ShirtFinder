@@ -13,12 +13,14 @@ const shirtRoutes = require('./routes/shirts');
 const commentRoutes = require('./routes/commentRoutes');
 const userRoutes = require('./routes/userRoutes');
 const favoriteRoutes = require('./routes/favoriteRoutes');
+const postRoutes = require('./routes/postRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/shirts', shirtRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/favorites', favoriteRoutes);
+app.use('/api/posts', postRoutes);
 app.use('/uploads', express.static('uploads'));
 
 app.listen(PORT, () => {
