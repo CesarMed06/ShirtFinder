@@ -9,7 +9,8 @@ CREATE TABLE users (
   email VARCHAR(100) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL,
   user_type VARCHAR(20) DEFAULT 'user',
-  date_registered TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  date_registered TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  avatar_url VARCHAR(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE shirts (
@@ -69,8 +70,9 @@ CREATE TABLE posts (
   id INT PRIMARY KEY AUTO_INCREMENT,
   title VARCHAR(255) NOT NULL,
   content TEXT NOT NULL,
-  category VARCHAR(100) DEFAULT 'Off-topic',
+  category VARCHAR(100) DEFAULT 'General',
   user_id INT NOT NULL,
+  attachment_url VARCHAR(500) DEFAULT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   replies_count INT DEFAULT 0,
   FOREIGN KEY (user_id) REFERENCES users(id_users) ON DELETE CASCADE

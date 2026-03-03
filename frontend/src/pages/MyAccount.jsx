@@ -22,6 +22,7 @@ function MyAccount() {
     const [commentPage, setCommentPage] = useState(1);
     const [deletingId, setDeletingId] = useState(null);
     const [avatarUrl, setAvatarUrl] = useState(null);
+    const [avatarBust, setAvatarBust] = useState(Date.now());
 
     const commentTotalPages = Math.ceil(comments.length / COMMENTS_PER_PAGE) || 1;
     const paginatedComments = comments.slice((commentPage - 1) * COMMENTS_PER_PAGE, commentPage * COMMENTS_PER_PAGE);
@@ -64,6 +65,21 @@ function MyAccount() {
 
         fetchData();
     }, [navigate]);
+
+    const refreshProfile = async () => {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+        try {
+            const res = await fetch('http://localhost:5000/api/users/profile', {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            const data = await res.json();
+            if (data.success) {
+                setProfile(data.data);
+                setAvatarBust(Date.now());
+            }
+        } catch { }
+    };
 
     useEffect(() => {
         const fetchFavorites = async () => {
@@ -138,9 +154,10 @@ function MyAccount() {
                 <div className="sf-my-account__profile-panel">
                     <div className="sf-profile-main">
                         <div className="sf-profile-avatar sf-profile-avatar--placeholder">
-                            {profile.avatar_url ? (
+                            {(avatarUrl || profile.avatar_url) ? (
                                 <img
-                                    src={`http://localhost:5000${profile.avatar_url}`}
+                                    key={avatarBust}
+                                    src={`http://localhost:5000${avatarUrl || profile.avatar_url}?v=${avatarBust}`}
                                     alt="avatar"
                                     style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
                                 />
@@ -334,6 +351,7 @@ function MyAccount() {
                         onAvatarUpdate={(url) => {
                             setAvatarUrl(url);
                             setProfile(prev => ({ ...prev, avatar_url: url }));
+                            setAvatarBust(Date.now());
                         }}
                     />
                 )}

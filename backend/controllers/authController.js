@@ -121,7 +121,6 @@ exports.getMe = async (req, res) => {
 };
 
 exports.forgotPassword = async (req, res) => {
-    console.log('>>> forgotPassword llamado con:', req.body);
     try {
         const { email } = req.body;
 

@@ -11,10 +11,6 @@ const transporter = nodemailer.createTransport({
 const sendResetEmail = async (to, token) => {
     const link = `http://localhost:5173/reset-password?token=${token}`;
 
-    console.log('Intentando enviar email a:', to);
-    console.log('EMAIL_USER cargado:', process.env.EMAIL_USER);
-    console.log('EMAIL_PASS cargado:', process.env.EMAIL_PASS ? 'SI' : 'NO');
-
     const info = await transporter.sendMail({
         from: `"ShirtFinder" <${process.env.EMAIL_USER}>`,
         to,
@@ -30,7 +26,7 @@ const sendResetEmail = async (to, token) => {
         `
     });
 
-    console.log('Email enviado OK, messageId:', info.messageId);
+    return info;
 };
 
 module.exports = { sendResetEmail };

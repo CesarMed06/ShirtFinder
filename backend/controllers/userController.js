@@ -7,7 +7,7 @@ exports.getProfile = async (req, res) => {
         const userId = req.user.id;
 
         const [rows] = await pool.query(
-            `SELECT u.id_users, u.username, u.email, u.date_registered, 
+            `SELECT u.id_users, u.username, u.email, u.date_registered, u.avatar_url,
             (SELECT COUNT(*) FROM comments WHERE user_id = u.id_users) as comment_count,
             (SELECT COUNT(*) FROM favorites WHERE user_id = u.id_users) as favorites_count
             FROM users u

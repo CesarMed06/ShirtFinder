@@ -1,8 +1,29 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { FaBell, FaBellSlash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
+import Cropper from 'react-easy-crop';
 import './Settings.css';
+
+async function getCroppedImg(imageSrc, pixelCrop) {
+    return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.addEventListener('load', () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = pixelCrop.width;
+            canvas.height = pixelCrop.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(image, pixelCrop.x, pixelCrop.y, pixelCrop.width, pixelCrop.height, 0, 0, pixelCrop.width, pixelCrop.height);
+            canvas.toBlob((blob) => {
+                if (!blob) { reject(new Error('Canvas vacío')); return; }
+                resolve(blob);
+            }, 'image/jpeg', 0.95);
+        });
+        image.addEventListener('error', reject);
+        image.setAttribute('crossOrigin', 'anonymous');
+        image.src = imageSrc;
+    });
+}
 
 function Settings({ profile, onAvatarUpdate }) {
     const [newUsername, setNewUsername] = useState('');
@@ -13,6 +34,13 @@ function Settings({ profile, onAvatarUpdate }) {
     const [avatarPreview, setAvatarPreview] = useState(null);
     const [avatarFile, setAvatarFile] = useState(null);
     const [notificaciones, setNotificaciones] = useState(false);
+    const [cropSrc, setCropSrc] = useState(null);
+    const [showCropModal, setShowCropModal] = useState(false);
+    const [crop, setCrop] = useState({ x: 0, y: 0 });
+    const [zoom, setZoom] = useState(1);
+    const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+
+    const onCropComplete = useCallback((_, cap) => setCroppedAreaPixels(cap), []);
 
     const token = localStorage.getItem('token');
     const headers = { Authorization: `Bearer ${token}` };
@@ -88,8 +116,23 @@ function Settings({ profile, onAvatarUpdate }) {
     const handleAvatarChange = (e) => {
         const file = e.target.files[0];
         if (!file) return;
-        setAvatarFile(file);
-        setAvatarPreview(URL.createObjectURL(file));
+        const objectUrl = URL.createObjectURL(file);
+        setCropSrc(objectUrl);
+        setCrop({ x: 0, y: 0 });
+        setZoom(1);
+        setShowCropModal(true);
+    };
+
+    const handleCropConfirm = async () => {
+        try {
+            const blob = await getCroppedImg(cropSrc, croppedAreaPixels);
+            const croppedFile = new File([blob], 'avatar.jpg', { type: 'image/jpeg' });
+            setAvatarFile(croppedFile);
+            setAvatarPreview(URL.createObjectURL(blob));
+            setShowCropModal(false);
+        } catch {
+            Swal.fire('Error', 'No se pudo recortar la imagen', 'error');
+        }
     };
 
     const handleNotificaciones = () => {
@@ -211,7 +254,7 @@ function Settings({ profile, onAvatarUpdate }) {
         });
     };
 
-    return (
+    return (<>
         <div className="sf-settings">
             <div className="sf-settings__left">
                 <h2 className="sf-settings__section-title">Editar perfil</h2>
@@ -310,7 +353,48 @@ function Settings({ profile, onAvatarUpdate }) {
                 </button>
             </div>
         </div>
-    );
+
+        {showCropModal && (
+            <div className="sf-crop-overlay">
+                <div className="sf-crop-modal">
+                    <h3 className="sf-crop-title">Ajusta tu foto de perfil</h3>
+                    <div className="sf-crop-area">
+                        <Cropper
+                            image={cropSrc}
+                            crop={crop}
+                            zoom={zoom}
+                            aspect={1}
+                            cropShape="round"
+                            showGrid={false}
+                            onCropChange={setCrop}
+                            onZoomChange={setZoom}
+                            onCropComplete={onCropComplete}
+                        />
+                    </div>
+                    <div className="sf-crop-zoom">
+                        <span>Zoom</span>
+                        <input
+                            type="range"
+                            min={1}
+                            max={3}
+                            step={0.05}
+                            value={zoom}
+                            onChange={(e) => setZoom(Number(e.target.value))}
+                            className="sf-crop-slider"
+                        />
+                    </div>
+                    <div className="sf-crop-actions">
+                        <button className="sf-crop-btn sf-crop-btn--cancel" onClick={() => setShowCropModal(false)}>
+                            Cancelar
+                        </button>
+                        <button className="sf-crop-btn sf-crop-btn--confirm" onClick={handleCropConfirm}>
+                            Aplicar recorte
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )}
+    </>);
 }
 
 export default Settings;

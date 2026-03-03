@@ -18,7 +18,7 @@ exports.getPosts = async (req, res) => {
         const [posts] = await pool.query(
             `SELECT p.id, p.title, LEFT(p.content, 80) AS preview, p.category,
                     p.created_at, p.replies_count,
-                    u.username
+                    u.username, u.avatar_url
                     FROM posts p
                     JOIN users u ON p.user_id = u.id_users
                     ${whereClause}
@@ -41,9 +41,11 @@ exports.createPost = async (req, res) => {
             return res.status(400).json({ success: false, message: 'Título y contenido son obligatorios' });
         }
 
+        const attachmentUrl = req.file ? `/uploads/posts/${req.file.filename}` : null;
+
         const [result] = await pool.query(
-            'INSERT INTO posts (title, content, category, user_id) VALUES (?, ?, ?, ?)',
-            [title, content, category || 'Off-topic', userId]
+            'INSERT INTO posts (title, content, category, user_id, attachment_url) VALUES (?, ?, ?, ?, ?)',
+            [title, content, category || 'General', userId, attachmentUrl]
         );
 
         res.status(201).json({ success: true, data: { id: result.insertId } });
@@ -58,10 +60,10 @@ exports.getPostById = async (req, res) => {
 
         const [rows] = await pool.query(
             `SELECT p.id, p.title, p.content, p.category, p.created_at, p.replies_count,
-                    u.username
-             FROM posts p
-             JOIN users u ON p.user_id = u.id_users
-             WHERE p.id = ?`,
+                    u.username, u.avatar_url
+                    FROM posts p
+                    JOIN users u ON p.user_id = u.id_users
+                    WHERE p.id = ?`,
             [id]
         );
 

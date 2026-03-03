@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
 
 function timeAgo(dateStr) {
     const diff = Math.floor((Date.now() - new Date(dateStr)) / 1000);
@@ -19,6 +20,9 @@ function formatDate(dateStr) {
 
 function PostCard({ post }) {
     const navigate = useNavigate();
+    const avatarSrc = post.avatar_url
+        ? `http://localhost:5000${post.avatar_url}`
+        : null;
 
     return (
         <article
@@ -26,7 +30,17 @@ function PostCard({ post }) {
             onClick={() => navigate(`/foro/${post.id}`)}
         >
             <div className="forum-post-avatar">
-                <span>{post.username?.charAt(0).toUpperCase()}</span>
+                {avatarSrc ? (
+                    <img
+                        src={avatarSrc}
+                        alt={post.username}
+                        className="forum-post-avatar-img"
+                        onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                    />
+                ) : null}
+                <span style={{ display: avatarSrc ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                    <FaUser size={24} color="#fff" />
+                </span>
             </div>
             <div className="forum-post-body">
                 <h3 className="forum-post-title">{post.title}</h3>
