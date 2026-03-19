@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
-const { getPosts, createPost, getPostById } = require('../controllers/postController');
+const { getPosts, createPost, getPostById, getReplies, createReply, getUserPosts, deletePost } = require('../controllers/postController');
 const { verifyToken } = require('../middleware/authMiddleware');
 
 const storage = multer.diskStorage({
@@ -12,7 +12,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.get('/', getPosts);
+router.get('/my-posts', verifyToken, getUserPosts);
 router.get('/:id', getPostById);
+router.get('/:id/replies', getReplies);
 router.post('/', verifyToken, upload.single('attachment'), createPost);
+router.post('/:id/replies', verifyToken, createReply);
+router.delete('/:id', verifyToken, deletePost);
 
 module.exports = router;

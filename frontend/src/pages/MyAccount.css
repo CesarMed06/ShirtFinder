@@ -664,4 +664,29 @@
     background-clip: text;
 }
 
+.sf-post-row__avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+    flex-shrink: 0;
+}
+
+.sf-post-row__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sf-post-row__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-end;
+    min-width: 180px;
+}
 

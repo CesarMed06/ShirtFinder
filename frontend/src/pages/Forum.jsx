@@ -12,7 +12,6 @@ const CATEGORIES = [
 
 const SORT_FIELDS = [
     { key: 'date', label: 'Fecha de creación' },
-    { key: 'comments', label: 'Comentarios' },
     { key: 'replies', label: 'Respuestas' },
 ];
 

@@ -1,0 +1,196 @@
+.pd-wrapper {
+    max-width: 1542px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.pd-loading {
+    text-align: center;
+    padding: 80px;
+    font-family: 'Inter', sans-serif;
+    color: #808080;
+}
+
+.pd-card {
+    background: #D9D9D9;
+    border: 1px solid #BDC3C7;
+    padding: 32px;
+}
+
+.pd-card--main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.pd-title {
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 70px;
+    font-weight: 700;
+    color: #2C3E50;
+    text-align: center;
+    margin: 0;
+}
+
+.pd-author-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.pd-avatar {
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+    flex-shrink: 0;
+}
+
+.pd-avatar--big {
+    width: 127px;
+    height: 127px;
+}
+
+.pd-avatar--small {
+    width: 103px;
+    height: 103px;
+}
+
+.pd-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pd-author {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #808080;
+    margin: 0 0 10px 0;
+}
+
+.pd-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #808080;
+    margin: 0;
+}
+
+.pd-body-row {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+}
+
+.pd-content {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    margin: 0;
+    flex: 1;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.pd-attachment {
+    width: 243px;
+    height: 304px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.pd-reply-btn-wrap {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pd-btn {
+    width: 202px;
+    height: 38px;
+    background: #E67E22;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.pd-btn:hover {
+    background: #d35400;
+}
+
+.pd-card--reply {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 173px;
+    gap: 24px;
+}
+
+.pd-reply-left {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    flex: 1;
+}
+
+.pd-reply-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.pd-reply-content {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #555555;
+    margin: 8px 0 0 0;
+    white-space: pre-wrap;
+}
+
+.pd-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.pd-form-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #333333;
+}
+
+.pd-textarea {
+    width: 100%;
+    min-height: 78px;
+    background: #D9D9D9;
+    border: 1px solid #BDC3C7;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #555555;
+    padding: 12px;
+    box-sizing: border-box;
+    resize: vertical;
+    outline: none;
+}
+
+.pd-textarea::placeholder {
+    color: #555555;
+}
+
+.pd-form-btn-wrap {
+    display: flex;
+    justify-content: flex-end;
+}
