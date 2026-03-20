@@ -4,7 +4,6 @@ const cors = require('cors');
 const pool = require('./config/db');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -30,8 +29,6 @@ async function runMigrations() {
         if (cols.length === 0) {
             await pool.query('ALTER TABLE users ADD COLUMN avatar_url VARCHAR(500) DEFAULT NULL');
         }
-
-
         await pool.query(`
             CREATE TABLE IF NOT EXISTS posts (
                 id INT PRIMARY KEY AUTO_INCREMENT,
@@ -50,8 +47,13 @@ async function runMigrations() {
     }
 }
 
-runMigrations().then(() => {
-    app.listen(PORT, () => {
-        console.log(`Servidor corriendo en http://localhost:${PORT}`);
+if (require.main === module) {
+    runMigrations().then(() => {
+        const PORT = process.env.PORT || 5000;
+        app.listen(PORT, () => {
+            console.log(`Servidor corriendo en http://localhost:${PORT}`);
+        });
     });
-});
+}
+
+module.exports = app;
