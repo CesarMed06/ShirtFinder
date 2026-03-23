@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FaStar, FaRegStar, FaStarHalfAlt } from 'react-icons/fa';
+import FavoriteButton from './FavoriteButton';
 
 const ShirtCard = ({ shirt }) => {
     const renderStars = (rating) => {
