@@ -1,25 +1,19 @@
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function Heart({ filled, size }) {
     const w = size === 'small' ? 20 : size === 'large' ? 38 : 26;
     const h = size === 'small' ? 18.35 : size === 'large' ? 35 : 24;
 
     return (
-        <svg
-            width={w}
-            height={h}
-            viewBox="0 0 24 22"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))', transition: 'transform 0.2s' }}
-        >
+        <svg width={w} height={h} viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg"
+            style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))', transition: 'transform 0.2s' }}>
             <path
                 d="M12 20s-7.5-4.7-10.3-9C-1 6.5 2.2 1.5 7.4 2.1c2 .2 3.4 1.4 4.6 2.8 1.2-1.4 2.6-2.6 4.6-2.8C21.8 1.5 25 6.5 22.3 11c-2.8 4.3-10.3 9-10.3 9Z"
                 fill={filled ? '#E74C3C' : 'none'}
-                stroke="#E74C3C"
-                strokeWidth="1.6"
-                strokeLinejoin="round"
+                stroke="#E74C3C" strokeWidth="1.6" strokeLinejoin="round"
             />
         </svg>
     );
@@ -33,19 +27,17 @@ function FavoriteButton({ shirtId, size = 'medium', className = '', onChange }) 
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (!token || !shirtId) return;
-
         const controller = new AbortController();
 
         (async () => {
             try {
-                const res = await fetch(`http://localhost:5000/api/favorites/check/${shirtId}`, {
+                const res = await fetch(`${API_URL}/api/favorites/check/${shirtId}`, {
                     headers: { Authorization: `Bearer ${token}` },
                     signal: controller.signal
                 });
                 const data = await res.json();
                 setIsFavorite(!!data?.isFavorite);
-            } catch (e) {
-            }
+            } catch {}
         })();
 
         return () => controller.abort();
@@ -64,9 +56,8 @@ function FavoriteButton({ shirtId, size = 'medium', className = '', onChange }) 
 
         try {
             setLoading(true);
-
             if (isFavorite) {
-                const res = await fetch(`http://localhost:5000/api/favorites/${shirtId}`, {
+                const res = await fetch(`${API_URL}/api/favorites/${shirtId}`, {
                     method: 'DELETE',
                     headers: { Authorization: `Bearer ${token}` }
                 });
@@ -78,13 +69,11 @@ function FavoriteButton({ shirtId, size = 'medium', className = '', onChange }) 
                 }
                 return;
             }
-
-            const res = await fetch(`http://localhost:5000/api/favorites/${shirtId}`, {
+            const res = await fetch(`${API_URL}/api/favorites/${shirtId}`, {
                 method: 'POST',
                 headers: { Authorization: `Bearer ${token}` }
             });
             const data = await res.json();
-
             if (data?.success) {
                 setIsFavorite(true);
                 onChange?.(true);
@@ -92,7 +81,7 @@ function FavoriteButton({ shirtId, size = 'medium', className = '', onChange }) 
             } else {
                 Swal.fire({ icon: 'info', title: data?.message || 'No se pudo añadir', timer: 1500, showConfirmButton: false });
             }
-        } catch (e) {
+        } catch {
             Swal.fire({ icon: 'error', title: 'Error', text: 'No se pudo actualizar favoritos' });
         } finally {
             setLoading(false);
@@ -100,23 +89,14 @@ function FavoriteButton({ shirtId, size = 'medium', className = '', onChange }) 
     };
 
     return (
-        <button
-            className={className}
-            onClick={toggleFavorite}
-            disabled={loading}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
+        <button className={className} onClick={toggleFavorite} disabled={loading}
+            onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
             style={{
-                background: 'transparent',
-                border: 'none',
-                padding: 0,
-                cursor: loading ? 'not-allowed' : 'pointer',
-                lineHeight: 0,
+                background: 'transparent', border: 'none', padding: 0,
+                cursor: loading ? 'not-allowed' : 'pointer', lineHeight: 0,
                 transform: hovered ? 'scale(1.18)' : 'scale(1)',
-                transition: 'transform 0.2s',
-                opacity: loading ? 0.5 : 1
-            }}
-        >
+                transition: 'transform 0.2s', opacity: loading ? 0.5 : 1
+            }}>
             <Heart filled={isFavorite} size={size} />
         </button>
     );

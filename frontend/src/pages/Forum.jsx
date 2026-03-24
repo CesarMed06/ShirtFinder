@@ -16,6 +16,7 @@ const SORT_FIELDS = [
 ];
 
 const POSTS_PER_PAGE = 10;
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Forum() {
     const [posts, setPosts] = useState([]);
@@ -35,7 +36,7 @@ function Forum() {
         params.append("orderBy", orderBy);
         params.append("direction", direction);
 
-        fetch(`http://localhost:5000/api/posts?${params}`)
+        fetch(`${API_URL}/api/posts?${params}`)
             .then((r) => r.json())
             .then((data) => {
                 if (data.success) {

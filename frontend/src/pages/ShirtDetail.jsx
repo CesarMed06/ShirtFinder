@@ -5,6 +5,8 @@ import { FaStar, FaRegStar, FaStarHalfAlt, FaShoppingCart } from 'react-icons/fa
 import ShirtImageGallery from '../components/ShirtImageGallery';
 import FavoriteButton from '../components/FavoriteButton';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function ShirtDetail() {
     const { id } = useParams();
     const { user } = useAuth();
@@ -45,7 +47,7 @@ function ShirtDetail() {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/shirts/${id}`)
+        fetch(`${API_URL}/api/shirts/${id}`)
             .then(res => {
                 if (!res.ok) throw new Error('Camiseta no encontrada');
                 return res.json();
@@ -64,7 +66,7 @@ function ShirtDetail() {
 
     const loadComments = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/comments/${id}`);
+            const response = await fetch(`${API_URL}/api/comments/${id}`);
             const data = await response.json();
             if (data.success) setComments(data.data);
         } catch (error) {
@@ -83,7 +85,7 @@ function ShirtDetail() {
             return;
         }
         try {
-            const response = await fetch(`http://localhost:5000/api/comments/${id}`, {
+            const response = await fetch(`${API_URL}/api/comments/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

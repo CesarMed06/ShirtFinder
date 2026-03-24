@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function CreatePost() {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
@@ -37,13 +39,13 @@ function CreatePost() {
             fd.append("content", body);
             fd.append("category", selectedCategory);
             fd.append("attachment", file);
-            res = await fetch("http://localhost:5000/api/posts", {
+            res = await fetch(`${API_URL}/api/posts`, {
                 method: "POST",
                 headers: { Authorization: `Bearer ${token}` },
                 body: fd,
             });
         } else {
-            res = await fetch("http://localhost:5000/api/posts", {
+            res = await fetch(`${API_URL}/api/posts`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
                 body: JSON.stringify({ title, content: body, category: selectedCategory }),

@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { FaStar, FaRegStar, FaStarHalfAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import FavoriteButton from './FavoriteButton';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Catalog() {
     const [searchParams] = useSearchParams();
@@ -37,9 +38,9 @@ function Catalog() {
     const fetchShirts = () => {
         let url;
         if (searchQuery) {
-            url = `http://localhost:5000/api/shirts/search?q=${searchQuery}`;
+            url = `${API_URL}/api/shirts/search?q=${searchQuery}`;
         } else {
-            url = 'http://localhost:5000/api/shirts?';
+            url = `${API_URL}/api/shirts?`;
             const params = [];
             if (filters.marca) params.push(`brand=${filters.marca}`);
             if (filters.tipo) params.push(`tipo=${filters.tipo}`);

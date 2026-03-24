@@ -5,6 +5,8 @@ import jsPDF from 'jspdf';
 import Cropper from 'react-easy-crop';
 import './Settings.css';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 async function getCroppedImg(imageSrc, pixelCrop) {
     return new Promise((resolve, reject) => {
         const image = new Image();
@@ -57,7 +59,7 @@ function Settings({ profile, onAvatarUpdate }) {
 
         try {
             if (newUsername.trim()) {
-                const res = await fetch('http://localhost:5000/api/users/update-username', {
+                const res = await fetch(`${API_URL}/api/users/update-username`, {
                     method: 'PUT',
                     headers: { ...headers, 'Content-Type': 'application/json' },
                     body: JSON.stringify({ newUsername })
@@ -67,7 +69,7 @@ function Settings({ profile, onAvatarUpdate }) {
             }
 
             if (newEmail.trim()) {
-                const res = await fetch('http://localhost:5000/api/users/update-email', {
+                const res = await fetch(`${API_URL}/api/users/update-email`, {
                     method: 'PUT',
                     headers: { ...headers, 'Content-Type': 'application/json' },
                     body: JSON.stringify({ newEmail })
@@ -78,7 +80,7 @@ function Settings({ profile, onAvatarUpdate }) {
             }
 
             if (newPassword.trim()) {
-                const res = await fetch('http://localhost:5000/api/users/update-password', {
+                const res = await fetch(`${API_URL}/api/users/update-password`, {
                     method: 'PUT',
                     headers: { ...headers, 'Content-Type': 'application/json' },
                     body: JSON.stringify({ currentPassword, newPassword })
@@ -90,7 +92,7 @@ function Settings({ profile, onAvatarUpdate }) {
             if (avatarFile) {
                 const formData = new FormData();
                 formData.append('avatar', avatarFile);
-                const res = await fetch('http://localhost:5000/api/users/update-avatar', {
+                const res = await fetch(`${API_URL}/api/users/update-avatar`, {
                     method: 'PUT',
                     headers,
                     body: formData
@@ -149,8 +151,8 @@ function Settings({ profile, onAvatarUpdate }) {
     const handleDescargarDatos = async () => {
         try {
             const [profileRes, commentsRes] = await Promise.all([
-                fetch('http://localhost:5000/api/users/profile', { headers }),
-                fetch('http://localhost:5000/api/comments/user/me', { headers })
+                fetch(`${API_URL}/api/users/profile`, { headers }),
+                fetch(`${API_URL}/api/comments/user/me`, { headers })
             ]);
             const profileData = await profileRes.json();
             const commentsData = await commentsRes.json();
@@ -222,7 +224,7 @@ function Settings({ profile, onAvatarUpdate }) {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const res = await fetch('http://localhost:5000/api/users/delete-account', {
+                    const res = await fetch(`${API_URL}/api/users/delete-account`, {
                         method: 'DELETE',
                         headers
                     });

@@ -4,6 +4,8 @@ import { FaUser } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import './PostDetail.css';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function PostDetail() {
     const { postId } = useParams();
     const navigate = useNavigate();
@@ -17,7 +19,7 @@ function PostDetail() {
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const res = await fetch(`http://localhost:5000/api/posts/${postId}`);
+                const res = await fetch(`${API_URL}/api/posts/${postId}`);
                 const data = await res.json();
                 if (!data.success) {
                     Swal.fire({ icon: 'error', title: 'Post no encontrado', timer: 1500, showConfirmButton: false });
@@ -26,7 +28,7 @@ function PostDetail() {
                 }
                 setPost(data.data);
 
-                const repRes = await fetch(`http://localhost:5000/api/posts/${postId}/replies`);
+                const repRes = await fetch(`${API_URL}/api/posts/${postId}/replies`);
                 const repData = await repRes.json();
                 if (repData.success) setReplies(repData.data);
             } catch {
@@ -49,7 +51,7 @@ function PostDetail() {
         }
 
         try {
-            const res = await fetch(`http://localhost:5000/api/posts/${postId}/replies`, {
+            const res = await fetch(`${API_URL}/api/posts/${postId}/replies`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
                 body: JSON.stringify({ content: replyText })
@@ -87,7 +89,7 @@ function PostDetail() {
                 <div className="pd-author-row">
                     <div className="pd-avatar pd-avatar--big">
                         {post.avatar_url
-                            ? <img src={`http://localhost:5000${post.avatar_url}`} alt="avatar" />
+                            ? <img src={`${API_URL}${post.avatar_url}`} alt="avatar" />
                             : <FaUser size={60} color="#bdc3c7" />}
                     </div>
                     <div>
@@ -101,7 +103,7 @@ function PostDetail() {
                     {post.attachment_url && (
                         <img
                             className="pd-attachment"
-                            src={`http://localhost:5000${post.attachment_url}`}
+                            src={`${API_URL}${post.attachment_url}`}
                             alt="adjunto"
                         />
                     )}
@@ -119,7 +121,7 @@ function PostDetail() {
                     <div className="pd-reply-left">
                         <div className="pd-avatar pd-avatar--small">
                             {reply.avatar_url
-                                ? <img src={`http://localhost:5000${reply.avatar_url}`} alt="avatar" />
+                                ? <img src={`${API_URL}${reply.avatar_url}`} alt="avatar" />
                                 : <FaUser size={45} color="#bdc3c7" />}
                         </div>
                         <div className="pd-reply-info">

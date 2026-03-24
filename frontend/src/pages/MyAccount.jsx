@@ -6,6 +6,7 @@ import FavoriteButton from '../components/FavoriteButton';
 import Swal from 'sweetalert2';
 import Settings from '../components/Settings';
 
+const API_URL = import.meta.env.VITE_API_URL;
 const FAV_PER_PAGE = 8;
 const COMMENTS_PER_PAGE = 5;
 
@@ -35,19 +36,19 @@ function MyAccount() {
 
         const fetchData = async () => {
             try {
-                const profileRes = await fetch('http://localhost:5000/api/users/profile', {
+                const profileRes = await fetch(`${API_URL}/api/users/profile`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (!profileRes.ok) throw new Error('Error al cargar perfil');
                 const profileData = await profileRes.json();
 
-                const commentsRes = await fetch('http://localhost:5000/api/comments/user/me', {
+                const commentsRes = await fetch(`${API_URL}/api/comments/user/me`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (!commentsRes.ok) throw new Error('Error al cargar comentarios');
                 const commentsData = await commentsRes.json();
 
-                const postsRes = await fetch('http://localhost:5000/api/posts/my-posts', {
+                const postsRes = await fetch(`${API_URL}/api/posts/my-posts`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const postsData = await postsRes.json();
@@ -74,7 +75,7 @@ function MyAccount() {
             try {
                 const token = localStorage.getItem('token');
                 if (!token) return setFavorites([]);
-                const res = await fetch('http://localhost:5000/api/favorites', {
+                const res = await fetch(`${API_URL}/api/favorites`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 const data = await res.json();
@@ -105,7 +106,7 @@ function MyAccount() {
         try {
             setDeletingId(commentId);
             const token = localStorage.getItem('token');
-            const res = await fetch(`http://localhost:5000/api/comments/${commentId}`, {
+            const res = await fetch(`${API_URL}/api/comments/${commentId}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${token}` }
             });
@@ -137,7 +138,7 @@ function MyAccount() {
 
         try {
             const token = localStorage.getItem('token');
-            const res = await fetch(`http://localhost:5000/api/posts/${postId}`, {
+            const res = await fetch(`${API_URL}/api/posts/${postId}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${token}` }
             });
@@ -176,7 +177,7 @@ function MyAccount() {
                         <div className="sf-profile-avatar sf-profile-avatar--placeholder">
                             {profile.avatar_url ? (
                                 <img
-                                    src={`http://localhost:5000${profile.avatar_url}`}
+                                    src={`${API_URL}${profile.avatar_url}`}
                                     alt="avatar"
                                     style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
                                 />
@@ -353,7 +354,7 @@ function MyAccount() {
                                         <div className="sf-comment-row__left">
                                             <div className="sf-post-row__avatar">
                                                 {profile.avatar_url ? (
-                                                    <img src={`http://localhost:5000${profile.avatar_url}`} alt="avatar" />
+                                                    <img src={`${API_URL}${profile.avatar_url}`} alt="avatar" />
                                                 ) : (
                                                     <FaUser size={28} color="#bdc3c7" />
                                                 )}

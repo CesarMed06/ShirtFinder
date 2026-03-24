@@ -1,6 +1,8 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
+const API_URL = import.meta.env.VITE_API_URL;
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -11,17 +13,12 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     const savedToken = localStorage.getItem('token');
-
-    if (!savedToken) {
-      setLoading(false);
-      return;
-    }
+    if (!savedToken) { setLoading(false); return; }
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/me', {
+      const response = await fetch(`${API_URL}/api/auth/me`, {
         headers: { Authorization: `Bearer ${savedToken}` }
       });
-
       if (response.ok) {
         const data = await response.json();
         setUser(data.user);
@@ -30,46 +27,47 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('token');
         setToken(null);
       }
-    } catch (error) {
+    } catch {
       localStorage.removeItem('token');
       setToken(null);
     }
-
     setLoading(false);
   };
 
   const register = async (username, email, password) => {
     try {
-      const response = await fetch('http://localhost:5000/api/auth/register', {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password })
       });
-
       const data = await response.json();
-
       if (response.ok) {
-        alert('Usuario registrado correctamente');
-        navigate('/login');
+        Swal.fire({
+          icon: 'success',
+          title: '¡Registro exitoso!',
+          text: 'Tu cuenta ha sido creada correctamente.',
+          confirmButtonColor: '#E67E22',
+          timer: 2000,
+          showConfirmButton: false
+        }).then(() => navigate('/login'));
         return { success: true };
       } else {
         return { success: false, error: data.message };
       }
-    } catch (error) {
+    } catch {
       return { success: false, error: 'Error al conectar con el servidor' };
     }
   };
 
   const login = async (email, password) => {
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch(`${API_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
       });
-
       const data = await response.json();
-
       if (response.ok) {
         localStorage.setItem('token', data.token);
         setToken(data.token);
@@ -79,7 +77,7 @@ export const AuthProvider = ({ children }) => {
       } else {
         return { success: false, error: data.message || data.error || 'Credenciales inválidas' };
       }
-    } catch (error) {
+    } catch {
       return { success: false, error: 'Error al conectar con el servidor' };
     }
   };
@@ -91,9 +89,7 @@ export const AuthProvider = ({ children }) => {
     navigate('/login');
   };
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
+  useEffect(() => { checkAuth(); }, []);
 
   return (
     <AuthContext.Provider value={{ user, token, loading, login, register, logout }}>
