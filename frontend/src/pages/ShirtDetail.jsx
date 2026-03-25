@@ -5,6 +5,14 @@ import { FaStar, FaRegStar, FaStarHalfAlt, FaShoppingCart } from 'react-icons/fa
 import ShirtImageGallery from '../components/ShirtImageGallery';
 import FavoriteButton from '../components/FavoriteButton';
 
+const BRAND_URLS = {
+    Nike: 'https://www.nike.com/es/w/futbol-camisetas-1gdj0z5l6ka',
+    Adidas: 'https://www.adidas.es/camisetas_deportivas-futbol-hombre',
+    Puma: 'https://eu.puma.com/es/es/deportes/futbol/camisetas-de-futbol',
+    Hummel: 'https://www.hummel.es/deporte/futbol/camisetas-de-clubs',
+    Kappa: 'https://www.kappa.com/es/collections/football-jersey'
+};
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 function ShirtDetail() {
@@ -195,19 +203,27 @@ function ShirtDetail() {
                                     <div className="sf-detail__store">
                                         <FaShoppingCart />
                                         <span>Tienda oficial</span>
-                                        <a href={shirt.buy_link || '#'} target="_blank" rel="noopener noreferrer" className="sf-detail__store-btn">
+                                        <a
+                                            href={shirt.buy_link || '#'}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="sf-detail__store-btn"
+                                        >
                                             IR A TIENDA
                                         </a>
                                     </div>
+
                                     <div className="sf-detail__store">
                                         <FaShoppingCart />
-                                        <span>Adidas</span>
-                                        <a href="#" className="sf-detail__store-btn">IR A TIENDA</a>
-                                    </div>
-                                    <div className="sf-detail__store">
-                                        <FaShoppingCart />
-                                        <span>Nike</span>
-                                        <a href="#" className="sf-detail__store-btn">IR A TIENDA</a>
+                                        <span>{shirt.brand}</span>
+                                        <a
+                                            href={BRAND_URLS[shirt.brand] || '#'}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="sf-detail__store-btn"
+                                        >
+                                            IR A TIENDA
+                                        </a>
                                     </div>
                                 </div>
                             </div>

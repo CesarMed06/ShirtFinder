@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import FavoriteButton from './FavoriteButton';
 const API_URL = import.meta.env.VITE_API_URL;
 
+
 function Catalog() {
     const [searchParams] = useSearchParams();
     const searchQuery = searchParams.get('search');
@@ -22,9 +23,7 @@ function Catalog() {
         talla: '',
         marca: '',
         version: '',
-        valoracion: '',
-        stock: false,
-        descuento: false
+        valoracion: ''
     });
 
     useEffect(() => {
@@ -94,10 +93,6 @@ function Catalog() {
 
     const handleFilterChange = (filterName, value) => {
         setFilters(prev => ({ ...prev, [filterName]: value }));
-    };
-
-    const toggleCheckbox = (filterName) => {
-        setFilters(prev => ({ ...prev, [filterName]: !prev[filterName] }));
     };
 
     const applyFilters = () => {
@@ -193,20 +188,6 @@ function Catalog() {
                             <option value="2">★★☆☆☆</option>
                             <option value="1">★☆☆☆☆</option>
                         </select>
-                    </div>
-                    <div className="sf-filter sf-filter--checkbox">
-                        <label className="sf-filter__label">En stock</label>
-                        <label className="sf-filter__checkbox-container">
-                            <input type="checkbox" checked={filters.stock} onChange={() => toggleCheckbox('stock')} />
-                            <span className="sf-filter__checkmark"></span>
-                        </label>
-                    </div>
-                    <div className="sf-filter sf-filter--checkbox">
-                        <label className="sf-filter__label">En descuento</label>
-                        <label className="sf-filter__checkbox-container">
-                            <input type="checkbox" checked={filters.descuento} onChange={() => toggleCheckbox('descuento')} />
-                            <span className="sf-filter__checkmark"></span>
-                        </label>
                     </div>
                     <button className="sf-filter__apply-btn" onClick={applyFilters}>Aplicar cambios</button>
                 </aside>
