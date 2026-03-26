@@ -101,6 +101,7 @@ Para probar la aplicación puedes usar estas credenciales:
 ## Autor
 
 **César Medina Gago**
+
 2º Desarrollo de Aplicaciones Web
 CEI Sevilla - Curso 2025/2026
 
