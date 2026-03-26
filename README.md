@@ -48,8 +48,8 @@ mysql -u root -p < database/shirtfinder_backup.sql
 cd backend
 npm install
 
-Crea un archivo `.env` en la carpeta `backend` con este contenido:
-
+Crea un `.env` dentro de `backend/`:
+``` 
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=tu_contraseña_mysql
@@ -57,6 +57,9 @@ DB_NAME=shirtfinder
 DB_PORT=3306
 JWT_SECRET=shirtfinder_secret_2026
 PORT=5000
+EMAIL_USER=tu_email@gmail.com
+EMAIL_PASS=tu_contraseña_app
+``` 
 
 Arranca el servidor backend:
 
