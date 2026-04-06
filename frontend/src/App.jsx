@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 
+import Chatbot from './components/Chatbot';
 import Catalog from './components/Catalog';
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -17,7 +18,11 @@ import PostDetail from './pages/PostDetail';
 import ResetPassword from './pages/ResetPassword';
 import ShirtDetail from './pages/ShirtDetail';
 
+import { useAuth } from './context/AuthContext';
+
 function App() {
+  const { user } = useAuth();
+
   return (
     <div className="app-container">
       <Header />
@@ -38,6 +43,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+      <Chatbot user={user} />
     </div>
   );
 }

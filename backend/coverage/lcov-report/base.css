@@ -152,30 +152,30 @@ table.coverage td span.cline-any {
     background-position: 0 -10px;
 }
 .status-line {  height: 10px; }
-/* yellow */
 .cbranch-no { background: yellow !important; color: #111; }
-/* dark red */
+.cbranch-no { background: yellow !important; color: #111; }
+.red.solid, .status-line.low, .low .cover-fill { background:#C21F39 }
 .red.solid, .status-line.low, .low .cover-fill { background:#C21F39 }
 .low .chart { border:1px solid #C21F39 }
 .highlighted,
 .highlighted .cstat-no, .highlighted .fstat-no, .highlighted .cbranch-no{
   background: #C21F39 !important;
 }
-/* medium red */
 .cstat-no, .fstat-no, .cbranch-no, .cbranch-no { background:#F6C6CE }
-/* light red */
+.cstat-no, .fstat-no, .cbranch-no, .cbranch-no { background:#F6C6CE }
 .low, .cline-no { background:#FCE1E5 }
-/* light green */
+.low, .cline-no { background:#FCE1E5 }
 .high, .cline-yes { background:rgb(230,245,208) }
-/* medium green */
+.high, .cline-yes { background:rgb(230,245,208) }
 .cstat-yes { background:rgb(161,215,106) }
-/* dark green */
+.cstat-yes { background:rgb(161,215,106) }
+.status-line.high, .high .cover-fill { background:rgb(77,146,33) }
 .status-line.high, .high .cover-fill { background:rgb(77,146,33) }
 .high .chart { border:1px solid rgb(77,146,33) }
-/* dark yellow (gold) */
+.status-line.medium, .medium .cover-fill { background: #f9cd0b; }
 .status-line.medium, .medium .cover-fill { background: #f9cd0b; }
 .medium .chart { border:1px solid #f9cd0b; }
-/* light yellow */
+.medium { background: #fff4c2; }
 .medium { background: #fff4c2; }
 
 .cstat-skip { background: #ddd; color: #111; }

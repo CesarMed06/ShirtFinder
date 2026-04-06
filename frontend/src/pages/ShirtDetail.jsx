@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useChatbotContext } from '../context/ChatbotContext';
 import { FaStar, FaRegStar, FaStarHalfAlt, FaShoppingCart } from 'react-icons/fa';
 import ShirtImageGallery from '../components/ShirtImageGallery';
 import FavoriteButton from '../components/FavoriteButton';
@@ -18,6 +19,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 function ShirtDetail() {
     const { id } = useParams();
     const { user } = useAuth();
+    const { setPageData } = useChatbotContext();
     const navigate = useNavigate();
 
     const [shirt, setShirt] = useState(null);
@@ -72,13 +74,28 @@ function ShirtDetail() {
         loadComments();
     }, [id]);
 
+    useEffect(() => {
+        if (!shirt) return;
+        setPageData({
+            type: 'shirt',
+            team: shirt.team,
+            season: shirt.season,
+            league: shirt.league,
+            brand: shirt.brand,
+            color: shirt.color,
+            description: shirt.description,
+            averageRating: calculateAverageRating(),
+            totalReviews: comments.length
+        });
+        return () => setPageData(null);
+    }, [shirt, comments]);
+
     const loadComments = async () => {
         try {
             const response = await fetch(`${API_URL}/api/comments/${id}`);
             const data = await response.json();
             if (data.success) setComments(data.data);
-        } catch (error) {
-        }
+        } catch (error) {}
     };
 
     const calculateAverageRating = () => {
@@ -151,9 +168,8 @@ function ShirtDetail() {
             <div className="sf-detail__container">
                 <div className="sf-detail__left" style={{ position: 'relative' }}>
                     <div style={{ position: 'absolute', top: 12, right: 12, zIndex: 10 }}>
-                    <FavoriteButton shirtId={Number(id)} size="medium" />
+                        <FavoriteButton shirtId={Number(id)} size="medium" />
                     </div>
-
                     <ShirtImageGallery shirt={shirt} />
                 </div>
 
@@ -212,7 +228,6 @@ function ShirtDetail() {
                                             IR A TIENDA
                                         </a>
                                     </div>
-
                                     <div className="sf-detail__store">
                                         <FaShoppingCart />
                                         <span>{shirt.brand}</span>
