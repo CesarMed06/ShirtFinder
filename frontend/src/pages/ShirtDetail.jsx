@@ -166,12 +166,12 @@ function ShirtDetail() {
             </Link>
 
             <div className="sf-detail__container">
-                <div className="sf-detail__left" style={{ position: 'relative' }}>
+                <div className="sf-detail__left" style={{ position: 'relative', background: '#f5f5f5', borderRadius: '12px', padding: '12px' }}>
                     <div style={{ position: 'absolute', top: 12, right: 12, zIndex: 10 }}>
                         <FavoriteButton shirtId={Number(id)} size="medium" />
                     </div>
                     <ShirtImageGallery shirt={shirt} />
-                </div>
+            </div>
 
                 <div className="sf-detail__center">
                     <h1 className="sf-detail__title">

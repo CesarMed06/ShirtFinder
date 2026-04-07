@@ -1,6 +1,5 @@
 # ShirtFinder 
 
-
 Buscador de camisetas de fútbol. Puedes explorar equipaciones de diferentes equipos y temporadas, ver su historia, valorarlas, guardarlas en favoritos y hablar sobre ellas en el foro.
 
 **Proyecto de 2º DAW — CEI Sevilla (2025/2026)**
@@ -8,6 +7,7 @@ Buscador de camisetas de fútbol. Puedes explorar equipaciones de diferentes equ
 ## Tecnologías
 
 **Frontend**
+
 - React 19 + Vite 7
 - React Router DOM
 - SweetAlert2
@@ -15,14 +15,17 @@ Buscador de camisetas de fútbol. Puedes explorar equipaciones de diferentes equ
 - Vitest + React Testing Library
 
 **Backend**
+
 - Node.js + Express
 - MySQL 8
 - JWT (autenticación)
 - Bcrypt (contraseñas)
 - Nodemailer (recuperación de contraseña)
+- Google Generative AI (@google/generative-ai)
 - Jest + Supertest (tests)
 
 **Otros**
+
 - Cloudinary (imágenes)
 - Postman (pruebas de API)
 
@@ -31,14 +34,14 @@ Buscador de camisetas de fútbol. Puedes explorar equipaciones de diferentes equ
 ### 1. Clonar el repo
 
 ```bash
-git clone [https://github.com/CesarMed06/ShirtFinder.git](https://github.com/CesarMed06/ShirtFinder.git)
+git clone https://github.com/CesarMed06/ShirtFinder.git
 cd ShirtFinder
 ```
 
 ### 2. Importar la base de datos
 
 **Desde MySQL Workbench:**
-1. `Server` → `Data Import`
+1. `Server` ---> `Data Import`
 2. Selecciona `Import from Self-Contained File`
 3. Elige `database/shirtfinder_backup.sql`
 4. Ejecuta
@@ -57,7 +60,6 @@ npm install
 
 Crea un `.env` dentro de `backend/`:
 ```env
-
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=tu_contraseña
@@ -65,8 +67,9 @@ DB_NAME=shirtfinder
 DB_PORT=3306
 JWT_SECRET=shirtfinder_secret_2026
 PORT=5000
-[EMAIL_USER=tu_email@gmail.com](mailto:EMAIL_USER=tu_email@gmail.com)
+EMAIL_USER=tu_email@gmail.com
 EMAIL_PASS=tu_contraseña_app
+GEMINI_API_KEY=tu_api_key_de_gemini
 ```
 
 Arranca el servidor:
@@ -84,6 +87,7 @@ npm install
 ```
 
 Crea un `.env` dentro de `frontend/`:
+
 VITE_API_URL=http://localhost:5000
 
 Arranca el frontend:
@@ -95,25 +99,27 @@ Frontend en `http://localhost:5173`
 
 ## Credenciales de prueba
 
-| Campo | Valor |
-|-------|-------|
-| Usuario | cesar_test |
-| Contraseña | test123 |
+Usuari: cesar_test 
+Contraseña: test123
 
 ## Tests
 
 **Backend** (Jest + Supertest):
+
 ```bash
 cd backend
 npm test
 ```
+
 Cubre: auth, camisetas, posts, favoritos y comentarios.
 
 **Frontend** (Vitest + React Testing Library):
+
 ```bash
 cd frontend
 npm test
 ```
+
 Cubre: Header, Footer, Login, Register, ShirtCard, PostCard, Home, Forum y CreatePost.
 
 ## Funcionalidades
@@ -128,16 +134,19 @@ Cubre: Header, Footer, Login, Register, ShirtCard, PostCard, Home, Forum y Creat
 - Foro con creación, lectura y eliminación de posts.
 - Perfil de usuario con edición de datos y avatar.
 - Página 404 y rutas protegidas para usuarios no logueados.
+- Chatbot con IA (Gemini) integrado en todas las páginas para ayudar al usuario a navegar la web y resolver dudas sobre camisetas.
 
 ## Mejoras futuras
 
 - Sistema de notificaciones en tiempo real.
 - Historial de valoraciones por usuario.
 - Modo oscuro.
+- Integración con API de ventas para mostrar camisetas destacadas en tiempo real según popularidad.
 
 ## Autor
 
 **César Medina Gago**
-2º Desarrollo de Aplicaciones Web — CEI Sevilla (2025/2026)
-https://github.com/CesarMed06
 
+2º Desarrollo de Aplicaciones Web — CEI Sevilla (2025/2026)
+
+https://github.com/CesarMed06

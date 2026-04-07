@@ -188,7 +188,7 @@ function MyAccount() {
                         <div className="sf-profile-details">
                             <p className="sf-profile-name">{profile.username}</p>
                             <p className="sf-profile-email">{profile.email}</p>
-                            <p className="sf-profile-date">Miembro desde: {new Date(profile.date_registered).toLocaleDateString('es-ES')}</p>
+                            <p className="sf-profile-date">Miembro desde: {new Date(profile.date_registered).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })}</p>
                         </div>
                     </div>
                 </div>
@@ -368,7 +368,7 @@ function MyAccount() {
                                         </div>
                                         <div className="sf-post-row__meta">
                                             <span className="sf-comment-row__date">
-                                                Publicado el {new Date(post.created_at).toLocaleDateString('es-ES')}
+                                                Publicado el {new Date(post.created_at).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })}
                                             </span>
                                             <span className="sf-comment-row__date">
                                                 Respuestas: {post.replies_count || 0}
