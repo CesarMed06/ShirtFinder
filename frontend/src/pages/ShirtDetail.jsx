@@ -166,7 +166,7 @@ function ShirtDetail() {
             </Link>
 
             <div className="sf-detail__container">
-                <div className="sf-detail__left" style={{ position: 'relative', background: '#f5f5f5', borderRadius: '12px', padding: '12px' }}>
+                <div className="sf-detail__left" style={{ position: 'relative' }}>
                     <div style={{ position: 'absolute', top: 12, right: 12, zIndex: 10 }}>
                         <FavoriteButton shirtId={Number(id)} size="medium" />
                     </div>
@@ -249,9 +249,16 @@ function ShirtDetail() {
 
             <div className="sf-detail__history">
                 <h2 className="sf-detail__section-title">Historia y curiosidades</h2>
-                <p className="sf-detail__history-text">
-                    {shirt.description || 'Descripción no disponible'}
-                </p>
+                {shirt.description && (
+                    <p className="sf-detail__history-text">
+                        {shirt.description}
+                    </p>
+                )}
+                {shirt.curiosity && (
+                    <p className="sf-detail__history-text" style={{ marginTop: '12px' }}>
+                        {shirt.curiosity}
+                    </p>
+                )}
             </div>
 
             <div className="sf-detail__comments-section">

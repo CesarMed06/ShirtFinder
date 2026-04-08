@@ -1,21 +1,8 @@
-.gallery-simple {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 40px;
-    background: #f5f5f5;
-    border-radius: 12px;
-}
-
-.gallery-simple img {
-    max-width: 100%;
-    max-height: 500px;
-    object-fit: contain;
-    mix-blend-mode: multiply;
-}
-
 .gallery {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .main-image-container {
@@ -23,16 +10,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px;
-    background: #f5f5f5;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    min-height: 400px;
+    padding: 30px;
+    min-height: 380px;
+    /* SIN background ni border-radius — lo pone sf-detail__left */
 }
 
 .main-image-container img {
     max-width: 100%;
-    max-height: 500px;
+    max-height: 450px;
     object-fit: contain;
     mix-blend-mode: multiply;
     transition: opacity 0.3s ease;
@@ -40,9 +25,11 @@
 
 .thumbnails {
     display: flex;
+    flex-direction: row;
     gap: 12px;
     justify-content: center;
-    margin-top: 20px;
+    padding: 0;
+    margin: 0;
 }
 
 .thumbnail {
@@ -52,11 +39,12 @@
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    background: #f5f5f5;
+    background: #e8e8e8;
     padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .thumbnail img {
@@ -67,24 +55,25 @@
 }
 
 .thumbnail:hover {
-    background: #e8e8e8;
+    background: #d8d8d8;
     transform: scale(1.05);
 }
 
 .thumbnail.active {
     border: 3px solid #FF6B35;
-    background: #f5f5f5;
+    background: #e8e8e8;
     transform: scale(1.08);
     box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
 }
 
 @media (max-width: 768px) {
     .main-image-container {
-        padding: 30px;
+        padding: 20px;
+        min-height: 280px;
     }
 
     .main-image-container img {
-        max-height: 350px;
+        max-height: 300px;
     }
 
     .thumbnail {

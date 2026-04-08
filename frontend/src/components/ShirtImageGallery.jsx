@@ -1,50 +1,47 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import './ShirtImageGallery.css';
 
 function ShirtImageGallery({ shirt }) {
-    const [imagenActiva, setImagenActiva] = useState(0);
+    const images = useMemo(() => {
+        const list = [
+            shirt?.image_1,
+            shirt?.image_2,
+            shirt?.image_3,
+            shirt?.image_4,
+            shirt?.image_url
+        ].filter(Boolean);
 
-    const imagenes = [
-        shirt.image_1,
-        shirt.image_2,
-        shirt.image_3,
-        shirt.image_4,
-        shirt.image_5
-    ].filter(img => img);
+        return [...new Set(list)];
+    }, [shirt]);
 
-    if (imagenes.length === 0) {
-        return (
-            <div className="gallery-simple">
-                <img src={shirt.image_url} alt={shirt.team} loading="lazy" />
-            </div>
-        );
-    }
+    const [selectedImage, setSelectedImage] = useState('');
 
-    if (imagenes.length === 1) {
-        return (
-            <div className="gallery-simple">
-                <img src={imagenes[0]} alt={shirt.team} loading="lazy" />
-            </div>
-        );
-    }
+    useEffect(() => {
+        setSelectedImage(images[0] || '');
+    }, [images]);
+
+    if (!images.length) return null;
 
     return (
         <div className="gallery">
             <div className="main-image-container">
-                <img src={imagenes[imagenActiva]} alt={shirt.team} loading="lazy" />
+                <img src={selectedImage} alt={shirt?.team || 'Camiseta'} />
             </div>
 
-            <div className="thumbnails">
-                {imagenes.map((img, index) => (
-                    <div
-                        key={index}
-                        className={`thumbnail ${imagenActiva === index ? 'active' : ''}`}
-                        onClick={() => setImagenActiva(index)}
-                    >
-                        <img src={img} alt="" loading="lazy" />
-                    </div>
-                ))}
-            </div>
+            {images.length > 1 && (
+                <div className="thumbnails">
+                    {images.map((image, index) => (
+                        <button
+                            key={index}
+                            type="button"
+                            className={`thumbnail ${selectedImage === image ? 'active' : ''}`}
+                            onClick={() => setSelectedImage(image)}
+                        >
+                            <img src={image} alt={`${shirt?.team || 'Camiseta'} ${index + 1}`} />
+                        </button>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }
