@@ -7,7 +7,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 
 function Catalog() {
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const searchQuery = searchParams.get('search');
 
     const [shirts, setShirts] = useState([]);
@@ -25,6 +25,19 @@ function Catalog() {
         version: '',
         valoracion: ''
     });
+
+
+    
+    useEffect(() => {
+        setFilters({
+            ordenar: searchParams.get('ordenar') || '',
+            tipo: searchParams.get('tipo') || '',
+            talla: searchParams.get('talla') || '',
+            marca: searchParams.get('marca') || '',
+            version: searchParams.get('version') || '',
+            valoracion: searchParams.get('valoracion') || ''
+        });
+    }, []);
 
     useEffect(() => {
         setPage(1);
@@ -92,7 +105,14 @@ function Catalog() {
     };
 
     const handleFilterChange = (filterName, value) => {
-        setFilters(prev => ({ ...prev, [filterName]: value }));
+        setFilters(prev => {
+            const newFilters = { ...prev, [filterName]: value };
+            const params = {};
+            if (searchQuery) params.search = searchQuery;
+            Object.entries(newFilters).forEach(([k, v]) => { if (v) params[k] = v; });
+            setSearchParams(params);
+            return newFilters;
+        });
     };
 
     const applyFilters = () => {

@@ -41,6 +41,14 @@ function ForgotPassword() {
 
     return (
         <section className="sf-forgot">
+            <button onClick={() => navigate(-1)} className="sf-back-button" aria-label="Volver" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                <img
+                    src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768983970/FLECHA_VOLVER_ATRAS_lspqx4.jpg"
+                    alt="Volver"
+                    className="sf-back-icon"
+                />
+            </button>
+
             <div className="sf-forgot__box">
                 <h1 className="sf-forgot__title">Recuperar contraseña</h1>
                 <p className="sf-forgot__desc">
@@ -57,6 +65,7 @@ function ForgotPassword() {
                             className="sf-forgot__input"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            aria-label="Correo electrónico"
                             required
                         />
                     </div>
@@ -69,7 +78,7 @@ function ForgotPassword() {
                     <button
                         onClick={() => navigate(-1)}
                         className="sf-forgot__login-link"
-                        style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                        style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, textDecoration: 'none' }}
                     >
                         Inicia sesión aquí
                     </button>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useChatbotContext } from '../context/ChatbotContext';
 import { FaStar, FaRegStar, FaStarHalfAlt, FaShoppingCart } from 'react-icons/fa';
@@ -48,7 +48,12 @@ function ShirtDetail() {
             else if (i === Math.floor(userRating) && userRating % 1 !== 0) icon = <FaStarHalfAlt />;
             else icon = <FaRegStar />;
             stars.push(
-                <button key={i} onClick={(e) => handleStarClick(i, e)} className="sf-detail__star-btn">
+                <button
+                    key={i}
+                    onClick={(e) => handleStarClick(i, e)}
+                    className="sf-detail__star-btn"
+                    aria-label={`Valorar con ${i + 1} estrella${i + 1 > 1 ? 's' : ''}`}
+                >
                     {icon}
                 </button>
             );
@@ -153,17 +158,22 @@ function ShirtDetail() {
 
     return (
         <div className="sf-detail">
-            <div className="sf-detail__breadcrumb">
-                <span>Catálogo / Detalle de la camiseta</span>
+            <div className="sf-detail__top">
+                <button
+                    onClick={() => navigate(-1)}
+                    aria-label="Volver al catálogo"
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center' }}
+                >
+                    <img
+                        src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768983970/FLECHA_VOLVER_ATRAS_lspqx4.jpg"
+                        alt="Volver"
+                        className="sf-back-icon"
+                    />
+                </button>
+                <div className="sf-detail__breadcrumb">
+                    <span>Catálogo / Detalle de la camiseta</span>
+                </div>
             </div>
-
-            <Link to="/catalog" className="sf-detail__back">
-                <img
-                    src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768983970/FLECHA_VOLVER_ATRAS_lspqx4.jpg"
-                    alt="Volver"
-                    className="sf-back-icon"
-                />
-            </Link>
 
             <div className="sf-detail__container">
                 <div className="sf-detail__left" style={{ position: 'relative' }}>
@@ -171,7 +181,7 @@ function ShirtDetail() {
                         <FavoriteButton shirtId={Number(id)} size="medium" />
                     </div>
                     <ShirtImageGallery shirt={shirt} />
-            </div>
+                </div>
 
                 <div className="sf-detail__center">
                     <h1 className="sf-detail__title">
@@ -250,14 +260,10 @@ function ShirtDetail() {
             <div className="sf-detail__history">
                 <h2 className="sf-detail__section-title">Historia y curiosidades</h2>
                 {shirt.description && (
-                    <p className="sf-detail__history-text">
-                        {shirt.description}
-                    </p>
+                    <p className="sf-detail__history-text">{shirt.description}</p>
                 )}
                 {shirt.curiosity && (
-                    <p className="sf-detail__history-text" style={{ marginTop: '12px' }}>
-                        {shirt.curiosity}
-                    </p>
+                    <p className="sf-detail__history-text" style={{ marginTop: '12px' }}>{shirt.curiosity}</p>
                 )}
             </div>
 
@@ -275,11 +281,13 @@ function ShirtDetail() {
                                 placeholder={token ? "Escribe tu comentario..." : "Inicia sesión para comentar"}
                                 className="sf-detail__comment-input"
                                 disabled={!token}
+                                aria-label="Escribe tu comentario"
                             />
                             <button
                                 className="sf-detail__submit-btn"
                                 onClick={handleSubmitComment}
                                 disabled={!token}
+                                aria-label="Enviar comentario"
                             >
                                 ENVIAR
                             </button>
@@ -294,7 +302,7 @@ function ShirtDetail() {
                         ) : (
                             comments.map(c => (
                                 <div key={c.id_comments} className="sf-detail__comment">
-                                    <div className="sf-detail__comment-avatar"></div>
+                                    <div className="sf-detail__comment-avatar" role="img" aria-label="Avatar usuario"></div>
                                     <div className="sf-detail__comment-rating-wrapper">
                                         <div className="sf-detail__comment-stars">
                                             {renderStars(c.rating || 0)}

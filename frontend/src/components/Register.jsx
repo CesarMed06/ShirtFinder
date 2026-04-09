@@ -44,7 +44,7 @@ function Register() {
 
     return (
         <section className="sf-login">
-            <button onClick={() => navigate(-1)} className="sf-back-button" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+            <button onClick={() => navigate(-1)} className="sf-back-button" aria-label="Volver" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
                 <img
                     src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768983970/FLECHA_VOLVER_ATRAS_lspqx4.jpg"
                     alt="Volver"
@@ -69,6 +69,7 @@ function Register() {
                             className="sf-register__input"
                             value={formData.username}
                             onChange={handleChange}
+                            aria-label="Nombre de usuario"
                             required
                         />
                     </div>
@@ -84,6 +85,7 @@ function Register() {
                             className="sf-register__input"
                             value={formData.email}
                             onChange={handleChange}
+                            aria-label="Correo electrónico"
                             required
                         />
                     </div>
@@ -99,9 +101,10 @@ function Register() {
                             className="sf-register__input"
                             value={formData.password}
                             onChange={handleChange}
+                            aria-label="Contraseña"
                             required
                         />
-                        <button type="button" className="sf-password-toggle" onClick={() => setShowPassword(!showPassword)}>
+                        <button type="button" className="sf-password-toggle" onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}>
                             {showPassword ? (
                                 <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
                             ) : (
@@ -121,9 +124,10 @@ function Register() {
                             className="sf-register__input"
                             value={formData.confirmPassword}
                             onChange={handleChange}
+                            aria-label="Confirmar contraseña"
                             required
                         />
-                        <button type="button" className="sf-password-toggle" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                        <button type="button" className="sf-password-toggle" onClick={() => setShowConfirmPassword(!showConfirmPassword)} aria-label={showConfirmPassword ? 'Ocultar confirmación de contraseña' : 'Mostrar confirmación de contraseña'}>
                             {showConfirmPassword ? (
                                 <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
                             ) : (

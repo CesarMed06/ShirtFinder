@@ -3,7 +3,9 @@ import { useLocation } from 'react-router-dom';
 import { useChatbotContext } from '../context/ChatbotContext';
 import './Chatbot.css';
 
+
 const API_URL = import.meta.env.VITE_API_URL;
+
 
 const PAGE_CONTEXT = {
     '/':          'Estás en la página de inicio de ShirtFinder.',
@@ -15,7 +17,7 @@ const PAGE_CONTEXT = {
     '/register':  'Estás en la página de registro.',
 };
 
-// Convierte markdown básico a HTML
+
 function parseMarkdown(text) {
     return text
         .replace(/&/g, '&amp;')
@@ -30,6 +32,7 @@ function parseMarkdown(text) {
         .replace(/^(.+)$/, '<p>$1</p>');
 }
 
+
 function MessageContent({ text }) {
     return (
         <span
@@ -38,6 +41,7 @@ function MessageContent({ text }) {
         />
     );
 }
+
 
 function Chatbot({ user }) {
     const location = useLocation();
@@ -53,14 +57,17 @@ function Chatbot({ user }) {
     const resizing = useRef(null);
     const abortRef = useRef(null);
 
+
     useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages, loading]);
+
 
     const startResize = (e, direction) => {
         e.preventDefault();
         resizing.current = { direction, startX: e.clientX, startY: e.clientY, ...size };
     };
+
 
     useEffect(() => {
         const onMove = (e) => {
@@ -85,13 +92,16 @@ function Chatbot({ user }) {
         };
     }, []);
 
+
     const buildContext = () => {
         const path = location.pathname;
+
 
         if (pageData?.type === 'shirt') {
             const avg = pageData.averageRating > 0
                 ? `${pageData.averageRating.toFixed(1)}/5 (${pageData.totalReviews} valoraciones)`
                 : 'sin valoraciones aún';
+
 
             let reviewsText = '';
             if (pageData.reviews?.length > 0) {
@@ -99,12 +109,14 @@ function Chatbot({ user }) {
                     pageData.reviews.map(r => `[${r.rating}/5] "${r.text}"`).join(' | ');
             }
 
+
             return `Estás viendo la camiseta del ${pageData.team}, temporada ${pageData.season}, ` +
                 `liga ${pageData.league}, marca ${pageData.brand}, colores: ${pageData.color}. ` +
                 `Valoración media: ${avg}.` +
                 (pageData.description ? ` Descripción: ${pageData.description}.` : '') +
                 reviewsText;
         }
+
 
         if (pageData?.type === 'post') {
             let repliesText = '';
@@ -117,6 +129,7 @@ function Chatbot({ user }) {
                 repliesText;
         }
 
+
         const exact = PAGE_CONTEXT[location.pathname];
         if (exact) return exact;
         if (location.pathname.startsWith('/catalog'))    return PAGE_CONTEXT['/catalog'];
@@ -125,27 +138,34 @@ function Chatbot({ user }) {
         return '';
     };
 
+
     const sendMessage = async () => {
         const text = input.trim();
         if (!text || loading) return;
 
+
         const ctx = buildContext();
         const fullMessage = ctx ? `[Contexto de página: ${ctx}]\n${text}` : text;
+
 
         const updatedMessages = [...messages, { role: 'user', text }];
         setMessages(updatedMessages);
         setInput('');
         setLoading(true);
 
+
         const historyToSend = updatedMessages
             .slice(1, -1)
             .map(m => ({ role: m.role, parts: [{ text: m.text }] }));
 
+
         const controller = new AbortController();
         abortRef.current = controller;
 
-        // Añadimos el mensaje vacío del bot que iremos rellenando
+
+        
         setMessages(prev => [...prev, { role: 'model', text: '' }]);
+
 
         try {
             const res = await fetch(`${API_URL}/api/chatbot`, {
@@ -155,20 +175,23 @@ function Chatbot({ user }) {
                 signal: controller.signal
             });
 
+
             if (!res.ok) {
                 const data = await res.json();
                 throw new Error(data.error || 'Error del servidor');
             }
 
+
             const reader = res.body.getReader();
             const decoder = new TextDecoder();
             let accumulated = '';
+
 
             while (true) {
                 const { done, value } = await reader.read();
                 if (done) break;
                 accumulated += decoder.decode(value, { stream: true });
-                // Actualizamos el último mensaje en tiempo real
+                
                 setMessages(prev => {
                     const updated = [...prev];
                     updated[updated.length - 1] = { role: 'model', text: accumulated };
@@ -200,13 +223,16 @@ function Chatbot({ user }) {
         }
     };
 
+
     const cancelMessage = () => {
         abortRef.current?.abort();
     };
 
+
     const clearChat = () => {
         setMessages([{ role: 'model', text: '¡Hola! Soy el asistente de ShirtFinder. ¿En qué te puedo ayudar?' }]);
     };
+
 
     const handleKey = (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
@@ -214,6 +240,7 @@ function Chatbot({ user }) {
             sendMessage();
         }
     };
+
 
     return (
         <div className="sf-chatbot">
@@ -227,6 +254,7 @@ function Chatbot({ user }) {
                     <div className="sf-chatbot__resize sf-chatbot__resize--top-left"    onMouseDown={e => startResize(e, 'top-left')} />
                     <div className="sf-chatbot__resize sf-chatbot__resize--top-right"   onMouseDown={e => startResize(e, 'top-right')} />
                     <div className="sf-chatbot__resize sf-chatbot__resize--bottom-left" onMouseDown={e => startResize(e, 'bottom-left')} />
+
 
                     <div className="sf-chatbot__header">
                         <div className="sf-chatbot__header-title">
@@ -249,6 +277,7 @@ function Chatbot({ user }) {
                         </div>
                     </div>
 
+
                     {pageData?.type === 'shirt' && (
                         <div className="sf-chatbot__page-badge">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="13" height="13">
@@ -260,6 +289,7 @@ function Chatbot({ user }) {
                         </div>
                     )}
 
+
                     {pageData?.type === 'post' && (
                         <div className="sf-chatbot__page-badge">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="13" height="13">
@@ -268,6 +298,7 @@ function Chatbot({ user }) {
                             Post: {pageData.title?.slice(0, 30)}{pageData.title?.length > 30 ? '…' : ''}
                         </div>
                     )}
+
 
                     <div className="sf-chatbot__messages">
                         {messages.map((msg, i) => (
@@ -285,6 +316,7 @@ function Chatbot({ user }) {
                         )}
                         <div ref={bottomRef} />
                     </div>
+
 
                     <div className="sf-chatbot__input-area">
                         <input
@@ -317,10 +349,11 @@ function Chatbot({ user }) {
                 </div>
             )}
 
+
             <button
                 className={`sf-chatbot__bubble${open ? ' sf-chatbot__bubble--open' : ''}`}
                 onClick={() => setOpen(o => !o)}
-                aria-label="Abrir asistente"
+                aria-label={open ? 'Cerrar asistente' : 'Abrir asistente'}
             >
                 {loading ? (
                     <span className="sf-chatbot__bubble-thinking" />
@@ -338,5 +371,6 @@ function Chatbot({ user }) {
         </div>
     );
 }
+
 
 export default Chatbot;

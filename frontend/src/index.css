@@ -388,17 +388,17 @@ body {
 }
 
 .sf-register__box {
-    width: 669px;
-    min-height: 523px;
-    background: #FFFFFF;
-    border-radius: 16px;
-    padding: 40px 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0px;
-    box-sizing: border-box;
+  width: 669px;
+  min-height: 523px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 40px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+  box-sizing: border-box;
 }
 
 .sf-login__title {
@@ -489,9 +489,9 @@ body {
 }
 
 .sf-password-toggle svg {
-    width: 22px;
-    height: 22px;
-    fill: #555555;
+  width: 22px;
+  height: 22px;
+  fill: #555555;
 }
 
 .sf-login__register-area {
@@ -528,17 +528,17 @@ body {
 }
 
 .sf-register__form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 22px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  width: 100%;
 }
 
 .sf-input-container {
-    position: relative;
-    width: 500px;
-    height: 50px;
+  position: relative;
+  width: 500px;
+  height: 50px;
 }
 
 .sf-input-icon {
@@ -904,12 +904,19 @@ body {
   background-color: #FFFFFF;
 }
 
+.sf-detail__top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
 .sf-detail__breadcrumb {
   font-family: 'Kumbh Sans', sans-serif;
   font-size: 36px;
   font-weight: 400;
   color: #555555;
-  margin-bottom: 30px;
+  margin-bottom: 0;
 }
 
 .sf-detail__back {
@@ -935,12 +942,12 @@ body {
 }
 
 .sf-detail__left {
+  width: 450px;
+  min-width: 380px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  background-color: #f5f5f5;
   border-radius: 12px;
-  padding: 12px;
+  position: relative;
 }
 
 .sf-detail__main-image {
@@ -1405,7 +1412,7 @@ body {
 
   .sf-detail__main-image,
   .sf-detail__left {
-  margin: 0 auto;
+    margin: 0 auto;
   }
 
   .sf-detail__two-columns {
@@ -1418,13 +1425,24 @@ body {
 }
 
 @media (max-width: 768px) {
-    .sf-detail {
+  .sf-login {
+    position: relative;
+    padding-top: 70px;
+  }
+
+  .sf-back-button {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+  }
+
+  .sf-detail {
     padding: 20px 30px;
   }
 
   .sf-detail__history {
-  padding: 20px 30px;
-  margin: 40px -30px;
+    padding: 20px 30px;
+    margin: 40px -30px;
   }
 }
 
@@ -1455,9 +1473,9 @@ body {
 }
 
 .sf-pagination__btn:hover:not(:disabled) {
-    background: #ff6b35;
-    color: #fff;
-    transform: translateY(-2px);
+  background: #ff6b35;
+  color: #fff;
+  transform: translateY(-2px);
 }
 
 .sf-pagination__btn--active {
@@ -1480,21 +1498,21 @@ body {
 
 input[type="password"]::-ms-reveal,
 input[type="password"]::-ms-clear {
-    display: none !important;
+  display: none !important;
 }
 
 .sf-login__input:-webkit-autofill,
 .sf-login__input:-webkit-autofill:hover,
 .sf-login__input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0px 1000px #F2F2F2 inset;
-    box-shadow: 0 0 0px 1000px #F2F2F2 inset;
+  -webkit-box-shadow: 0 0 0px 1000px #F2F2F2 inset;
+  box-shadow: 0 0 0px 1000px #F2F2F2 inset;
 }
 
 .sf-register__input:-webkit-autofill,
 .sf-register__input:-webkit-autofill:hover,
 .sf-register__input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0px 1000px #F2F2F2 inset;
-    box-shadow: 0 0 0px 1000px #F2F2F2 inset;
+  -webkit-box-shadow: 0 0 0px 1000px #F2F2F2 inset;
+  box-shadow: 0 0 0px 1000px #F2F2F2 inset;
 }
 
 
@@ -1669,7 +1687,7 @@ input[type="password"]::-ms-clear {
 
 .forum-post-card:hover {
   background: #fafafa;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
 }
 
 .forum-post-avatar {
@@ -1969,6 +1987,20 @@ input[type="password"]::-ms-clear {
   white-space: pre-wrap;
 }
 
+.sf-forgot {
+  min-height: calc(100vh - 80px - 50px);
+  background-image: url('https://res.cloudinary.com/dwldyiruu/image/upload/v1771919401/FONDO_wwebx9.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+
 @media (max-width: 1024px) {
   .forum-page {
     padding: 24px 20px;
@@ -1998,5 +2030,214 @@ input[type="password"]::-ms-clear {
     flex-wrap: wrap;
     gap: 8px;
     align-items: flex-start;
+  }
+}
+
+.sf-header__burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.sf-header__burger span {
+  display: block;
+  width: 26px;
+  height: 3px;
+  background: #f5f5f5;
+  border-radius: 2px;
+}
+
+.sf-header__search--nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+    .sf-catalog {
+        padding: 20px 16px;
+    }
+
+    .sf-catalog__content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .sf-catalog__filters {
+        min-width: unset;
+        width: 100%;
+        gap: 16px;
+    }
+
+    .sf-filter {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .sf-filter__label {
+        font-size: 16px;
+        min-width: unset;
+    }
+
+    .sf-filter__select {
+        width: 100%;
+    }
+
+    .sf-filter__apply-btn {
+        width: 100%;
+        height: 44px;
+        font-size: 16px;
+    }
+
+    .sf-catalog__title {
+        font-size: 24px;
+    }
+
+    .sf-catalog__count {
+        font-size: 16px;
+    }
+
+    .sf-catalog__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        width: 100%;
+    }
+
+    .sf-catalog-card {
+        width: 100%;
+        height: auto;
+        min-height: unset;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .sf-catalog-card__heart {
+        top: 6px;
+        right: 6px;
+        font-size: 18px;
+    }
+
+    .sf-catalog-card__image-box {
+        width: 100%;
+        height: 130px;
+        margin-bottom: 8px;
+    }
+
+    .sf-catalog-card__image {
+        width: 100px;
+        height: 120px;
+    }
+
+    .sf-catalog-card__name {
+        font-size: 10px;
+        min-height: unset;
+        padding: 0 2px;
+    }
+
+    .sf-catalog-card__price {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    .sf-catalog-card__footer {
+        padding-right: 4px;
+        gap: 4px;
+    }
+
+    .sf-catalog-card__stars {
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
+
+    .sf-catalog-card__stars svg {
+        width: 11px;
+        height: 11px;
+    }
+
+    .sf-catalog-card__button {
+        width: 70px;
+        height: 30px;
+        font-size: 11px;
+        border-radius: 14px;
+    }
+
+    .sf-catalog__right {
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 768px) {
+  .sf-catalog {
+    padding: 20px 16px;
+  }
+
+  .sf-catalog__content {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .sf-catalog__filters {
+    min-width: unset;
+    width: 100%;
+    gap: 16px;
+  }
+
+  .sf-filter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .sf-filter__label {
+    font-size: 16px;
+    min-width: unset;
+  }
+
+  .sf-filter__select {
+    width: 100%;
+  }
+
+  .sf-filter__apply-btn {
+    width: 100%;
+    height: 44px;
+    font-size: 16px;
+  }
+
+  .sf-catalog__title {
+    font-size: 24px;
+  }
+
+  .sf-catalog__count {
+    font-size: 16px;
+  }
+
+  .sf-catalog__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .sf-catalog-card {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+  }
+
+  .sf-catalog-card__image-box {
+    width: 100%;
+    height: 160px;
+  }
+
+  .sf-catalog-card__image {
+    width: 120px;
+    height: 150px;
+  }
+
+  .sf-catalog-card__button {
+    width: 85px;
+    font-size: 13px;
   }
 }

@@ -83,9 +83,22 @@ function PostDetail() {
 
     return (
         <div className="pd-wrapper">
-            <div className="pd-card pd-card--main">
+            <div className="pd-top">
+                <button
+                    onClick={() => navigate(-1)}
+                    aria-label="Volver al foro"
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center' }}
+                >
+                    <img
+                        src="https://res.cloudinary.com/dwldyiruu/image/upload/v1768983970/FLECHA_VOLVER_ATRAS_lspqx4.jpg"
+                        alt="Volver"
+                        className="sf-back-icon"
+                    />
+                </button>
                 <h1 className="pd-title">{post.title}</h1>
+            </div>
 
+            <div className="pd-card pd-card--main">
                 <div className="pd-author-row">
                     <div className="pd-avatar pd-avatar--big">
                         {post.avatar_url
@@ -139,13 +152,12 @@ function PostDetail() {
             <div className="pd-form">
                 <label className="pd-form-label">Escribe tu respuesta</label>
                 <textarea
-                ref={textareaRef}
-                className="pd-textarea"
-                placeholder="Escribe aquí tu respuesta..."
-                value={replyText}
-                onChange={e => setReplyText(e.target.value)}
-            />
-
+                    ref={textareaRef}
+                    className="pd-textarea"
+                    placeholder="Escribe aquí tu respuesta..."
+                    value={replyText}
+                    onChange={e => setReplyText(e.target.value)}
+                />
                 <div className="pd-form-btn-wrap">
                     <button className="pd-btn" onClick={handlePublicar}>PUBLICAR</button>
                 </div>
