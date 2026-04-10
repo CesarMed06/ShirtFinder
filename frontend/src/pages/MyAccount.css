@@ -690,3 +690,76 @@
     min-width: 180px;
 }
 
+@media (max-width: 768px) {
+    .sf-my-account {
+        padding: 24px 16px;
+    }
+
+    .sf-my-account__header {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .sf-my-account__layout {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .sf-my-account__stats-panel {
+        text-align: left;
+    }
+
+    .sf-profile-main {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .sf-profile-details {
+        gap: 16px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .sf-profile-tabs-container {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .sf-profile-tabs {
+        padding-left: 0;
+        gap: 0;
+    }
+
+    .sf-tab-btn {
+        width: auto;
+        flex: 1 1 auto;
+        font-size: 13px;
+        height: 42px;
+        padding: 0 8px;
+    }
+
+    .sf-favs {
+        padding: 0 0 24px 0;
+    }
+
+    .sf-favs__grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .sf-fav-card {
+        width: 100%;
+        height: auto;
+        padding: 16px;
+    }
+
+    .sf-fav-card__imageBox {
+        width: 100%;
+        height: 140px;
+    }
+
+    .sf-fav-card__btn {
+        width: 100%;
+    }
+}
