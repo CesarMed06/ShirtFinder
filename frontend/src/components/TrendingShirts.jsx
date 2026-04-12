@@ -47,7 +47,7 @@ function TrendingShirts() {
                             />
                         </div>
 
-                        <h3 className="sf-card__titulo">{shirt.team} {shirt.season}</h3>
+                        <h3 className="sf-card__titulo">{shirt.team} {shirt.season} - {shirt.tipo}</h3>
 
                         <div className="sf-card__info-bottom">
                             <p className="sf-card__precio-rango">{shirt.price}€</p>

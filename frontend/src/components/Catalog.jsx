@@ -5,7 +5,6 @@ import Swal from 'sweetalert2';
 import FavoriteButton from './FavoriteButton';
 const API_URL = import.meta.env.VITE_API_URL;
 
-
 function Catalog() {
     const [searchParams, setSearchParams] = useSearchParams();
     const searchQuery = searchParams.get('search');
@@ -26,17 +25,26 @@ function Catalog() {
         valoracion: ''
     });
 
+    const [pendingFilters, setPendingFilters] = useState({
+        ordenar: '',
+        tipo: '',
+        talla: '',
+        marca: '',
+        version: '',
+        valoracion: ''
+    });
 
-    
     useEffect(() => {
-        setFilters({
+        const initial = {
             ordenar: searchParams.get('ordenar') || '',
             tipo: searchParams.get('tipo') || '',
             talla: searchParams.get('talla') || '',
             marca: searchParams.get('marca') || '',
             version: searchParams.get('version') || '',
             valoracion: searchParams.get('valoracion') || ''
-        });
+        };
+        setFilters(initial);
+        setPendingFilters(initial);
     }, []);
 
     useEffect(() => {
@@ -105,19 +113,16 @@ function Catalog() {
     };
 
     const handleFilterChange = (filterName, value) => {
-        setFilters(prev => {
-            const newFilters = { ...prev, [filterName]: value };
-            const params = {};
-            if (searchQuery) params.search = searchQuery;
-            Object.entries(newFilters).forEach(([k, v]) => { if (v) params[k] = v; });
-            setSearchParams(params);
-            return newFilters;
-        });
+        setPendingFilters(prev => ({ ...prev, [filterName]: value }));
     };
 
     const applyFilters = () => {
         setPage(1);
-        fetchShirts();
+        const params = {};
+        if (searchQuery) params.search = searchQuery;
+        Object.entries(pendingFilters).forEach(([k, v]) => { if (v) params[k] = v; });
+        setSearchParams(params);
+        setFilters(pendingFilters);
         Swal.fire({
             icon: 'success',
             title: 'Filtros aplicados',
@@ -153,7 +158,7 @@ function Catalog() {
                 <aside className="sf-catalog__filters">
                     <div className="sf-filter">
                         <label className="sf-filter__label">Ordenar por</label>
-                        <select className="sf-filter__select" value={filters.ordenar} onChange={(e) => handleFilterChange('ordenar', e.target.value)}>
+                        <select className="sf-filter__select" value={pendingFilters.ordenar} onChange={(e) => handleFilterChange('ordenar', e.target.value)}>
                             <option value="">Seleccionar</option>
                             <option value="precio-menor">Precio (menor a mayor)</option>
                             <option value="precio-mayor">Precio (mayor a menor)</option>
@@ -161,17 +166,17 @@ function Catalog() {
                     </div>
                     <div className="sf-filter">
                         <label className="sf-filter__label">Tipo de equipación</label>
-                        <select className="sf-filter__select" value={filters.tipo} onChange={(e) => handleFilterChange('tipo', e.target.value)}>
+                        <select className="sf-filter__select" value={pendingFilters.tipo} onChange={(e) => handleFilterChange('tipo', e.target.value)}>
                             <option value="">Seleccionar</option>
                             <option value="Local">Local</option>
                             <option value="Visitante">Visitante</option>
-                            <option value="Alternativa">Alternativa</option>
+                            <option value="Especial">Especial</option>
                             <option value="Portero">Portero</option>
                         </select>
                     </div>
                     <div className="sf-filter">
                         <label className="sf-filter__label">Talla</label>
-                        <select className="sf-filter__select" value={filters.talla} onChange={(e) => handleFilterChange('talla', e.target.value)}>
+                        <select className="sf-filter__select" value={pendingFilters.talla} onChange={(e) => handleFilterChange('talla', e.target.value)}>
                             <option value="">Seleccionar</option>
                             <option value="xl">XL</option>
                             <option value="l">L</option>
@@ -182,7 +187,7 @@ function Catalog() {
                     </div>
                     <div className="sf-filter">
                         <label className="sf-filter__label">Marca</label>
-                        <select className="sf-filter__select" value={filters.marca} onChange={(e) => handleFilterChange('marca', e.target.value)}>
+                        <select className="sf-filter__select" value={pendingFilters.marca} onChange={(e) => handleFilterChange('marca', e.target.value)}>
                             <option value="">Seleccionar</option>
                             <option value="Adidas">Adidas</option>
                             <option value="Nike">Nike</option>
@@ -192,7 +197,7 @@ function Catalog() {
                     </div>
                     <div className="sf-filter">
                         <label className="sf-filter__label">Versión</label>
-                        <select className="sf-filter__select" value={filters.version} onChange={(e) => handleFilterChange('version', e.target.value)}>
+                        <select className="sf-filter__select" value={pendingFilters.version} onChange={(e) => handleFilterChange('version', e.target.value)}>
                             <option value="">Seleccionar</option>
                             <option value="Jugador">Jugador</option>
                             <option value="Aficionado">Aficionado</option>
@@ -200,7 +205,7 @@ function Catalog() {
                     </div>
                     <div className="sf-filter">
                         <label className="sf-filter__label">Valoración</label>
-                        <select className="sf-filter__select" value={filters.valoracion} onChange={(e) => handleFilterChange('valoracion', e.target.value)}>
+                        <select className="sf-filter__select" value={pendingFilters.valoracion} onChange={(e) => handleFilterChange('valoracion', e.target.value)}>
                             <option value="">Seleccionar</option>
                             <option value="5">★★★★★</option>
                             <option value="4">★★★★☆</option>

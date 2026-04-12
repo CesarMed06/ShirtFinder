@@ -26,16 +26,7 @@ const ShirtCard = ({ shirt }) => {
 
     return (
         <article className="sf-catalog-card" style={{ position: 'relative' }}>
-            <div style={{
-                position: 'absolute',
-                top: '10px',
-                right: '10px',
-                zIndex: 10,
-                background: 'rgba(255, 255, 255, 0.9)',
-                borderRadius: '50%',
-                padding: '4px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
-            }}>
+            <div className="sf-catalog-card__heart-btn">
                 <FavoriteButton shirtId={shirt.id_shirts} size="small" />
             </div>
 
@@ -49,10 +40,6 @@ const ShirtCard = ({ shirt }) => {
                         e.target.style.display = 'none';
                     }}
                 />
-            </div>
-
-            <div className="favorite-button-wrapper">
-                <FavoriteButton shirtId={shirt.id_shirts} size="small" />
             </div>
 
             <h3 className="sf-catalog-card__name">{shirt.team} {shirt.season} - {shirt.tipo}</h3>

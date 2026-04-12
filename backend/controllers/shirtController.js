@@ -60,7 +60,7 @@ exports.getAllShirts = async (req, res) => {
     query += ` GROUP BY s.id_shirts`;
 
     if (rating) {
-      query += ` HAVING average_rating >= ?`;
+      query += ` HAVING ROUND(average_rating) = ?`;
       params.push(parseInt(rating));
     }
 
