@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function timeAgo(dateStr) {
     const diff = Math.floor((Date.now() - new Date(dateStr)) / 1000);
     if (diff < 60) return `hace ${diff} segundos`;
@@ -21,7 +23,7 @@ function formatDate(dateStr) {
 function PostCard({ post }) {
     const navigate = useNavigate();
     const avatarSrc = post.avatar_url
-        ? `http://localhost:5000${post.avatar_url}`
+        ? `${API_URL}${post.avatar_url}`
         : null;
 
     return (

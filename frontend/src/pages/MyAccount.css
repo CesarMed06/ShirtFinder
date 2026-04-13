@@ -327,7 +327,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f8f9fa;
+    background-color: transparent;
     border: none;
     border-radius: 0;
 }

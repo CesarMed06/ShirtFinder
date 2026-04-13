@@ -770,7 +770,6 @@ body {
   justify-content: start;
 }
 
-
 .sf-catalog-card {
   width: 235px;
   height: 340px;
@@ -2031,6 +2030,7 @@ input[type="password"]::-ms-clear {
 
 @media (max-width: 768px) {
 
+  /* HEADER */
   .sf-header {
     padding: 0 20px;
     height: 60px;
@@ -2088,6 +2088,7 @@ input[type="password"]::-ms-clear {
     height: 42px;
   }
 
+  /* FOOTER */
   .sf-footer {
     flex-direction: column;
     gap: 16px;
@@ -2104,6 +2105,7 @@ input[type="password"]::-ms-clear {
     height: 30px;
   }
 
+  /* LOGIN / REGISTER */
   .sf-login {
     position: relative;
     padding-top: 70px;
@@ -2132,6 +2134,7 @@ input[type="password"]::-ms-clear {
     text-align: center;
   }
 
+  /* CATÁLOGO */
   .sf-catalog {
     padding: 20px 16px;
   }
@@ -2187,28 +2190,28 @@ input[type="password"]::-ms-clear {
     overflow: hidden;
   }
 
-.sf-catalog-card {
-  position: relative;
-  width: 100%;
-  height: auto;
-  min-height: unset;
-  padding: 10px;
-  padding-top: 36px;
-  box-sizing: border-box;
-}
+  .sf-catalog-card {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: unset;
+    padding: 10px;
+    padding-top: 36px;
+    box-sizing: border-box;
+  }
 
-.sf-catalog-card__heart {
-  top: 6px;
-  right: 6px;
-  font-size: 18px;
-}
+  .sf-catalog-card__heart {
+    top: 6px;
+    right: 6px;
+    font-size: 18px;
+  }
 
-.sf-catalog-card__image-box {
-  width: 100%;
-  height: 130px;
-  margin-bottom: 8px;
-  margin-top: 0;
-}
+  .sf-catalog-card__image-box {
+    width: 100%;
+    height: 130px;
+    margin-bottom: 8px;
+    margin-top: 0;
+  }
 
   .sf-catalog-card__image {
     width: 100px;
@@ -2248,52 +2251,32 @@ input[type="password"]::-ms-clear {
     border-radius: 14px;
   }
 
+  /* DETALLE CAMISETA */
   .sf-detail {
     padding: 16px;
     overflow-x: hidden;
+    max-width: 100vw;
   }
 
   .sf-detail__top {
     padding: 0 0 12px 0;
   }
 
-  .sf-detail__title {
-    font-size: 22px;
-    word-break: break-word;
-  }
-
-  .sf-detail__info-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .sf-detail__info-row {
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .sf-detail__info-label {
-    font-size: 13px;
-  }
-
-  .sf-detail__info-value {
+  .sf-detail__breadcrumb {
     font-size: 14px;
-    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
-  .sf-detail__buy-section {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+  .sf-detail__container {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
-  .sf-detail__stores {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .sf-detail__history {
-    padding: 20px 16px;
-    margin: 30px -16px;
+  .sf-detail__left {
+    width: 100%;
+    min-width: unset;
   }
 
   .sf-detail__center {
@@ -2301,6 +2284,158 @@ input[type="password"]::-ms-clear {
     overflow-x: hidden;
   }
 
+  .sf-detail__title {
+    font-size: 20px;
+    word-break: break-word;
+  }
+
+  .sf-detail__stars {
+    font-size: 24px;
+    gap: 4px;
+  }
+
+  .sf-detail__reviews {
+    font-size: 14px;
+  }
+
+  .sf-detail__two-columns {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    overflow: hidden;
+  }
+
+  .sf-detail__info-grid {
+    gap: 16px;
+  }
+
+  .sf-detail__info-row {
+    grid-template-columns: 100px 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+
+  .sf-detail__info-label {
+    font-size: 13px;
+  }
+
+  .sf-detail__info-value {
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  .sf-detail__right-column {
+    width: 100%;
+    margin-top: 0;
+    align-items: stretch;
+  }
+
+  .sf-detail__buy-section {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 16px;
+  }
+
+  .sf-detail__stores {
+    gap: 12px;
+  }
+
+  .sf-detail__store {
+    grid-template-columns: 22px 1fr auto;
+    gap: 8px;
+    overflow: hidden;
+  }
+
+  .sf-detail__store svg {
+    width: 22px;
+    height: 18px;
+  }
+
+  .sf-detail__store span {
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .sf-detail__store-btn {
+    width: 90px;
+    height: 28px;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  .sf-detail__history {
+    width: 100%;
+    margin: 20px 0;
+    padding: 16px;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .sf-detail__history-text {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    white-space: normal;
+    font-size: 14px;
+  }
+
+  .sf-detail__section-title {
+    font-size: 16px;
+  }
+
+  .sf-detail__comments-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .sf-detail__comment-form {
+    width: 100%;
+  }
+
+  .sf-detail__comment-input-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .sf-detail__comment-input {
+    width: 100%;
+    min-height: 80px;
+  }
+
+  .sf-detail__submit-btn {
+    width: 100%;
+    height: 44px;
+  }
+
+  .sf-detail__comments-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .sf-detail__comment {
+    width: 100%;
+    box-sizing: border-box;
+    align-items: flex-start;
+  }
+
+  .sf-detail__comment-content {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .sf-detail__comment-stars svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .sf-detail__comments-section {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  /* CREAR POST */
   .cp-page {
     padding: 30px 20px 40px;
   }
@@ -2322,6 +2457,7 @@ input[type="password"]::-ms-clear {
     font-size: 14px;
   }
 
+  /* FORO */
   .forum-layout {
     display: flex;
     flex-direction: column;

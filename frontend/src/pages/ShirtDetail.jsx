@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useChatbotContext } from '../context/ChatbotContext';
-import { FaStar, FaRegStar, FaStarHalfAlt, FaShoppingCart } from 'react-icons/fa';
+import { FaStar, FaRegStar, FaStarHalfAlt, FaShoppingCart, FaUser } from 'react-icons/fa';
 import ShirtImageGallery from '../components/ShirtImageGallery';
 import FavoriteButton from '../components/FavoriteButton';
+import Swal from 'sweetalert2';
 
 const BRAND_URLS = {
     Nike: 'https://www.nike.com/es/w/futbol-camisetas-1gdj0z5l6ka',
@@ -111,7 +112,13 @@ function ShirtDetail() {
 
     const handleSubmitComment = async () => {
         if (!token) {
-            alert('Inicia sesión para comentar');
+            Swal.fire({
+                icon: 'warning',
+                title: 'Inicia sesión',
+                text: 'Debes iniciar sesión para poder comentar.',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#e63946'
+            });
             return;
         }
         try {
@@ -128,11 +135,32 @@ function ShirtDetail() {
                 setComment('');
                 setUserRating(0);
                 loadComments();
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Comentario enviado!',
+                    text: 'Tu valoración se ha publicado correctamente.',
+                    confirmButtonText: 'Genial',
+                    confirmButtonColor: '#e63946',
+                    timer: 2500,
+                    timerProgressBar: true
+                });
             } else {
-                alert(data.message || 'Error al enviar comentario');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: data.message || 'No se pudo enviar el comentario.',
+                    confirmButtonText: 'Entendido',
+                    confirmButtonColor: '#e63946'
+                });
             }
         } catch (error) {
-            alert('Error al enviar comentario');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error de conexión',
+                text: 'No se pudo conectar con el servidor.',
+                confirmButtonText: 'Cerrar',
+                confirmButtonColor: '#e63946'
+            });
         }
     };
 
@@ -302,7 +330,18 @@ function ShirtDetail() {
                         ) : (
                             comments.map(c => (
                                 <div key={c.id_comments} className="sf-detail__comment">
-                                    <div className="sf-detail__comment-avatar" role="img" aria-label="Avatar usuario"></div>
+                                    <div className="sf-detail__comment-avatar">
+                                        {c.avatar_url ? (
+                                            <img
+                                                src={`${API_URL}${c.avatar_url}`}
+                                                alt={c.username}
+                                                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
+                                                onError={(e) => { e.target.style.display = 'none'; }}
+                                            />
+                                        ) : (
+                                            <FaUser size={20} color="#bdc3c7" />
+                                        )}
+                                    </div>
                                     <div className="sf-detail__comment-rating-wrapper">
                                         <div className="sf-detail__comment-stars">
                                             {renderStars(c.rating || 0)}

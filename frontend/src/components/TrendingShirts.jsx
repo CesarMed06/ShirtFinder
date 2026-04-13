@@ -15,6 +15,14 @@ const getDailyFeatured = (shirts) => {
     return shuffled.slice(0, 3);
 };
 
+const getPriceRange = (price) => {
+    const base = parseFloat(price);
+    if (isNaN(base)) return price;
+    const low = Math.floor(base * 0.9 / 5) * 5;
+    const high = Math.ceil(base * 1.2 / 5) * 5;
+    return `${low}-${high}€`;
+};
+
 function TrendingShirts() {
     const navigate = useNavigate();
     const [featured, setFeatured] = useState([]);
@@ -50,7 +58,7 @@ function TrendingShirts() {
                         <h3 className="sf-card__titulo">{shirt.team} {shirt.season} - {shirt.tipo}</h3>
 
                         <div className="sf-card__info-bottom">
-                            <p className="sf-card__precio-rango">{shirt.price}€</p>
+                            <p className="sf-card__precio-rango">{getPriceRange(shirt.price)}</p>
                             <button className="sf-card__boton" onClick={(e) => { e.stopPropagation(); navigate(`/shirt/${shirt.id_shirts}`); }}>VER MÁS</button>
                         </div>
                     </article>
