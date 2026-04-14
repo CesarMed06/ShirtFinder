@@ -203,7 +203,6 @@
     color: #fff;
 }
 
-
 .sf-crop-overlay {
     position: fixed;
     inset: 0;
@@ -295,4 +294,70 @@
 
 .sf-crop-btn--confirm:hover {
     filter: brightness(1.09);
+}
+
+/* ── RESPONSIVE MÓVIL ── */
+@media (max-width: 768px) {
+    .sf-settings {
+        flex-direction: column;
+        gap: 40px;
+        padding: 24px 0 40px 0;
+    }
+
+    .sf-settings__left {
+        width: 100%;
+    }
+
+    .sf-settings__right {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .sf-settings__section-title {
+        font-size: 20px;
+        margin-bottom: 24px;
+    }
+
+    .sf-settings__form {
+        gap: 20px;
+    }
+
+    .sf-settings__row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .sf-settings__label {
+        font-size: 15px;
+        min-width: unset;
+    }
+
+    .sf-settings__input {
+        width: 100%;
+    }
+
+    .sf-settings__password-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .sf-settings__password-group .sf-settings__input {
+        width: 100%;
+    }
+
+    .sf-settings__file-btn {
+        width: 100%;
+    }
+
+    .sf-settings__mas-title {
+        font-size: 28px;
+        margin-bottom: 16px;
+    }
+
+    .sf-settings__more-btn,
+    .sf-settings__apply-btn,
+    .sf-settings__logout-btn {
+        width: 100%;
+    }
 }

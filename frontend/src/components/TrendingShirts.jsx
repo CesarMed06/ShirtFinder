@@ -5,14 +5,22 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const getDailyFeatured = (shirts) => {
     if (!shirts || shirts.length === 0) return [];
+
     const today = new Date();
-    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-    const shuffled = [...shirts].sort((a, b) => {
-        const hashA = (a.id_shirts * seed) % 997;
-        const hashB = (b.id_shirts * seed) % 997;
-        return hashA - hashB;
-    });
-    return shuffled.slice(0, 3);
+    let seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+
+    const rand = () => {
+        seed = (seed * 1664525 + 1013904223) & 0xffffffff;
+        return (seed >>> 0) / 0xffffffff;
+    };
+
+    const arr = [...shirts];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(rand() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+
+    return arr.slice(0, 3);
 };
 
 const getPriceRange = (price) => {

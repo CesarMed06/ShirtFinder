@@ -17,7 +17,7 @@ async function getCroppedImg(imageSrc, pixelCrop) {
             const ctx = canvas.getContext('2d');
             ctx.drawImage(image, pixelCrop.x, pixelCrop.y, pixelCrop.width, pixelCrop.height, 0, 0, pixelCrop.width, pixelCrop.height);
             canvas.toBlob((blob) => {
-                if (!blob) { reject(new Error('Canvas vacío')); return; }
+                if (!blob) return reject(new Error('Canvas vacío'));
                 resolve(blob);
             }, 'image/jpeg', 0.95);
         });
@@ -27,7 +27,7 @@ async function getCroppedImg(imageSrc, pixelCrop) {
     });
 }
 
-function Settings({ profile, onAvatarUpdate }) {
+function Settings({ profile, onAvatarUpdate, onProfileUpdate }) {
     const [newUsername, setNewUsername] = useState('');
     const [newEmail, setNewEmail] = useState('');
     const [currentPassword, setCurrentPassword] = useState('');
@@ -53,30 +53,35 @@ function Settings({ profile, onAvatarUpdate }) {
         if (newPassword && newPassword !== confirmPassword) {
             return Swal.fire('Error', 'Las contraseñas no coinciden', 'error');
         }
+
         if (newPassword && newPassword.length < 6) {
             return Swal.fire('Error', 'Mínimo 6 caracteres', 'error');
         }
 
         try {
+            const updates = {};
+
             if (newUsername.trim()) {
                 const res = await fetch(`${API_URL}/api/users/update-username`, {
                     method: 'PUT',
                     headers: { ...headers, 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ newUsername })
+                    body: JSON.stringify({ newUsername: newUsername.trim() })
                 });
                 const data = await res.json();
                 if (!data.success) return Swal.fire('Error', data.message, 'error');
+                updates.username = newUsername.trim();
             }
 
             if (newEmail.trim()) {
                 const res = await fetch(`${API_URL}/api/users/update-email`, {
                     method: 'PUT',
                     headers: { ...headers, 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ newEmail })
+                    body: JSON.stringify({ newEmail: newEmail.trim() })
                 });
                 const data = await res.json();
                 if (!data.success) return Swal.fire('Error', data.message, 'error');
-                localStorage.setItem('token', data.token);
+                updates.email = newEmail.trim();
+                if (data.token) localStorage.setItem('token', data.token);
             }
 
             if (newPassword.trim()) {
@@ -100,6 +105,10 @@ function Settings({ profile, onAvatarUpdate }) {
                 const data = await res.json();
                 if (!data.success) return Swal.fire('Error', data.message, 'error');
                 onAvatarUpdate(data.avatarUrl);
+            }
+
+            if (Object.keys(updates).length > 0) {
+                onProfileUpdate(updates);
             }
 
             Swal.fire({ icon: 'success', title: 'Cambios aplicados', timer: 1500, showConfirmButton: false });

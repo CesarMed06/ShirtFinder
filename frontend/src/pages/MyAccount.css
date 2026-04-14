@@ -81,13 +81,6 @@
     padding: 4px;
 }
 
-@media (max-width: 768px) {
-    .favorites-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 15px;
-    }
-}
-
 .sf-my-account {
     width: 100%;
     margin: 0;
@@ -99,17 +92,24 @@
     box-sizing: border-box;
 }
 
-.sf-my-account__header {
+.sf-my-account__top {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
 }
 
-.sf-my-account__layout {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 60px;
+.sf-my-account__left-block {
+    flex: 1;
+}
+
+.sf-my-account__right-block {
+    flex-shrink: 0;
+    text-align: right;
+}
+
+.sf-my-account__right-block .sf-profile-stats-list {
+    text-align: right;
 }
 
 .sf-my-account__section-title {
@@ -175,10 +175,6 @@
     font-size: 16px;
 }
 
-.sf-my-account__stats-panel {
-    text-align: right;
-}
-
 .sf-profile-stats-list {
     display: flex;
     flex-direction: column;
@@ -202,13 +198,15 @@
 
 .sf-profile-tabs {
     display: flex;
-    gap: 80px;
+    gap: 0;
     padding-left: 80px;
+    padding-right: 80px;
     margin-bottom: 0;
     position: relative;
     z-index: 2;
     overflow-x: auto;
     scrollbar-width: none;
+    justify-content: space-between;
 }
 
 .sf-profile-tabs::-webkit-scrollbar {
@@ -216,8 +214,7 @@
 }
 
 .sf-tab-btn {
-    flex: 0 0 auto;
-    width: 269px;
+    flex: 1;
     height: 50px;
     background: #fff;
     border: 1px solid #bdc3c7;
@@ -381,8 +378,9 @@
     position: absolute;
     top: 18px;
     right: 18px;
-    width: 20px;
-    height: 18.35px;
+    z-index: 2;
+    width: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -638,16 +636,12 @@
 }
 
 .sf-comment-row__btn-borrar:hover {
-    color: #E67E22;
+    color: #e74c3c;
 }
 
 .sf-comment-row__btn-borrar:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-}
-
-.sf-comment-row__btn-borrar:hover {
-    color: #e74c3c;
 }
 
 .sf-comment-wrapper {
@@ -691,75 +685,197 @@
 }
 
 @media (max-width: 768px) {
+
     .sf-my-account {
         padding: 24px 16px;
     }
 
-    .sf-my-account__header {
+    .sf-my-account__top {
         flex-direction: column;
-        gap: 8px;
+        margin-bottom: 24px;
+        gap: 0;
     }
 
-    .sf-my-account__layout {
-        flex-direction: column;
-        gap: 24px;
-    }
-
-    .sf-my-account__stats-panel {
+    .sf-my-account__left-block,
+    .sf-my-account__right-block {
+        width: 100%;
         text-align: left;
+    }
+
+    .sf-my-account__right-block .sf-profile-stats-list {
+        text-align: left;
+    }
+
+    .sf-my-account__underline {
+        width: 148px;
+        margin-bottom: 20px;
+        display: block;
+    }
+
+    .sf-my-account__underline--right {
+        width: 173px;
+        margin-left: 0;
+        display: block;
     }
 
     .sf-profile-main {
         flex-direction: column;
         align-items: center;
-        gap: 24px;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .sf-profile-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+    }
+
+    .sf-profile-avatar--placeholder {
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
     }
 
     .sf-profile-details {
-        gap: 16px;
+        gap: 10px;
         align-items: center;
         text-align: center;
+        padding-top: 0;
+    }
+
+    .sf-profile-stats-list {
+        gap: 10px;
+        margin-top: 0;
     }
 
     .sf-profile-tabs-container {
         width: 100%;
         margin-left: 0;
+        margin-bottom: 24px;
     }
 
     .sf-profile-tabs {
         padding-left: 0;
+        padding-right: 0;
         gap: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        justify-content: unset;
     }
 
     .sf-tab-btn {
-        width: auto;
-        flex: 1 1 auto;
-        font-size: 13px;
-        height: 42px;
-        padding: 0 8px;
+        width: 100%;
+        flex: unset;
+        font-size: 11px;
+        height: 44px;
+        padding: 0 4px;
+        border-radius: 0;
+        text-align: center;
+    }
+
+    .sf-full-width-line {
+        position: static;
+        width: 100%;
+        margin-top: 12px;
     }
 
     .sf-favs {
-        padding: 0 0 24px 0;
+        padding: 16px 0 24px 0;
     }
 
     .sf-favs__grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 16px;
+        justify-items: stretch;
     }
 
     .sf-fav-card {
         width: 100%;
         height: auto;
-        padding: 16px;
+        padding: 14px;
+        box-sizing: border-box;
+    }
+
+    .sf-fav-card__heart {
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        padding: 4px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
     }
 
     .sf-fav-card__imageBox {
         width: 100%;
-        height: 140px;
+        height: 160px;
+        margin: 36px auto 12px auto;
+    }
+
+    .sf-fav-card__img {
+        width: auto;
+        max-width: 100%;
+        height: 130px;
+        object-fit: contain;
+    }
+
+    .sf-fav-card__title {
+        font-size: 14px;
+        padding: 0 2px;
+    }
+
+    .sf-fav-card__bottom {
+        padding: 0 2px;
     }
 
     .sf-fav-card__btn {
+        flex: 1;
+        width: auto;
+        font-size: 14px;
+        height: 32px;
+    }
+
+    .sf-comment-wrapper {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .sf-comment-row {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px 12px;
+    }
+
+    .sf-comment-row__left {
         width: 100%;
+    }
+
+    .sf-comment-row__stars {
+        width: 100%;
+    }
+
+    .sf-comment-row__date {
+        width: 100%;
+        text-align: left;
+        min-width: unset;
+    }
+
+    .sf-comment-row__actions {
+        flex-direction: row;
+        gap: 10px;
+        min-width: unset;
+        width: 100%;
+    }
+
+    .sf-comment-row__btn-ver {
+        flex: 1;
+    }
+
+    .sf-post-row__meta {
+        align-items: flex-start;
+        width: 100%;
+        min-width: unset;
     }
 }

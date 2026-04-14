@@ -160,19 +160,10 @@ function MyAccount() {
 
     return (
         <div className="sf-my-account">
-            <div className="sf-my-account__header">
-                <div className="sf-my-account__title-group">
+            <div className="sf-my-account__top">
+                <div className="sf-my-account__left-block">
                     <h1 className="sf-my-account__section-title">Mi cuenta</h1>
                     <div className="sf-my-account__underline"></div>
-                </div>
-                <div className="sf-my-account__stats-group">
-                    <h1 className="sf-my-account__section-title">Estadísticas</h1>
-                    <div className="sf-my-account__underline sf-my-account__underline--right"></div>
-                </div>
-            </div>
-
-            <div className="sf-my-account__layout">
-                <div className="sf-my-account__profile-panel">
                     <div className="sf-profile-main">
                         <div className="sf-profile-avatar sf-profile-avatar--placeholder">
                             {profile.avatar_url ? (
@@ -193,7 +184,9 @@ function MyAccount() {
                     </div>
                 </div>
 
-                <div className="sf-my-account__stats-panel">
+                <div className="sf-my-account__right-block">
+                    <h1 className="sf-my-account__section-title">Estadísticas</h1>
+                    <div className="sf-my-account__underline sf-my-account__underline--right"></div>
                     <div className="sf-profile-stats-list">
                         <p>Camisetas guardadas: {profile.favorites_count || 0}</p>
                         <p>Comentarios escritos: {profile.comment_count || 0}</p>
@@ -395,6 +388,9 @@ function MyAccount() {
                         onAvatarUpdate={(url) => {
                             setAvatarUrl(url);
                             setProfile(prev => ({ ...prev, avatar_url: url }));
+                        }}
+                        onProfileUpdate={(changes) => {
+                            setProfile(prev => ({ ...prev, ...changes }));
                         }}
                     />
                 )}
