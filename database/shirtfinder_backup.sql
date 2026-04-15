@@ -184,4 +184,4 @@ INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, 
 ALTER TABLE shirts AUTO_INCREMENT = 12;
 
 INSERT INTO users (username, email, password, user_type) VALUES
-('cesar_test', 'cesar@test.com', '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
+('prueba', 'prueba@shirtfinder.com', '$2b$10$UekvFFy3an9QD.G7P1nBQ.xo3trddLJXqnXjBSgY96fP8hkj2484e', 'admin');

@@ -121,6 +121,16 @@ function ShirtDetail() {
             });
             return;
         }
+        if (userRating < 0.5) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Selecciona una valoración',
+                text: 'Debes puntuar al menos con media estrella.',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#e63946'
+            });
+            return;
+        }
         try {
             const response = await fetch(`${API_URL}/api/comments/${id}`, {
                 method: 'POST',
@@ -140,7 +150,7 @@ function ShirtDetail() {
                     title: '¡Comentario enviado!',
                     text: 'Tu valoración se ha publicado correctamente.',
                     confirmButtonText: 'Genial',
-                    confirmButtonColor: '#e63946',
+                    confirmButtonColor: '#27ae60',
                     timer: 2500,
                     timerProgressBar: true
                 });

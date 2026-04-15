@@ -1,5 +1,9 @@
 # ShirtFinder 
 
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
+![Node.js](https://img.shields.io/badge/Node.js-Express-339933?logo=node.js)
+![MySQL](https://img.shields.io/badge/MySQL-8-4479A1?logo=mysql)
+
 Buscador de camisetas de fútbol. Puedes explorar equipaciones de diferentes equipos y temporadas, ver su historia, valorarlas, guardarlas en favoritos y hablar sobre ellas en el foro.
 
 **Proyecto de 2º DAW — CEI Sevilla (2025/2026)**
@@ -12,6 +16,8 @@ Buscador de camisetas de fútbol. Puedes explorar equipaciones de diferentes equ
 - React Router DOM
 - SweetAlert2
 - React Icons
+- jsPDF
+- react-easy-crop
 - Vitest + React Testing Library
 
 **Backend**
@@ -40,13 +46,13 @@ cd ShirtFinder
 
 ### 2. Importar la base de datos
 
-**Desde MySQL Workbench:**
-1. `Server` ---> `Data Import`
+**Desde MySQL Workbench (recomendado):**
+1. `Server` → `Data Import`
 2. Selecciona `Import from Self-Contained File`
 3. Elige `database/shirtfinder_backup.sql`
 4. Ejecuta
 
-**Desde terminal:**
+**Desde terminal** (solo si MySQL está en el PATH del sistema):
 ```bash
 mysql -u root -p < database/shirtfinder_backup.sql
 ```
@@ -72,6 +78,8 @@ EMAIL_PASS=tu_contraseña_app
 GEMINI_API_KEY=tu_api_key_de_gemini
 ```
 
+> ⚠️ **Chatbot con IA:** El chatbot usa la API de Google Gemini. Para que funcione necesitas una API key gratuita — consíguela en [aistudio.google.com](https://aistudio.google.com). Sin ella el resto de la app funciona con normalidad.
+
 Arranca el servidor:
 ```bash
 npm start
@@ -81,14 +89,20 @@ Backend corriendo en `http://localhost:5000`
 
 ### 4. Configurar el frontend
 
+Abre una **nueva terminal** y ejecuta:
+
 ```bash
 cd frontend
-npm install
+npm install --legacy-peer-deps
+npm install jspdf react-easy-crop --legacy-peer-deps
 ```
 
-Crea un `.env` dentro de `frontend/`:
+> ℹ️ Si aparecen advertencias de vulnerabilidades tras la instalación, ignóralas — son de herramientas de desarrollo y no afectan al funcionamiento de la app. No ejecutes `npm audit fix`.
 
+Crea un `.env` dentro de `frontend/`:
+```env
 VITE_API_URL=http://localhost:5000
+```
 
 Arranca el frontend:
 ```bash
@@ -99,8 +113,10 @@ Frontend en `http://localhost:5173`
 
 ## Credenciales de prueba
 
-Usuari: cesar_test 
-Contraseña: test123
+- **Email:** prueba@shirtfinder.com
+- **Contraseña:** prueba123
+
+> ℹ️ Este usuario ya viene incluido en el backup de la base de datos.
 
 ## Tests
 
@@ -149,4 +165,4 @@ Cubre: Header, Footer, Login, Register, ShirtCard, PostCard, Home, Forum y Creat
 
 2º Desarrollo de Aplicaciones Web — CEI Sevilla (2025/2026)
 
-https://github.com/CesarMed06
+[https://github.com/CesarMed06](https://github.com/CesarMed06)

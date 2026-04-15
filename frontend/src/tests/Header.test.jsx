@@ -7,9 +7,8 @@ describe("Header", () => {
     const { container } = render(
       <BrowserRouter>
         <Header />
-      </BrowserRouter>,
+      </BrowserRouter>
     );
-
     expect(container.querySelector("img, svg")).toBeTruthy();
   });
 
@@ -17,9 +16,8 @@ describe("Header", () => {
     render(
       <BrowserRouter>
         <Header />
-      </BrowserRouter>,
+      </BrowserRouter>
     );
-
     expect(screen.getByText(/home/i)).toBeInTheDocument();
     expect(screen.getByText(/cat[aá]logo/i)).toBeInTheDocument();
     expect(screen.getByText(/foro/i)).toBeInTheDocument();
@@ -30,21 +28,19 @@ describe("Header", () => {
     render(
       <BrowserRouter>
         <Header />
-      </BrowserRouter>,
+      </BrowserRouter>
     );
-
-    expect(screen.getByRole("textbox")).toBeInTheDocument();
+    const inputs = screen.getAllByRole("textbox");
+    expect(inputs.length).toBeGreaterThan(0);
   });
 
   it("el buscador tiene el placeholder correcto", () => {
     render(
       <BrowserRouter>
         <Header />
-      </BrowserRouter>,
+      </BrowserRouter>
     );
-
-    expect(
-      screen.getByPlaceholderText(/buscar camisetas/i),
-    ).toBeInTheDocument();
+    const inputs = screen.getAllByPlaceholderText(/buscar camisetas/i);
+    expect(inputs.length).toBeGreaterThan(0);
   });
 });

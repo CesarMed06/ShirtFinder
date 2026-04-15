@@ -2030,7 +2030,6 @@ input[type="password"]::-ms-clear {
 
 @media (max-width: 768px) {
 
-  /* HEADER */
   .sf-header {
     padding: 0 20px;
     height: 60px;
@@ -2088,7 +2087,6 @@ input[type="password"]::-ms-clear {
     height: 42px;
   }
 
-  /* FOOTER */
   .sf-footer {
     flex-direction: column;
     gap: 16px;
@@ -2105,7 +2103,6 @@ input[type="password"]::-ms-clear {
     height: 30px;
   }
 
-  /* LOGIN / REGISTER */
   .sf-login {
     position: relative;
     padding-top: 70px;
@@ -2134,7 +2131,6 @@ input[type="password"]::-ms-clear {
     text-align: center;
   }
 
-  /* CATÁLOGO */
   .sf-catalog {
     padding: 20px 16px;
   }
@@ -2251,7 +2247,6 @@ input[type="password"]::-ms-clear {
     border-radius: 14px;
   }
 
-  /* DETALLE CAMISETA */
   .sf-detail {
     padding: 16px;
     overflow-x: hidden;
@@ -2435,7 +2430,6 @@ input[type="password"]::-ms-clear {
     overflow: hidden;
   }
 
-  /* CREAR POST */
   .cp-page {
     padding: 30px 20px 40px;
   }
@@ -2457,7 +2451,6 @@ input[type="password"]::-ms-clear {
     font-size: 14px;
   }
 
-  /* FORO */
   .forum-layout {
     display: flex;
     flex-direction: column;
@@ -2506,6 +2499,53 @@ input[type="password"]::-ms-clear {
     font-size: 18px;
     padding: 12px 32px;
     width: 100%;
+  }
+
+  .sf-my-account {
+    padding: 24px 16px;
+  }
+
+  .sf-my-account__top {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .sf-my-account__info {
+    align-items: center;
+    text-align: center;
+  }
+
+  .sf-my-account__avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .sf-my-account__stats {
+    width: 100%;
+    text-align: left;
+  }
+
+  .sf-my-account__stats-title {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .sf-my-account__tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  .sf-my-account__tab {
+    font-size: 13px;
+    padding: 14px 8px;
+    text-align: center;
+  }
+
+  .sf-my-account__cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
 
   .sf-my-account__underline,

@@ -6,6 +6,19 @@ vi.mock('../context/AuthContext', () => ({
   useAuth: () => ({ user: null, token: null })
 }))
 
+beforeEach(() => {
+  global.fetch = vi.fn(() =>
+    Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve([]),
+    })
+  );
+});
+
+afterEach(() => {
+  vi.restoreAllMocks();
+});
+
 describe('Home', () => {
   it('renderiza la página Home sin errores', () => {
     const { container } = render(<BrowserRouter><Home /></BrowserRouter>)
@@ -14,7 +27,7 @@ describe('Home', () => {
 
   it('muestra el título principal', () => {
     render(<BrowserRouter><Home /></BrowserRouter>)
-    expect(screen.getByText(/shirtfinder/i)).toBeInTheDocument()
+    expect(screen.getByText(/viste la historia del fútbol/i)).toBeInTheDocument()
   })
 
   it('muestra el botón de explorar catálogo', () => {

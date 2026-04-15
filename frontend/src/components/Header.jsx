@@ -35,7 +35,7 @@ function Header() {
                 <span /><span /><span />
             </button>
 
-            <nav className={`sf-header__nav${menuOpen ? ' sf-header__nav--open' : ''}`}>
+            <nav aria-label="Navegación principal" className={`sf-header__nav${menuOpen ? ' sf-header__nav--open' : ''}`}>
                 <Link to="/" className={location.pathname === "/" ? "activo" : ""} onClick={() => setMenuOpen(false)}>HOME</Link>
                 <Link to="/catalog" className={location.pathname === "/catalog" || location.pathname.startsWith("/shirt/") ? "activo" : ""} onClick={() => setMenuOpen(false)}>CATÁLOGO</Link>
                 <Link to="/foro" className={location.pathname.startsWith("/foro") ? "activo" : ""} onClick={() => setMenuOpen(false)}>FORO</Link>

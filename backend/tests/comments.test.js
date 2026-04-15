@@ -19,7 +19,8 @@ describe('POST /api/comments/:shirtId', () => {
     it('crea comentario con token válido', async () => {
         pool.query
             .mockResolvedValueOnce([{ insertId: 1 }])
-            .mockResolvedValueOnce([[{ id_comments: 1, text: 'Buena', rating: 5, date: new Date(), username: 'test' }]]);
+            .mockResolvedValueOnce([[{ id_comments: 1, text: 'Buena', rating: 5, date: new Date(), username: 'test', avatar_url: null }]])
+            .mockResolvedValueOnce([[{ id_comments: 1, text: 'Buena', rating: 5, date: new Date(), username: 'test', avatar_url: null }]]);
         const res = await request(app)
             .post('/api/comments/1')
             .set('Authorization', `Bearer ${token}`)
