@@ -90,7 +90,10 @@ CREATE TABLE notifications (
   FOREIGN KEY (user_id) REFERENCES users(id_users) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- IDs forzados con INSERT INTO ... para respetar los huecos (4 y 11 borrados)
+-- =============================================
+-- CAMISETAS
+-- =============================================
+
 INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description, buy_link) VALUES
 (1, '2010/2011', 'La Liga', 'FC Barcelona', 'Nike', 95.00, 'Azul / Rojo', 'Local', 'Jugador', 5,
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1770564724/BARCELONA1_w6b2xf.jpg',
@@ -161,8 +164,9 @@ INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, 
 'La temporada 2025/26 marca un nuevo capítulo en la historia del FC Barcelona con una camiseta que rinde homenaje a sus orígenes. El diseño presenta las icónicas franjas azulgrana en un degradado moderno que simboliza la transición entre tradición y futuro. Tras años de incertidumbre financiera, el club ha logrado estabilizarse bajo la dirección de Joan Laporta y su proyecto deportivo empieza a dar frutos. La plantilla rejuvenecida combina canteranos formados en La Masia con fichajes estratégicos que han devuelto al equipo a la élite europea. El escudo bordado y los detalles dorados celebran los 126 años de historia del club. Esta equipación Nike representa la esperanza de una nueva era dorada en el Camp Nou, donde una generación de jóvenes talentos busca emular las gestas de Messi, Xavi e Iniesta.',
 'https://store.fcbarcelona.com/es/collections/kits');
 
+-- ID 9: PSG → tipo='Especial', version='Jugador', precio actualizado a 105.00
 INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description, buy_link) VALUES
-(9, '2025/2026', 'Ligue 1', 'Paris Saint-Germain', 'Nike', 95.00, 'Azul Marino / Rojo', 'Local', 'Aficionado', 4,
+(9, '2025/2026', 'Ligue 1', 'Paris Saint-Germain', 'Nike', 105.00, 'Azul Marino / Rojo', 'Especial', 'Jugador', 4,
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237507/PSG1_dvhnmm.jpg',
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237507/PSG1_dvhnmm.jpg',
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237507/PSG2_mvbalb.jpg',
@@ -181,7 +185,55 @@ INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, 
 'El Venezia FC se ha convertido en el equipo más elegante y fashion del fútbol mundial. Esta camiseta 2023/24 es una auténtica obra de arte que fusiona deporte y moda de alta costura. El diseño en negro con detalles en verde y naranja está inspirado en los canales y góndolas de Venecia, creando un efecto visual único. Kappa ha trabajado junto a diseñadores de moda para crear una pieza que trasciende el fútbol. Aunque el club juega en Serie B tras descender, sus camisetas se han convertido en objetos de culto entre coleccionistas y fashionistas de todo el mundo. Celebrities e influencers las lucen en las calles de Milán, París y Nueva York. Esta equipación demuestra que el fútbol puede ser un lienzo para la expresión artística, convirtiendo al Venezia en un fenómeno cultural más allá de los resultados deportivos.',
 'https://shop.veneziafc.it/collections/kits-matchday-25-26');
 
-ALTER TABLE shirts AUTO_INCREMENT = 12;
+-- ID 12: Málaga CF 2025-2026 Visitante — 79,95€ precio oficial tienda [web:493][web:494]
+INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description, buy_link, curiosity) VALUES
+(12, '2025/2026', 'La Liga 2', 'Málaga CF', 'Hummel', 79.95, 'Negro / Morado / Verde', 'Visitante', 'Jugador', 4,
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341630/MALAGA1_xalidv.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341630/MALAGA1_xalidv.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341600/MALAGA2_tsbki5.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341594/MALAGA3_qhadiw.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341594/MALAGA4_lg4bsy.jpg',
+'La camiseta visitante del Málaga CF para la temporada 2025/26 es uno de los diseños más originales y atrevidos del fútbol español. Fabricada por Hummel, presenta una base negra sobria sobre la que destaca una llamativa franja horizontal que cruza el pecho mezclando los colores verde y morado, los colores que representan a la ciudad de Málaga. Lejos de ser un diseño genérico, esta equipación es un homenaje directo a la identidad malagueña: esos tonos tan característicos que se ven en sus fiestas, en sus símbolos y en su cultura. En el interior del cuello se esconde un detalle histórico para los más aficionados: el lema «Tanto Monta», relacionado con la reconquista de la ciudad en 1487 y que forma parte del escudo del club. Una camiseta que reivindica las raíces de un club con historia, actualmente en Segunda División pero con una afición que nunca abandona.',
+'https://www.tiendamalagacf.com',
+'El lema «Tanto Monta» oculto en el interior del cuello hace referencia a la reconquista de Málaga en 1487 por los Reyes Católicos. Este detalle, que la mayoría de portadores de la camiseta no llegan a ver, convierte cada equipación en un pequeño objeto histórico. El morado y el verde son también los colores oficiales del Ayuntamiento de Málaga, lo que refuerza el vínculo entre el club y su ciudad.');
+
+-- ID 13: Nottingham Forest 2024-2025 Portero — ~65€ (Adidas Tiro 24 GK ~60$ oficial) [web:480]
+INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description, buy_link, curiosity) VALUES
+(13, '2024/2025', 'Premier League', 'Nottingham Forest', 'Adidas', 65.00, 'Verde / Negro', 'Portero', 'Jugador', 4,
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341594/FOREST1_jh8hdl.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341594/FOREST1_jh8hdl.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341594/FOREST2_mk3glv.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341594/FOREST3_k316hd.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341594/FOREST4_zexuos.jpg',
+'La camiseta de portero del Nottingham Forest en la temporada 2024/25 es una pieza especial fabricada por Adidas que destaca inmediatamente sobre el césped. Este diseño sigue la línea del kit Tiro 24 Competition GK de Adidas, con su particular patrón de rayas horizontales y puntos cuadrados inspirados en el estilo atrevido de los años 90. El Nottingham Forest vivió una temporada cargada de emoción en la Premier League, consolidándose entre los equipos de la primera mitad de la tabla tras su histórico retorno a la máxima categoría. El guardameta vistió esta equipación en noches memorables en el City Ground, uno de los estadios con más historia y ambiente del fútbol inglés. El club, bicampeón de Europa en 1979 y 1980, sigue siendo un referente histórico a pesar de los años pasados en divisiones inferiores.',
+'https://shop.nottinghamforest.co.uk/collections/goalkeeper-kit',
+'El Nottingham Forest es uno de los pocos clubes en la historia del fútbol que ha ganado la Copa de Europa más veces que la liga de su propio país. Consiguieron la Champions en 1979 y 1980 bajo las órdenes de Brian Clough, cuando el equipo apenas llevaba un año en Primera División inglesa. Esta camiseta de portero lleva bordadas en el escudo las dos estrellas que representan esas dos conquistas europeas, un detalle que recuerda la grandeza histórica del club cada vez que el portero para un balón.');
+
+-- ID 14: Como 1907 2021-2022 Coppa Italia — ~55€ (Legea, categoría inferior italiana) [web:467]
+INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description, buy_link, curiosity) VALUES
+(14, '2021/2022', 'Coppa Italia', 'Como 1907', 'Legea', 55.00, 'Azul / Blanco', 'Especial', 'Jugador', 5,
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341703/COMO1_uva76v.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341703/COMO1_uva76v.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341703/COMO2_jvkggc.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341702/COMO3_ohbkwj.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341702/COMO4_redwd3.jpg',
+'La camiseta del Como 1907 para la Coppa Italia de la temporada 2021/22 es una de esas piezas que enamoran por su sencillez y su carga histórica. Fabricada por la marca italiana Legea, presenta un diseño limpio en azul y blanco, los colores clásicos del club lariano, que contrasta con el minimalismo tan en boga en el fútbol actual. El Como 1907 es un club con más de cien años de historia ubicado a orillas del lago Como, uno de los paisajes más espectaculares de Italia. En aquel momento el equipo militaba en categorías inferiores del fútbol italiano, pero su identidad visual y su historia lo mantienen en el radar de coleccionistas de todo el mundo. Esta equipación especial para la copa nacional es un ejemplo perfecto de cómo un club humilde puede crear prendas que compiten en elegancia con las grandes marcas.',
+'https://shop.como1907.com',
+'El Como 1907 saltó a la fama internacional gracias a la llegada de sus nuevos propietarios indonesios en 2019, que transformaron el club en un referente del fútbol moderno y fashionista. En pocos años pasaron de la Serie D a la Serie A, firmando a leyendas como Cesc Fàbregas como jugador y luego como entrenador. Esta camiseta de la Coppa Italia del 21/22 es de las últimas antes de esa transformación radical, lo que la convierte en una pieza de coleccionista que marca el antes y el después de un club único en el mundo.');
+
+-- ID 15: SC Freiburg 2019-2020 Visitante — ~65€ (retro Hummel, precio estimado mercado actual) [web:498]
+INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description, buy_link, curiosity) VALUES
+(15, '2019/2020', 'Bundesliga', 'SC Freiburg', 'Hummel', 65.00, 'Blanco / Rojo / Negro', 'Visitante', 'Jugador', 4,
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341710/FRIBURGO1_b4oukg.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341710/FRIBURGO1_b4oukg.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341709/FRIBURGO2_n2k4xm.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341710/FRIBURGO3_hmuo7r.jpg',
+'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341710/FRIBURGO4_ebnyfq.jpg',
+'La camiseta visitante del SC Freiburg de la temporada 2019/20 es una joya discreta del fútbol alemán, fabricada por Hummel en un momento en el que esta marca nórdica empezaba a posicionarse como referente en el diseño de equipaciones alternativas. El Freiburg es uno de los clubes más queridos y respetados de la Bundesliga, conocido por su modelo sostenible y su filosofía de cantera que contradice el modelo de grandes inversiones del fútbol moderno. Esta equipación visitante de tonos claros, con los inconfundibles chevrones de Hummel, refleja la personalidad de un club que nunca ha necesitado grandes nombres para brillar. En la temporada 2019/20, el equipo dirigido por Christian Streich continuó consolidando su posición en la Bundesliga con un fútbol atractivo y organizado.',
+'https://www.scfreiburg.com/en',
+'El SC Freiburg es famoso en el fútbol europeo por ser uno de los pocos clubes que lleva más de 30 años con el mismo entrenador: Christian Streich dirigió al equipo desde 2011 hasta 2024, siendo el técnico con más longevidad en activo de las grandes ligas europeas. En esta temporada 2019/20, Streich llevaba ya casi una década al frente del equipo, algo casi imposible en el fútbol moderno. Esta camiseta fue confeccionada por Hummel, la misma marca que vistió al Dinamarca campeón de Europa en 1992, y que hoy se ha convertido en sinónimo de fútbol con identidad.');
+
+ALTER TABLE shirts AUTO_INCREMENT = 16;
 
 INSERT INTO users (username, email, password, user_type) VALUES
 ('prueba', 'prueba@shirtfinder.com', '$2b$10$UekvFFy3an9QD.G7P1nBQ.xo3trddLJXqnXjBSgY96fP8hkj2484e', 'admin');
