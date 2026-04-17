@@ -2548,11 +2548,19 @@ input[type="password"]::-ms-clear {
     gap: 16px;
   }
 
-  .sf-my-account__underline,
+  .sf-my-account__underline {
+    display: block;
+    width: 148px;
+    height: 3px;
+    background-color: #ff6b35;
+    margin-left: 0;
+  }
+
   .sf-my-account__underline--right {
-    display: inline-block;
-    width: fit-content;
-    min-width: unset;
+    display: block;
+    width: 173px;
+    height: 3px;
+    background-color: #ff6b35;
     margin-left: 0;
   }
 }

@@ -340,16 +340,32 @@ function ShirtDetail() {
                         ) : (
                             comments.map(c => (
                                 <div key={c.id_comments} className="sf-detail__comment">
-                                    <div className="sf-detail__comment-avatar">
+                                    <div
+                                        className="sf-detail__comment-avatar"
+                                        style={{
+                                            width: '65px',
+                                            height: '65px',
+                                            minWidth: '65px',
+                                            borderRadius: '50%',
+                                            overflow: 'hidden',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            alignSelf: 'flex-start',
+                                            marginTop: '40px',
+                                            background: c.avatar_url ? 'transparent' : 'none',
+                                            border: c.avatar_url ? '1px solid #ddd' : 'none',
+                                        }}
+                                    >
                                         {c.avatar_url ? (
                                             <img
                                                 src={`${API_URL}${c.avatar_url}`}
                                                 alt={c.username}
-                                                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
+                                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                                 onError={(e) => { e.target.style.display = 'none'; }}
                                             />
                                         ) : (
-                                            <FaUser size={20} color="#bdc3c7" />
+                                            <FaUser size={32} color="#bdc3c7" />
                                         )}
                                     </div>
                                     <div className="sf-detail__comment-rating-wrapper">
