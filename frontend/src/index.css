@@ -2431,7 +2431,7 @@ input[type="password"]::-ms-clear {
   }
 
   .cp-page {
-    padding: 30px 20px 40px;
+    padding: 70px 20px 40px;
   }
 
   .cp-title {
@@ -2458,6 +2458,8 @@ input[type="password"]::-ms-clear {
 
   .forum-main {
     order: -1;
+    width: 100%;
+    align-items: center;
   }
 
   .forum-sidebar {
@@ -2479,7 +2481,7 @@ input[type="password"]::-ms-clear {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: stretch;
     gap: 8px;
   }
 
