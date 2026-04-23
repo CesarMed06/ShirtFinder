@@ -80,6 +80,16 @@ CREATE TABLE posts (
   FOREIGN KEY (user_id) REFERENCES users(id_users) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE replies (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  post_id INT NOT NULL,
+  user_id INT NOT NULL,
+  content TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(id_users) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE notifications (
   id_notifications INT PRIMARY KEY AUTO_INCREMENT,
   user_id INT,
@@ -89,10 +99,6 @@ CREATE TABLE notifications (
   is_read BOOLEAN DEFAULT FALSE,
   FOREIGN KEY (user_id) REFERENCES users(id_users) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- =============================================
--- CAMISETAS
--- =============================================
 
 INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description, buy_link) VALUES
 (1, '2010/2011', 'La Liga', 'FC Barcelona', 'Nike', 95.00, 'Azul / Rojo', 'Local', 'Jugador', 5,
@@ -164,7 +170,6 @@ INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, 
 'La temporada 2025/26 marca un nuevo capítulo en la historia del FC Barcelona con una camiseta que rinde homenaje a sus orígenes. El diseño presenta las icónicas franjas azulgrana en un degradado moderno que simboliza la transición entre tradición y futuro. Tras años de incertidumbre financiera, el club ha logrado estabilizarse bajo la dirección de Joan Laporta y su proyecto deportivo empieza a dar frutos. La plantilla rejuvenecida combina canteranos formados en La Masia con fichajes estratégicos que han devuelto al equipo a la élite europea. El escudo bordado y los detalles dorados celebran los 126 años de historia del club. Esta equipación Nike representa la esperanza de una nueva era dorada en el Camp Nou, donde una generación de jóvenes talentos busca emular las gestas de Messi, Xavi e Iniesta.',
 'https://store.fcbarcelona.com/es/collections/kits');
 
--- ID 9: PSG → tipo='Especial', version='Jugador', precio actualizado a 105.00
 INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description, buy_link) VALUES
 (9, '2025/2026', 'Ligue 1', 'Paris Saint-Germain', 'Nike', 105.00, 'Azul Marino / Rojo', 'Especial', 'Jugador', 4,
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1771237507/PSG1_dvhnmm.jpg',
@@ -185,7 +190,6 @@ INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, 
 'El Venezia FC se ha convertido en el equipo más elegante y fashion del fútbol mundial. Esta camiseta 2023/24 es una auténtica obra de arte que fusiona deporte y moda de alta costura. El diseño en negro con detalles en verde y naranja está inspirado en los canales y góndolas de Venecia, creando un efecto visual único. Kappa ha trabajado junto a diseñadores de moda para crear una pieza que trasciende el fútbol. Aunque el club juega en Serie B tras descender, sus camisetas se han convertido en objetos de culto entre coleccionistas y fashionistas de todo el mundo. Celebrities e influencers las lucen en las calles de Milán, París y Nueva York. Esta equipación demuestra que el fútbol puede ser un lienzo para la expresión artística, convirtiendo al Venezia en un fenómeno cultural más allá de los resultados deportivos.',
 'https://shop.veneziafc.it/collections/kits-matchday-25-26');
 
--- ID 12: Málaga CF 2025-2026 Visitante — 79,95€ precio oficial tienda [web:493][web:494]
 INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description, buy_link, curiosity) VALUES
 (12, '2025/2026', 'La Liga 2', 'Málaga CF', 'Hummel', 79.95, 'Negro / Morado / Verde', 'Visitante', 'Jugador', 4,
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341630/MALAGA1_xalidv.jpg',
@@ -197,7 +201,6 @@ INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, 
 'https://www.tiendamalagacf.com',
 'El lema «Tanto Monta» oculto en el interior del cuello hace referencia a la reconquista de Málaga en 1487 por los Reyes Católicos. Este detalle, que la mayoría de portadores de la camiseta no llegan a ver, convierte cada equipación en un pequeño objeto histórico. El morado y el verde son también los colores oficiales del Ayuntamiento de Málaga, lo que refuerza el vínculo entre el club y su ciudad.');
 
--- ID 13: Nottingham Forest 2024-2025 Portero — ~65€ (Adidas Tiro 24 GK ~60$ oficial) [web:480]
 INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description, buy_link, curiosity) VALUES
 (13, '2024/2025', 'Premier League', 'Nottingham Forest', 'Adidas', 65.00, 'Verde / Negro', 'Portero', 'Jugador', 4,
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341594/FOREST1_jh8hdl.jpg',
@@ -209,7 +212,6 @@ INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, 
 'https://shop.nottinghamforest.co.uk/collections/goalkeeper-kit',
 'El Nottingham Forest es uno de los pocos clubes en la historia del fútbol que ha ganado la Copa de Europa más veces que la liga de su propio país. Consiguieron la Champions en 1979 y 1980 bajo las órdenes de Brian Clough, cuando el equipo apenas llevaba un año en Primera División inglesa. Esta camiseta de portero lleva bordadas en el escudo las dos estrellas que representan esas dos conquistas europeas, un detalle que recuerda la grandeza histórica del club cada vez que el portero para un balón.');
 
--- ID 14: Como 1907 2021-2022 Coppa Italia — ~55€ (Legea, categoría inferior italiana) [web:467]
 INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description, buy_link, curiosity) VALUES
 (14, '2021/2022', 'Coppa Italia', 'Como 1907', 'Legea', 55.00, 'Azul / Blanco', 'Especial', 'Jugador', 5,
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341703/COMO1_uva76v.jpg',
@@ -221,7 +223,6 @@ INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, 
 'https://shop.como1907.com',
 'El Como 1907 saltó a la fama internacional gracias a la llegada de sus nuevos propietarios indonesios en 2019, que transformaron el club en un referente del fútbol moderno y fashionista. En pocos años pasaron de la Serie D a la Serie A, firmando a leyendas como Cesc Fàbregas como jugador y luego como entrenador. Esta camiseta de la Coppa Italia del 21/22 es de las últimas antes de esa transformación radical, lo que la convierte en una pieza de coleccionista que marca el antes y el después de un club único en el mundo.');
 
--- ID 15: SC Freiburg 2019-2020 Visitante — ~65€ (retro Hummel, precio estimado mercado actual) [web:498]
 INSERT INTO shirts (id_shirts, season, league, team, brand, price, color, tipo, version, rating, image_url, image_1, image_2, image_3, image_4, description, buy_link, curiosity) VALUES
 (15, '2019/2020', 'Bundesliga', 'SC Freiburg', 'Hummel', 65.00, 'Blanco / Rojo / Negro', 'Visitante', 'Jugador', 4,
 'https://res.cloudinary.com/dwldyiruu/image/upload/v1776341710/FRIBURGO1_b4oukg.jpg',

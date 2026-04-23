@@ -49,8 +49,8 @@ cd ShirtFinder
 **Desde MySQL Workbench (recomendado):**
 1. `Server` → `Data Import`
 2. Selecciona `Import from Self-Contained File`
-3. Elige `database/shirtfinder_backup.sql`
-4. Ejecuta
+3. Elige `ShirtFinder/database/shirtfinder_backup.sql`
+4. `Start Import`
 
 **Desde terminal** (solo si MySQL está en el PATH del sistema):
 ```bash

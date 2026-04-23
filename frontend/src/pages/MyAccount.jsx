@@ -179,7 +179,7 @@ function MyAccount() {
                         <div className="sf-profile-details">
                             <p className="sf-profile-name">{profile.username}</p>
                             <p className="sf-profile-email">{profile.email}</p>
-                            <p className="sf-profile-date">Miembro desde: {new Date(profile.date_registered).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })}</p>
+                            <p className="sf-profile-date">Miembro desde: {profile.date_registered?.slice(0, 10).split('-').reverse().join('/')}</p>
                         </div>
                     </div>
                 </div>

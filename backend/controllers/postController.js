@@ -19,10 +19,10 @@ exports.getPosts = async (req, res) => {
             `SELECT p.id, p.title, LEFT(p.content, 80) AS preview, p.category,
                     p.created_at, p.replies_count,
                     u.username, u.avatar_url
-             FROM posts p
-             JOIN users u ON p.user_id = u.id_users
-             ${whereClause}
-             ORDER BY ${orderClause}`,
+                FROM posts p
+                JOIN users u ON p.user_id = u.id_users
+                ${whereClause}
+                ORDER BY ${orderClause}`,
             params
         );
 
